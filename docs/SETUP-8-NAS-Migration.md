@@ -41,6 +41,8 @@ When working through this phase with the AI assistant:
 - [ ] Services are running normally
 - [ ] You have maintenance window planned
 
+**Note**: Update status to `COMPLETED` after verifying all migration prerequisites and NAS requirements are met.
+
 ## NAS Preparation `PLANNED`
 
 ### Create NAS Share Structure
@@ -73,6 +75,8 @@ net view \\your-nas-ip
 # SMB/CIFS example:
 smbclient -L your-nas-ip
 ```
+
+**Note**: Update status to `COMPLETED` after preparing NAS shares and verifying access permissions.
 
 ## Mount NAS Storage `PLANNED`
 
@@ -124,6 +128,8 @@ New-PSDrive -Name "NASMedia" -PSProvider FileSystem -Root "\\your-nas-ip\media" 
 # For permanent mounting, create a scheduled task or startup script
 ```
 
+**Note**: Update status to `COMPLETED` after successfully mounting NAS storage and verifying access.
+
 ## Pre-Migration Backup `PLANNED`
 
 ### Full System Backup
@@ -168,6 +174,8 @@ du -sh media/photos/ >> temp/media-inventory.txt
 
 cat temp/media-inventory.txt
 ```
+
+**Note**: Update status to `COMPLETED` after creating full system backups and inventorying existing media.
 
 ## Media Migration `PLANNED`
 
@@ -218,6 +226,8 @@ touch /mnt/nas/media/test-access
 rm /mnt/nas/media/test-access
 ```
 
+**Note**: Update status to `COMPLETED` after successfully migrating all media files to NAS storage and verifying file integrity.
+
 ## Update Docker Configuration `PLANNED`
 
 ### Modify docker-compose.yml
@@ -252,6 +262,8 @@ sed -i 's|PHOTOS_PATH=./media/photos|PHOTOS_PATH=/mnt/nas/media/photos|g' .env
 # Verify environment changes
 grep "PATH=" .env
 ```
+
+**Note**: Update status to `COMPLETED` after updating Docker volume mappings and environment variables to use NAS paths.
 
 ## Service Restart and Testing `PLANNED`
 
@@ -295,6 +307,8 @@ echo "Access Plex at: https://plex.yourdomain.com"
 # Check for any playback issues
 ```
 
+**Note**: Update status to `COMPLETED` after restarting services and verifying they work with NAS storage.
+
 ## Post-Migration Validation `PLANNED`
 
 ### Functional Testing
@@ -326,6 +340,8 @@ docker stats
 ls -la temp/backups/
 ```
 
+**Note**: Update status to `COMPLETED` after validating all functions work correctly with NAS storage.
+
 ## Cleanup and Optimization `PLANNED`
 
 ### Remove Local Media Files
@@ -354,6 +370,8 @@ sed -i 's|du -sh config/ downloads/ transcode/ media/ temp/ shared/|du -sh confi
 # Ensure backup scripts account for NAS paths
 # Consider separate NAS backup strategy
 ```
+
+**Note**: Update status to `COMPLETED` after cleaning up local storage and updating monitoring scripts for NAS.
 
 ## NAS Backup Strategy `PLANNED`
 
@@ -445,6 +463,8 @@ docker compose --profile core down
 docker compose --profile core up -d
 ```
 
+**Note**: Update status to `COMPLETED` after implementing NAS backup strategy and recovery procedures.
+
 ## Migration Validation Checklist `PLANNED`
 
 - [ ] NAS properly mounted and accessible `PLANNED`
@@ -460,6 +480,8 @@ docker compose --profile core up -d
 - [ ] Performance acceptable `PLANNED`
 - [ ] NAS backup strategy implemented `PLANNED`
 - [ ] Local storage cleaned up (optional) `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all migration checklist items are satisfied and NAS migration is successful.
 
 ## Next Steps
 

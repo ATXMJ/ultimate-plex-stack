@@ -32,6 +32,8 @@ The security setup includes:
 - **Authentication**: Secure access to management services
 - **Firewall Rules**: Network access control
 
+**Note**: Update status to `COMPLETED` after understanding the security architecture and components.
+
 ## VPN Gateway Setup `PLANNED`
 
 ### Deploy VPN Services
@@ -106,6 +108,8 @@ EOF
 
 # On Windows, scripts are executable by default
 ```
+
+**Note**: Update status to `COMPLETED` after configuring VPN gateway, WireGuard setup, and kill switch functionality.
 
 ## Nginx Proxy Manager Setup `PLANNED`
 
@@ -185,6 +189,8 @@ echo "Default credentials: admin@example.com / changeme"
    - Add IP restrictions for admin services
    - Allow only trusted networks
 
+**Note**: Update status to `COMPLETED` after configuring Nginx Proxy Manager with SSL certificates and access controls.
+
 ## Service Authentication Configuration `PLANNED`
 
 ### Update Service URLs
@@ -219,6 +225,8 @@ Now that services are behind the reverse proxy, update internal service configur
 2. **Plex Claim Token**
    - Ensure claim token is still valid
    - Re-claim if necessary
+
+**Note**: Update status to `COMPLETED` after configuring authentication for all services and updating URLs for reverse proxy access.
 
 ## Firewall Configuration `PLANNED`
 
@@ -270,6 +278,8 @@ chmod +x shared/scripts/configure-firewall.sh
 ./shared/scripts/configure-firewall.sh
 ```
 
+**Note**: Update status to `COMPLETED` after configuring firewall rules and network access controls.
+
 ## SSL Certificate Management `PLANNED`
 
 ### Let's Encrypt Automation
@@ -287,6 +297,8 @@ chmod +x shared/scripts/configure-firewall.sh
 # - Import into NPM SSL Certificates section
 # - Update proxy hosts to use custom certificates
 ```
+
+**Note**: Update status to `COMPLETED` after configuring SSL certificate management and renewal processes.
 
 ## Network Security Testing `PLANNED`
 
@@ -322,6 +334,8 @@ curl -H "X-Plex-Token: YOUR_TOKEN" https://plex.yourdomain.com/library/sections
 # Verify torrent traffic routes through VPN
 ```
 
+**Note**: Update status to `COMPLETED` after testing SSL certificates, authentication, and network security measures.
+
 ## Service Security Hardening `PLANNED`
 
 ### Disable Unnecessary Services
@@ -353,6 +367,8 @@ docker compose --profile core logs | grep -i "unauthorized\|forbidden\|error"
 # Configure in docker-compose.yml logging section
 ```
 
+**Note**: Update status to `COMPLETED` after implementing service security hardening measures and API key security.
+
 ## Backup Security Configurations `PLANNED`
 
 ```bash
@@ -372,6 +388,8 @@ cp -r shared/ssl "$BACKUP_DIR/"
 
 echo "Security backup created in: $BACKUP_DIR"
 ```
+
+**Note**: Update status to `COMPLETED` after creating backups of all security configurations and certificates.
 
 ## Monitoring and Alerts `PLANNED`
 
@@ -482,6 +500,8 @@ sudo ufw allow ssh
 sudo ufw allow 80,443/tcp
 ```
 
+**Note**: Update status to `COMPLETED` after setting up security monitoring scripts and alert procedures.
+
 ## Security Validation Checklist `PLANNED`
 
 - [ ] VPN gateway configured with kill switch `PLANNED`
@@ -494,6 +514,8 @@ sudo ufw allow 80,443/tcp
 - [ ] SSL certificate validation passing `PLANNED`
 - [ ] Authentication working correctly `PLANNED`
 - [ ] Security configurations backed up `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all security checklist items are satisfied and all security measures are properly configured.
 
 ## Next Steps
 

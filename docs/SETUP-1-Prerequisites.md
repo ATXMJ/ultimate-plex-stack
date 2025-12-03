@@ -45,6 +45,8 @@ When working through this phase with the AI assistant:
 
 ### Software Requirements
 
+**Note**: Update status to `COMPLETED` after verifying all system requirements are met and Docker is properly installed and configured.
+
 #### Operating System
 - **Supported**: Windows 11 Pro (version 21H2 or newer)
 - **Architecture**: x86_64 (AMD64)
@@ -91,6 +93,8 @@ whoami
 Get-Acl . | Format-List
 ```
 
+**Note**: Update status to `COMPLETED` after configuring user accounts and verifying proper file system permissions are in place.
+
 ## Network and Firewall Configuration `PLANNED`
 
 ### Windows Firewall Setup
@@ -126,6 +130,8 @@ Test-NetConnection -ComputerName 8.8.8.8 -InformationLevel Detailed
 Resolve-DnsName google.com
 ```
 
+**Note**: Update status to `COMPLETED` after configuring firewall rules and verifying network connectivity and DNS resolution.
+
 ## VPN Service Preparation `PLANNED`
 
 ### VPN Requirements
@@ -157,6 +163,8 @@ Prepare your VPN credentials (will be used in Phase 6):
    # Note: Docker containers will handle VPN connections
    ```
 
+**Note**: Update status to `COMPLETED` after obtaining VPN subscription and preparing all required credentials and configuration details.
+
 ## Domain and DNS Setup (Optional but Recommended) `PLANNED`
 
 ### Domain Requirements
@@ -181,6 +189,8 @@ Set up these subdomains (example for `yourdomain.com`):
 nslookup plex.yourdomain.com
 nslookup proxy.yourdomain.com
 ```
+
+**Note**: Update status to `COMPLETED` after configuring domain DNS records and verifying DNS propagation for all required subdomains.
 
 ## Storage Preparation `PLANNED`
 
@@ -215,6 +225,8 @@ Write-Host "Read performance: $($stopwatch.Elapsed.TotalSeconds) seconds"
 Remove-Item $testFile -Force
 ```
 
+**Note**: Update status to `COMPLETED` after assessing storage capacity and performance, ensuring adequate space for media libraries and temporary files.
+
 ## System Optimization `PLANNED`
 
 ### Windows Performance Tuning
@@ -242,6 +254,8 @@ Docker Desktop settings are configured through the GUI:
 docker system info
 ```
 
+**Note**: Update status to `COMPLETED` after applying system optimizations and configuring Docker Desktop for optimal media serving performance.
+
 ## Security Hardening `PLANNED`
 
 ### Windows Security Configuration
@@ -266,6 +280,8 @@ Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\W
 ### Automatic Updates
 Windows Update handles automatic updates. Ensure your system is set to download and install updates automatically.
 
+**Note**: Update status to `COMPLETED` after implementing all security hardening measures and configuring automatic updates.
+
 ## Pre-Deployment Checklist `PLANNED`
 
 - [ ] System meets hardware requirements `PLANNED`
@@ -279,6 +295,8 @@ Windows Update handles automatic updates. Ensure your system is set to download 
 - [ ] Storage space verified and performant `PLANNED`
 - [ ] System optimized for media serving `PLANNED`
 - [ ] Security hardening applied `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all checklist items are satisfied and all prerequisites are properly configured.
 
 ## Next Steps
 

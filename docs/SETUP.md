@@ -11,12 +11,16 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 - Set up firewall and network access rules `PLANNED`
 - Prepare VPN service credentials `PLANNED`
 
+**Note**: Update status to `COMPLETED` after successfully completing all prerequisites and environment preparation steps.
+
 ### Phase 2: Repository Setup and Initial Configuration `PLANNED`
 **File**: [SETUP-2-Repository-Setup.md](./SETUP-2-Repository-Setup.md)
 - Clone the ultimate-plex-stack repository `PLANNED`
 - Create and configure environment variables (.env file) `PLANNED`
 - Set up domain configuration for reverse proxy `PLANNED`
 - Initialize basic Docker Compose configuration `PLANNED`
+
+**Note**: Update status to `COMPLETED` after successfully cloning the repository, configuring environment variables, and validating Docker Compose setup.
 
 ### Phase 3: Directory Structure and Storage Setup `PLANNED`
 **File**: [SETUP-3-Directory-Structure.md](./SETUP-3-Directory-Structure.md)
@@ -25,12 +29,16 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 - Configure proper file permissions and ownership `PLANNED`
 - Prepare storage layout following hybrid storage strategy `PLANNED`
 
+**Note**: Update status to `COMPLETED` after successfully creating all required directories, setting proper permissions, and preparing the storage layout.
+
 ### Phase 4: Core Services Deployment `PLANNED`
 **File**: [SETUP-4-Core-Services.md](./SETUP-4-Core-Services.md)
 - Deploy core media management services (Plex, Radarr, Sonarr) `PLANNED`
 - Start supporting services (Bazarr, Prowlarr, Overseerr) `PLANNED`
 - Configure Docker networks and service isolation `PLANNED`
 - Verify initial service startup and basic connectivity `PLANNED`
+
+**Note**: Update status to `COMPLETED` after successfully deploying all core services and verifying their basic connectivity and functionality.
 
 ### Phase 5: Service Configuration and Integration `PLANNED`
 **File**: [SETUP-5-Service-Integration.md](./SETUP-5-Service-Integration.md)
@@ -39,12 +47,16 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 - Integrate Radarr/Sonarr with download clients `PLANNED`
 - Configure Overseerr for request management `PLANNED`
 
+**Note**: Update status to `COMPLETED` after successfully configuring all service integrations and verifying cross-service connectivity.
+
 ### Phase 6: Security and Network Setup `PLANNED`
 **File**: [SETUP-6-Security-Network.md](./SETUP-6-Security-Network.md)
 - Configure VPN gateway and kill switch for torrent/usenet `PLANNED`
 - Set up Nginx Proxy Manager for SSL and reverse proxy `PLANNED`
 - Implement authentication for all services `PLANNED`
 - Configure firewall rules and network security `PLANNED`
+
+**Note**: Update status to `COMPLETED` after successfully configuring VPN security, reverse proxy with SSL, authentication, and network security measures.
 
 ### Phase 7: Advanced Services (Optional) `PLANNED`
 **File**: [SETUP-7-Advanced-Services.md](./SETUP-7-Advanced-Services.md)
@@ -53,6 +65,8 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 - Configure GPU acceleration for transcoding (if available) `PLANNED`
 - Integrate advanced services with existing stack `PLANNED`
 
+**Note**: Update status to `COMPLETED` after successfully deploying and configuring all advanced services and verifying their integration with the core stack.
+
 ### Phase 8: NAS Migration (Optional) `PLANNED`
 **File**: [SETUP-8-NAS-Migration.md](./SETUP-8-NAS-Migration.md)
 - Prepare NAS storage and mount points `PLANNED`
@@ -60,12 +74,16 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 - Update Docker volume mappings `PLANNED`
 - Verify Plex library scanning and integrity `PLANNED`
 
+**Note**: Update status to `COMPLETED` after successfully migrating all media to NAS storage and verifying library integrity and access.
+
 ### Phase 9: Testing and Validation `PLANNED`
 **File**: [SETUP-9-Testing-Validation.md](./SETUP-9-Testing-Validation.md)
 - Perform end-to-end testing of media acquisition pipeline `PLANNED`
 - Validate streaming functionality and transcoding `PLANNED`
 - Test security configurations and access controls `PLANNED`
 - Set up monitoring and backup procedures `PLANNED`
+
+**Note**: Update status to `COMPLETED` after successfully completing all testing procedures and establishing monitoring and backup routines.
 
 ## Quick Start Commands
 

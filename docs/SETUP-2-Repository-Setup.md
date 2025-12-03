@@ -52,6 +52,8 @@ ultimate-plex-stack/
 └── scripts/               # Setup and utility scripts
 ```
 
+**Note**: Update status to `COMPLETED` after successfully cloning the repository and verifying all required files are present.
+
 ## Environment Variables Configuration `PLANNED`
 
 ### Create Environment File
@@ -193,6 +195,8 @@ CONFIG_PATH=./config
 NVIDIA_VISIBLE_DEVICES=all
 ```
 
+**Note**: Update status to `COMPLETED` after creating and configuring the .env file with all required environment variables and credentials.
+
 ## Docker Compose Configuration `PLANNED`
 
 ### Verify Docker Compose File
@@ -223,6 +227,8 @@ docker compose config --profiles
 docker compose --profile core config
 ```
 
+**Note**: Update status to `COMPLETED` after validating Docker Compose configuration and confirming all service profiles are properly configured.
+
 ## Domain and SSL Preparation `PLANNED`
 
 ### DNS Verification
@@ -248,6 +254,8 @@ Test SSL challenge accessibility:
 # Test HTTP access (should work if firewall is configured correctly)
 Invoke-WebRequest -Uri http://yourdomain.com -Method Head
 ```
+
+**Note**: Update status to `COMPLETED` after verifying domain DNS configuration and SSL certificate preparation for Let's Encrypt.
 
 ## Initial Configuration Validation `PLANNED`
 
@@ -286,6 +294,8 @@ docker network ls | Select-String plex-stack
 if ($LASTEXITCODE -ne 0) { Write-Host "Network will be created on first run" }
 ```
 
+**Note**: Update status to `COMPLETED` after validating all environment variables, Docker Compose configuration, and network accessibility.
+
 ## Backup Configuration `PLANNED`
 ```bash
 # Create a backup of your initial configuration
@@ -296,6 +306,8 @@ cp docker-compose.yml docker-compose.yml.backup
 git add .
 git commit -m "Initial configuration setup"
 ```
+
+**Note**: Update status to `COMPLETED` after creating backups of configuration files and optionally committing to version control.
 
 ## Configuration Checklist `PLANNED`
 
@@ -310,6 +322,8 @@ git commit -m "Initial configuration setup"
 - [ ] Docker Compose configuration validated `PLANNED`
 - [ ] DNS resolution verified `PLANNED`
 - [ ] SSL ports accessible for Let's Encrypt `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all checklist items are satisfied and all repository setup and configuration tasks are complete.
 
 ## Next Steps
 

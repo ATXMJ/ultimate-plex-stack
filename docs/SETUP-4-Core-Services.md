@@ -33,6 +33,8 @@ The core profile includes essential services for media streaming and management:
 - **Prowlarr**: Centralized indexer management
 - **Overseerr**: User request management and media discovery
 
+**Note**: Update status to `COMPLETED` after reviewing the core services overview and understanding their roles in the media stack.
+
 ## Pre-Deployment Verification `PLANNED`
 
 ### Environment Validation
@@ -76,6 +78,8 @@ docker run --rm \
   alpine touch /test_config/test /test_downloads/test /test_media/test
 ```
 
+**Note**: Update status to `COMPLETED` after verifying environment variables, Docker Compose configuration, and directory permissions are ready for deployment.
+
 ## Core Services Deployment `PLANNED`
 
 ### Deploy Core Services
@@ -106,6 +110,8 @@ docker compose --profile core ps
 # - prowlarr
 # - overseerr
 ```
+
+**Note**: Update status to `COMPLETED` after successfully deploying all core services and verifying they are running.
 
 ## Service Startup Verification `PLANNED`
 
@@ -169,6 +175,8 @@ docker compose --profile core logs prowlarr 2>&1 | grep -i error | tail -5
 docker compose --profile core logs overseerr 2>&1 | grep -i error | tail -5
 ```
 
+**Note**: Update status to `COMPLETED` after verifying all services have started successfully and are healthy.
+
 ## Network Connectivity Testing `PLANNED`
 
 ### Internal Network Verification
@@ -205,6 +213,8 @@ docker compose --profile core exec -T prowlarr netstat -tln | grep 9696
 docker compose --profile core exec -T overseerr netstat -tln | grep 5055
 ```
 
+**Note**: Update status to `COMPLETED` after verifying all services are listening on their expected ports and network connectivity is working.
+
 ## Initial Service Access Testing `PLANNED`
 
 ### Web Interface Availability
@@ -235,6 +245,8 @@ docker compose --profile core exec plex nslookup radarr
 docker compose --profile core exec radarr nslookup plex
 docker compose --profile core exec sonarr nslookup prowlarr
 ```
+
+**Note**: Update status to `COMPLETED` after verifying all web interfaces are accessible and DNS resolution is working between services.
 
 ## Configuration Directory Verification `PLANNED`
 
@@ -269,6 +281,8 @@ ls -la config/sonarr/test_sonarr
 rm config/plex/test_plex config/radarr/test_radarr config/sonarr/test_sonarr
 ```
 
+**Note**: Update status to `COMPLETED` after verifying configuration directories are properly created and volume mounts are working correctly.
+
 ## Resource Usage Monitoring `PLANNED`
 
 ### Initial Resource Check
@@ -290,6 +304,8 @@ top -bn1 | head -5
 echo "Container log sizes:"
 docker compose --profile core ps -q | xargs docker inspect --format='{{.Name}}: {{.LogPath}}' | xargs ls -lh | awk '{print $5, $9}'
 ```
+
+**Note**: Update status to `COMPLETED` after monitoring resource usage and confirming services are running within acceptable limits.
 
 ## Service-Specific Initial Setup `PLANNED`
 
@@ -367,6 +383,8 @@ docker compose --profile core down -v
 docker compose --profile core up -d
 ```
 
+**Note**: Update status to `COMPLETED` after performing initial service-specific setup and configuration steps for all core services.
+
 ## Deployment Validation Checklist `PLANNED`
 
 - [ ] Core services deployed successfully `PLANNED`
@@ -377,6 +395,8 @@ docker compose --profile core up -d
 - [ ] Configuration directories populated `PLANNED`
 - [ ] Volume mounts working correctly `PLANNED`
 - [ ] Resource usage within acceptable limits `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all checklist items are satisfied and all core services are properly deployed and functional.
 
 ## Next Steps
 

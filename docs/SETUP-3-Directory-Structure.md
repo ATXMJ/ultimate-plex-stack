@@ -31,6 +31,8 @@ The Ultimate Plex Media Stack uses a **hybrid storage approach**:
 - **Local Storage (Initial)**: Media libraries (will migrate to NAS later)
 - **NAS Storage (Future)**: Media libraries only (after migration)
 
+**Note**: Update status to `COMPLETED` after understanding the hybrid storage strategy and confirming available storage meets requirements.
+
 ## Directory Structure Creation `PLANNED`
 
 ### Navigate to Project Directory
@@ -95,6 +97,8 @@ mkdir temp\logs, temp\backups -Force
 mkdir shared\scripts, shared\ssl -Force
 ```
 
+**Note**: Update status to `COMPLETED` after successfully creating all required directories following the hybrid storage strategy.
+
 ## File Permissions and Ownership `PLANNED`
 
 ### Windows Permissions
@@ -127,6 +131,8 @@ Get-Acl downloads | Select Path, Owner
 Get-Acl media | Select Path, Owner
 Get-Acl transcode | Select Path, Owner
 ```
+
+**Note**: Update status to `COMPLETED` after configuring proper file permissions and ownership for all created directories.
 
 ## Storage Space Verification `PLANNED`
 
@@ -165,6 +171,8 @@ du -sh media/
 du -sh temp/
 du -sh shared/
 ```
+
+**Note**: Update status to `COMPLETED` after verifying sufficient storage space is available for all directories and planned media libraries.
 
 ## Storage Optimization `PLANNED`
 
@@ -206,6 +214,8 @@ docker run --rm \
   alpine sh -c "touch /test_config/test && touch /test_downloads/test && touch /test_media/test && touch /test_transcode/test && echo 'Volume mounts working correctly'"
 ```
 
+**Note**: Update status to `COMPLETED` after optimizing storage settings and verifying Docker volume mount permissions.
+
 ## Backup and Recovery Preparation `PLANNED`
 
 ### Create Backup Scripts Directory
@@ -237,6 +247,8 @@ chmod +x shared/scripts/backups/backup-config.sh
 # Run initial backup
 ./shared/scripts/backups/backup-config.sh
 ```
+
+**Note**: Update status to `COMPLETED` after creating backup scripts and performing initial backup of configuration files.
 
 ## Directory Structure Validation `PLANNED`
 
@@ -331,6 +343,8 @@ chmod +x shared/scripts/validate-permissions.sh
 ./shared/scripts/validate-permissions.sh
 ```
 
+**Note**: Update status to `COMPLETED` after validating the complete directory structure, permissions, and storage allocation.
+
 ## Storage Monitoring Setup `PLANNED`
 
 ### Create Storage Monitoring Script
@@ -360,6 +374,8 @@ chmod +x shared/scripts/monitor-storage.sh
 ./shared/scripts/monitor-storage.sh
 ```
 
+**Note**: Update status to `COMPLETED` after setting up storage monitoring scripts and generating initial storage reports.
+
 ## Setup Checklist `PLANNED`
 
 - [ ] All required directories created `PLANNED`
@@ -371,6 +387,8 @@ chmod +x shared/scripts/monitor-storage.sh
 - [ ] Backup scripts created `PLANNED`
 - [ ] Directory structure validated `PLANNED`
 - [ ] Storage monitoring configured `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all checklist items are satisfied and the complete directory structure is ready for service deployment.
 
 ## Next Steps
 

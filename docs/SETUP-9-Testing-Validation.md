@@ -33,6 +33,8 @@ The validation process includes:
 - **User Experience Testing**: Real-world usage scenarios
 - **Monitoring Setup**: Ongoing health and performance tracking
 
+**Note**: Update status to `COMPLETED` after understanding the testing scope and methodology.
+
 ## Pre-Testing Preparation `PLANNED`
 
 ### System Health Check
@@ -74,6 +76,8 @@ cp temp/test-media/* media/tv/ 2>/dev/null || true
 # Prepare test API keys
 # Set up test client devices
 ```
+
+**Note**: Update status to `COMPLETED` after preparing the system and test environment for comprehensive validation.
 
 ## Functional Testing `PLANNED`
 
@@ -162,6 +166,8 @@ curl -s http://localhost:6767/api/system/status | jq .version
 # Manual: Verify subtitle download for test media
 ```
 
+**Note**: Update status to `COMPLETED` after validating all core service functionality and integrations.
+
 ## End-to-End Pipeline Testing `PLANNED`
 
 ### Media Acquisition Pipeline
@@ -227,6 +233,8 @@ docker stats --no-stream
 # Document any issues or friction points
 ```
 
+**Note**: Update status to `COMPLETED` after testing complete media acquisition and delivery pipelines.
+
 ## Security Testing `PLANNED`
 
 ### Access Control Validation
@@ -266,6 +274,8 @@ sudo ufw status
 # Verify encrypted communications
 # Test backup security
 ```
+
+**Note**: Update status to `COMPLETED` after validating all security controls and access protections.
 
 ## Performance Testing `PLANNED`
 
@@ -327,6 +337,8 @@ docker system df
 du -sh config/ downloads/ transcode/ media/ temp/
 ```
 
+**Note**: Update status to `COMPLETED` after conducting performance testing and establishing baseline metrics.
+
 ## User Experience Testing `PLANNED`
 
 ### Client Compatibility Testing
@@ -351,6 +363,8 @@ du -sh config/ downloads/ transcode/ media/ temp/
 
 # Gather user feedback on workflows
 ```
+
+**Note**: Update status to `COMPLETED` after testing user experience across different clients and interfaces.
 
 ## Monitoring and Alerting Setup `PLANNED`
 
@@ -412,6 +426,8 @@ echo "0 2 * * * /path/to/ultimate-plex-stack/shared/scripts/backups/backup-confi
 # Test backup restoration
 # Document backup/recovery procedures
 ```
+
+**Note**: Update status to `COMPLETED` after setting up monitoring, alerting, and backup automation.
 
 ## Test Results Documentation `PLANNED`
 
@@ -486,6 +502,8 @@ EOF
 
 echo "Test results template created: temp/test-results-$(date +%Y%m%d).md"
 ```
+
+**Note**: Update status to `COMPLETED` after documenting all test results and creating comprehensive test reports.
 
 ## Final System Validation `PLANNED`
 
@@ -564,6 +582,8 @@ Congratulations! You have successfully set up and validated the Ultimate Plex Me
 - **Security**: SSL encryption, authentication, and network protection
 - **Storage**: Optimized hybrid local/NAS storage architecture
 - **Monitoring**: Automated health checks and performance monitoring
+
+**Note**: Update status to `COMPLETED` after completing all validation testing and confirming the system is ready for production use.
 
 ### Next Steps
 1. Begin using your media server

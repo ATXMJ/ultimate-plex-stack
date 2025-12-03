@@ -32,6 +32,8 @@ Optional services to consider:
 - **Tdarr**: Automated media transcoding and optimization
 - **Bazarr**: Automated subtitle downloading
 
+**Note**: Update status to `COMPLETED` after reviewing available advanced services and deciding which ones to implement.
+
 ## Content Acquisition Services `PLANNED`
 
 ### qBittorrent with VPN Integration
@@ -140,6 +142,8 @@ echo "NZBGet: http://$(hostname -I | awk '{print $1}'):6789"
    - TV: `/downloads/tv`
    - Music: `/downloads/music`
 
+**Note**: Update status to `COMPLETED` after configuring qBittorrent and/or NZBGet with VPN integration and initial settings.
+
 ## Connect Download Clients to Management Services `PLANNED`
 
 ### Configure qBittorrent in Radarr/Sonarr
@@ -183,6 +187,8 @@ echo "NZBGet: http://$(hostname -I | awk '{print $1}'):6789"
 # Same configuration as Radarr but with TV category
 # Category: tv
 ```
+
+**Note**: Update status to `COMPLETED` after connecting qBittorrent and NZBGet to Radarr and Sonarr for automated downloading.
 
 ## Media Processing Services `PLANNED`
 
@@ -266,6 +272,8 @@ echo "Bazarr: http://$(hostname -I | awk '{print $1}'):6767"
    - Enable Sonarr/Radarr integration
    - Set up automatic subtitle searching
 
+**Note**: Update status to `COMPLETED` after configuring Tdarr for transcoding and Bazarr for subtitle management.
+
 ## Service Integration Testing `PLANNED`
 
 ### Download Pipeline Testing
@@ -315,6 +323,8 @@ echo "Bazarr: http://$(hostname -I | awk '{print $1}'):6767"
    - Trigger Bazarr scan
    - Verify subtitles are downloaded and attached
 
+**Note**: Update status to `COMPLETED` after testing download pipelines, transcoding, and subtitle functionality.
+
 ## Performance and Resource Management `PLANNED`
 
 ### Resource Monitoring
@@ -348,6 +358,8 @@ nvidia-smi  # If using GPU
 # - Concurrent limits: Based on RAM
 ```
 
+**Note**: Update status to `COMPLETED` after configuring performance settings and resource management for advanced services.
+
 ## Security Considerations for Advanced Services `PLANNED`
 
 ### VPN Kill Switch Verification
@@ -378,6 +390,8 @@ sudo ufw status | grep 6789  # NZBGet
 # Enable IP filtering in qBittorrent
 # Configure proper authentication in NZBGet
 ```
+
+**Note**: Update status to `COMPLETED` after implementing security measures for advanced services including VPN protection and access controls.
 
 ## Backup Advanced Configurations `PLANNED`
 
@@ -459,6 +473,8 @@ docker compose --profile torrent up -d
 docker compose --profile advanced up -d --build tdarr
 ```
 
+**Note**: Update status to `COMPLETED` after creating backups of all advanced service configurations.
+
 ## Advanced Services Validation Checklist `PLANNED`
 
 - [ ] qBittorrent deployed and VPN-integrated `PLANNED`
@@ -471,6 +487,8 @@ docker compose --profile advanced up -d --build tdarr
 - [ ] VPN kill switch working `PLANNED`
 - [ ] Security configurations applied `PLANNED`
 - [ ] Resource usage monitored `PLANNED`
+
+**Note**: Update status to `COMPLETED` after verifying all advanced services checklist items are satisfied and all optional services are properly configured.
 
 ## Next Steps
 
