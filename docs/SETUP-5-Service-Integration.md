@@ -442,7 +442,7 @@ fi
 echo "Integration check complete"
 EOF
 
-chmod +x shared/scripts/check-integration.sh
+# On Windows, scripts are executable by default
 ```
 
 ### Update Procedures

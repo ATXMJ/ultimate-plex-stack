@@ -29,7 +29,7 @@ When working through this phase with the AI assistant:
 ### NAS Requirements
 - **Storage Capacity**: 2TB+ for initial media library
 - **Network**: Gigabit Ethernet minimum, 10GbE recommended
-- **File System**: NFS, SMB/CIFS, or compatible with Linux mounting
+- **File System**: SMB/CIFS (Windows file sharing), or compatible with Windows mounting
 - **RAID**: Hardware RAID 5/6 or software RAID with redundancy
 - **Backup**: Existing backup solution or ability to implement one
 
@@ -57,8 +57,8 @@ When working through this phase with the AI assistant:
 ### Configure NAS Permissions
 ```bash
 # Ensure proper permissions for media access
-# UID/GID should match your Docker PUID/PGID
-# Typically: UID=1000, GID=1000 for most Linux systems
+# On Windows with Docker Desktop, permissions are managed automatically
+# Ensure your Windows user account has access to the NAS share
 ```
 
 ### Test NAS Accessibility
@@ -67,8 +67,8 @@ When working through this phase with the AI assistant:
 ping your-nas-ip
 
 # Test share access (adjust for your NAS type)
-# NFS example:
-showmount -e your-nas-ip
+# SMB example:
+net view \\your-nas-ip
 
 # SMB/CIFS example:
 smbclient -L your-nas-ip
@@ -77,50 +77,51 @@ smbclient -L your-nas-ip
 ## Mount NAS Storage `PLANNED`
 
 ### Create Mount Point
-```bash
+```powershell
 # Create local mount directory
-sudo mkdir -p /mnt/nas/media
+mkdir C:\mnt\nas\media -Force
 
-# Set proper ownership
-sudo chown $PUID:$PGID /mnt/nas/media
+# On Windows, permissions are managed by your user account
+# Docker Desktop will handle container access
 ```
 
-### NFS Mount Configuration
-```bash
-# Temporary mount for testing
-sudo mount -t nfs your-nas-ip:/volume1/media /mnt/nas/media
+### SMB/CIFS Mount Configuration (Windows)
+```powershell
+# Mount NAS using SMB/CIFS (most common for Windows)
+net use Z: \\your-nas-ip\media /persistent:yes
+
+# Or use PowerShell for mapped drive
+New-PSDrive -Name "NASMedia" -PSProvider FileSystem -Root "\\your-nas-ip\media" -Persist
 
 # Verify mount success
-df -h | grep nas
-ls -la /mnt/nas/media/
+Get-PSDrive | Where-Object { $_.Name -eq "Z" -or $_.Name -eq "NASMedia" }
+dir Z:\
 
 # Test write permissions
-touch /mnt/nas/media/test-file
-rm /mnt/nas/media/test-file
+New-Item Z:\test-file -ItemType File
+Remove-Item Z:\test-file
 ```
 
 ### Permanent Mount Configuration
-```bash
-# Add to /etc/fstab for automatic mounting
-echo "your-nas-ip:/volume1/media /mnt/nas/media nfs defaults 0 0" | sudo tee -a /etc/fstab
-
-# Test fstab configuration
+```powershell
+# Create a PowerShell script to mount on startup
+# Save as mount-nas.ps1 in your startup folder or as a scheduled task
 sudo mount -a
 
 # Verify mount persists after reboot
 sudo reboot  # Test in maintenance window
 ```
 
-### SMB/CIFS Mount (Alternative)
-```bash
-# Install CIFS utilities if needed
-sudo apt install cifs-utils
+### SMB/CIFS Mount (Primary for Windows)
+```powershell
+# Windows has built-in SMB/CIFS support
+# Map network drive using net use
+net use Z: \\your-nas-ip\media /user:your-user your-pass /persistent:yes
 
-# Mount SMB share
-sudo mount -t cifs //your-nas-ip/media /mnt/nas/media -o username=your-user,password=your-pass,uid=$PUID,gid=$PGID
+# Or use PowerShell New-PSDrive
+New-PSDrive -Name "NASMedia" -PSProvider FileSystem -Root "\\your-nas-ip\media" -Credential (Get-Credential) -Persist
 
-# Add to fstab
-# //your-nas-ip/media /mnt/nas/media cifs username=your-user,password=your-pass,uid=$PUID,gid=$PGID 0 0
+# For permanent mounting, create a scheduled task or startup script
 ```
 
 ## Pre-Migration Backup `PLANNED`

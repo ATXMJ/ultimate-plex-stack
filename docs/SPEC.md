@@ -474,7 +474,7 @@ services:
 ## Deployment Instructions
 
 ### Prerequisites
-1. Linux host with Docker and Docker Compose
+1. Windows 11 Pro host with Docker Desktop
 2. Sufficient storage space (see storage requirements)
 3. VPN service subscription
 4. Domain name (optional, for reverse proxy)
@@ -482,7 +482,7 @@ services:
 ### Initial Setup
 
 1. **Clone Repository**
-   ```bash
+   ```powershell
    git clone https://github.com/DonMcD/ultimate-plex-stack.git
    cd ultimate-plex-stack
    ```
@@ -494,19 +494,20 @@ services:
    ```
 
 3. **Create Directory Structure**
-   ```bash
+   ```powershell
    # Create local directories for server data
-   mkdir -p config downloads transcode
+   mkdir config, downloads, transcode -Force
 
    # Create initial local media directories (will migrate to NAS later)
-   mkdir -p media/{movies,tv,music,photos}
-
-   # Set proper permissions
-   chown -R $USER:$USER config downloads transcode media
+   mkdir media\movies, media\tv, media\music, media\photos -Force
    ```
 
 4. **Deploy Services**
-   ```bash
+   ```powershell
+   # Using Makefile (recommended)
+   make up-d
+
+   # Or directly with Docker Compose
    docker compose --profile core up -d
    ```
 
@@ -534,21 +535,25 @@ services:
 When ready to migrate media libraries to NAS while keeping server data local:
 
 1. **Mount NAS Storage**
-   ```bash
-   # Mount NAS (example using NFS)
-   sudo mount -t nfs nas-server:/export/media /mnt/nas/media
+   ```powershell
+   # Mount NAS (example using SMB/CIFS)
+   # Create mount point first
+   mkdir C:\mnt\nas\media -Force
 
-   # Or add to /etc/fstab for permanent mount
-   nas-server:/export/media /mnt/nas/media nfs defaults 0 0
+   # Mount using net use (for SMB shares)
+   net use Z: \\nas-server\media /persistent:yes
+
+   # Or use PowerShell to map network drive
+   New-PSDrive -Name "NASMedia" -PSProvider FileSystem -Root "\\nas-server\media" -Persist
    ```
 
 2. **Copy Existing Media**
-   ```bash
-   # Copy media to NAS (preserve permissions)
-   rsync -avh --progress ./media/ /mnt/nas/media/
+   ```powershell
+   # Copy media to NAS (preserve structure)
+   robocopy .\media\ Z:\media /MIR /COPYALL /DCOPY:T
 
-   # Verify copy integrity
-   diff -r ./media/ /mnt/nas/media/
+   # Alternative using PowerShell
+   Copy-Item -Path .\media\* -Destination Z:\media -Recurse -Force
    ```
 
 3. **Update Docker Compose Volumes**
@@ -577,7 +582,12 @@ When ready to migrate media libraries to NAS while keeping server data local:
    ```
 
 5. **Restart Services**
-   ```bash
+   ```powershell
+   # Using Makefile
+   make down
+   make up-d
+
+   # Or directly
    docker compose down
    docker compose up -d
    ```
@@ -611,10 +621,12 @@ When ready to migrate media libraries to NAS while keeping server data local:
 - **Backup**: Always backup before major updates
 
 ### Troubleshooting
-- **Logs**: `docker compose logs <service>`
+- **Logs**: `make logs` or `docker compose logs <service>`
 - **Network**: `docker network inspect plex-stack`
 - **Disk Space**: Monitor storage usage
 - **VPN**: Verify kill switch functionality
+- **Stop Services**: `make down`
+- **Restart Services**: `make restart`
 
 ## Future Enhancements
 

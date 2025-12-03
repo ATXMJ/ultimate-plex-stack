@@ -27,9 +27,9 @@ When working through this phase with the AI assistant:
 ## Repository Cloning `PLANNED`
 
 ### Clone the Repository
-```bash
+```powershell
 # Navigate to your desired installation directory
-cd /path/to/installation/directory
+cd C:\path\to\installation\directory
 
 # Clone the repository
 git clone https://github.com/DonMcD/ultimate-plex-stack.git
@@ -38,7 +38,7 @@ git clone https://github.com/DonMcD/ultimate-plex-stack.git
 cd ultimate-plex-stack
 
 # Verify the clone was successful
-ls -la
+dir
 ```
 
 ### Repository Structure
@@ -55,12 +55,12 @@ ultimate-plex-stack/
 ## Environment Variables Configuration `PLANNED`
 
 ### Create Environment File
-```bash
+```powershell
 # Copy the example environment file
-cp .env.example .env
+copy .env.example .env
 
-# Set proper permissions (environment variables may contain sensitive data)
-chmod 600 .env
+# Note: Windows NTFS permissions will protect the file
+# Ensure only your user account has access to the .env file
 ```
 
 ### Configure User and System Variables
@@ -74,13 +74,14 @@ nano .env
 #### Required Variables
 
 **User/Group IDs:**
-```bash
-# Get your user and group IDs
-id $USER
+```powershell
+# Get your user information
+whoami /user
 
-# Set PUID and PGID in .env
-PUID=1000          # Your user ID
-PGID=1000          # Your group ID
+# On Windows, PUID and PGID are not required for Docker Desktop
+# These can be set to default values or omitted
+PUID=1000          # Default value (not used on Windows)
+PGID=1000          # Default value (not used on Windows)
 ```
 
 **Timezone:**
@@ -195,9 +196,9 @@ NVIDIA_VISIBLE_DEVICES=all
 ## Docker Compose Configuration `PLANNED`
 
 ### Verify Docker Compose File
-```bash
+```powershell
 # Check that docker-compose.yml exists and is valid
-ls -la docker-compose.yml
+dir docker-compose.yml
 
 # Validate the Docker Compose configuration
 docker compose config
@@ -227,12 +228,12 @@ docker compose --profile core config
 ### DNS Verification
 Ensure your domain DNS is properly configured:
 
-```bash
+```powershell
 # Test DNS resolution for your domain
-nslookup yourdomain.com
+Resolve-DnsName yourdomain.com
 
 # If using subdomains, test those too
-nslookup plex.yourdomain.com
+Resolve-DnsName plex.yourdomain.com
 ```
 
 ### SSL Certificate Preparation
@@ -243,9 +244,9 @@ The reverse proxy (Nginx Proxy Manager) will handle SSL certificates via Let's E
 3. **Domain DNS** resolves to your server's public IP
 
 Test SSL challenge accessibility:
-```bash
+```powershell
 # Test HTTP access (should work if firewall is configured correctly)
-curl -I http://yourdomain.com
+Invoke-WebRequest -Uri http://yourdomain.com -Method Head
 ```
 
 ## Initial Configuration Validation `PLANNED`
@@ -276,12 +277,13 @@ fi
 ```
 
 ### Network Configuration Test
-```bash
+```powershell
 # Test that required ports are available
-netstat -tuln | grep -E "(80|443|32400)"
+Get-NetTCPConnection | Where-Object { $_.LocalPort -in 80,443,32400 } | Select LocalPort, State
 
 # Verify Docker network can be created
-docker network ls | grep plex-stack || echo "Network will be created on first run"
+docker network ls | Select-String plex-stack
+if ($LASTEXITCODE -ne 0) { Write-Host "Network will be created on first run" }
 ```
 
 ## Backup Configuration `PLANNED`
@@ -336,19 +338,19 @@ docker compose --profile core config --verbose
 ```
 
 **DNS not resolving:**
-```bash
+```powershell
 # Check DNS servers
-cat /etc/resolv.conf
+Get-DnsClientServerAddress | Select ServerAddresses
 
 # Test with different DNS
-nslookup yourdomain.com 8.8.8.8
+Resolve-DnsName yourdomain.com -Server 8.8.8.8
 ```
 
 **Permission issues:**
-```bash
-# Ensure .env file has correct permissions
-ls -la .env
+```powershell
+# Check .env file permissions
+Get-Acl .env | Format-List
 
-# Fix if necessary
-chmod 600 .env
+# Windows handles permissions differently - ensure only your user has access
+# Docker Desktop will manage container permissions automatically
 ```

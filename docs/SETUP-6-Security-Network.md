@@ -104,7 +104,7 @@ iptables -A OUTPUT -p tcp --sport 32400 -j ACCEPT
 echo "VPN kill switch rules applied"
 EOF
 
-chmod +x shared/scripts/vpn-killswitch.sh
+# On Windows, scripts are executable by default
 ```
 
 ## Nginx Proxy Manager Setup `PLANNED`
@@ -222,27 +222,21 @@ Now that services are behind the reverse proxy, update internal service configur
 
 ## Firewall Configuration `PLANNED`
 
-### Update UFW Rules
-```bash
+### Update Windows Firewall Rules
+```powershell
 # Allow HTTPS and HTTP for reverse proxy
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
+New-NetFirewallRule -DisplayName "HTTP" -Direction Inbound -LocalPort 80 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "HTTPS" -Direction Inbound -LocalPort 443 -Protocol TCP -Action Allow
 
-# Allow SSH (restrict to specific IPs if possible)
-sudo ufw allow ssh
+# Allow RDP (remote desktop) for management
+New-NetFirewallRule -DisplayName "RDP" -Direction Inbound -LocalPort 3389 -Protocol TCP -Action Allow
 
 # Allow Plex direct access (optional, can be removed later)
-sudo ufw allow 32400/tcp
+New-NetFirewallRule -DisplayName "Plex TCP" -Direction Inbound -LocalPort 32400 -Protocol TCP -Action Allow
 
-# Deny all other incoming traffic by default
-sudo ufw default deny incoming
-sudo ufw default allow outgoing
-
-# Reload firewall
-sudo ufw reload
-
+# Windows Firewall defaults to deny incoming, allow outgoing
 # Verify rules
-sudo ufw status
+Get-NetFirewallRule | Where-Object { $_.DisplayName -like "*HTTP*" -or $_.DisplayName -like "*Plex*" -or $_.DisplayName -like "*RDP*" } | Select DisplayName, Direction, Action
 ```
 
 ### Advanced Firewall Rules

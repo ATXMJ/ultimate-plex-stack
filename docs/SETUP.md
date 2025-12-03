@@ -71,19 +71,35 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 
 For experienced users, the basic deployment can be completed with:
 
-```bash
+### Available Makefile Targets
+
+The repository includes a Makefile with convenient targets for managing the stack:
+
+- `make up` - Start services (attached mode)
+- `make up-d` - Start services in background (detached)
+- `make down` - Stop all services
+- `make restart` - Restart services
+- `make logs` - View service logs
+- `make clean` - Clean up containers and volumes
+- `make pull` - Pull latest Docker images
+- `make build` - Build custom images (if modified)
+
+```powershell
 # Phase 1-2: Prerequisites and Repository Setup
 git clone https://github.com/DonMcD/ultimate-plex-stack.git
 cd ultimate-plex-stack
-cp .env.example .env
+copy .env.example .env
 # Edit .env with your configuration
 
 # Phase 3: Directory Structure
-mkdir -p config downloads transcode media/{movies,tv,music,photos}
-chown -R $USER:$USER config downloads transcode media
+mkdir config, downloads, transcode -Force
+mkdir media\movies, media\tv, media\music, media\photos -Force
 
 # Phase 4: Deploy Core Services
-docker compose --profile core up -d
+make up-d
+
+# Alternative: Direct Docker Compose command
+# docker compose --profile core up -d
 
 # Phase 5-9: Follow detailed step files for configuration
 ```

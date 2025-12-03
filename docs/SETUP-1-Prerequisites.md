@@ -46,95 +46,84 @@ When working through this phase with the AI assistant:
 ### Software Requirements
 
 #### Operating System
-- **Supported**: Ubuntu 20.04+, Debian 11+, CentOS 8+, Fedora 35+
+- **Supported**: Windows 11 Pro (version 21H2 or newer)
 - **Architecture**: x86_64 (AMD64)
-- **Kernel**: Linux kernel 4.15 or newer
+- **Requirements**: Windows Subsystem for Linux (WSL2) disabled, Hyper-V enabled
 
 #### Required Software Packages
-```bash
-# Update package lists
-sudo apt update
+```powershell
+# Install Docker Desktop for Windows
+# Download and install from: https://www.docker.com/products/docker-desktop
+# Ensure Hyper-V and WSL2 features are enabled in Windows Features
 
-# Install essential packages
-sudo apt install -y curl wget git ufw htop iotop ncdu rsync
-
-# Install Docker and Docker Compose
-sudo apt install -y docker.io docker-compose-plugin
-
-# Optional: Install additional monitoring tools
-sudo apt install -y fail2ban unattended-upgrades
+# Install additional tools via Winget or Chocolatey
+winget install Git.Git
+winget install Microsoft.PowerShell
 ```
 
 #### Docker Version Requirements
+- **Docker Desktop**: 4.0.0 or newer
 - **Docker Engine**: 20.10.0 or newer
-- **Docker Compose**: 2.0.0 or newer (plugin version)
+- **Docker Compose**: 2.0.0 or newer (included with Docker Desktop)
 
 Verify installations:
-```bash
+```powershell
 docker --version
 docker compose version
+
+# Test basic functionality
+make --version  # Verify Make is available
 ```
 
 ## User and Permission Setup `PLANNED`
 
-### Create Dedicated Service User (Recommended)
-```bash
-# Create plex user with appropriate groups
-sudo useradd -m -s /bin/bash plex
-sudo usermod -aG docker plex
-sudo usermod -aG sudo plex  # Optional: for administrative tasks
-
-# Set password for plex user
-sudo passwd plex
-
-# Switch to plex user for remaining setup
-su - plex
-```
+### Windows User Account
+Docker Desktop on Windows runs services under the current user account. No additional user creation is required.
 
 ### File System Permissions
-The setup requires proper permissions for Docker volume mounts and media access.
+Windows NTFS permissions will be managed automatically by Docker Desktop. Ensure your user account has full control over the project directory and media folders.
+
+```powershell
+# Verify current user permissions
+whoami
+
+# Check current directory permissions
+Get-Acl . | Format-List
+```
 
 ## Network and Firewall Configuration `PLANNED`
 
-### Firewall Setup (UFW)
-```bash
-# Enable UFW
-sudo ufw enable
+### Windows Firewall Setup
+Windows Firewall is configured automatically by Docker Desktop. Additional rules may need to be added for specific services.
 
-# Allow SSH (change port if using non-standard)
-sudo ufw allow ssh
-sudo ufw allow 22/tcp
+```powershell
+# Check current firewall status
+Get-NetFirewallProfile | Select Name, Enabled
 
-# Allow HTTP/HTTPS for reverse proxy
-sudo ufw allow 80/tcp
-sudo ufw allow 443/tcp
+# Allow HTTP/HTTPS for reverse proxy (if needed)
+New-NetFirewallRule -DisplayName "HTTP" -Direction Inbound -LocalPort 80 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "HTTPS" -Direction Inbound -LocalPort 443 -Protocol TCP -Action Allow
 
 # Allow Plex ports (initially - will be restricted later)
-sudo ufw allow 32400/tcp
-sudo ufw allow 32400/udp
+New-NetFirewallRule -DisplayName "Plex TCP" -Direction Inbound -LocalPort 32400 -Protocol TCP -Action Allow
+New-NetFirewallRule -DisplayName "Plex UDP" -Direction Inbound -LocalPort 32400 -Protocol UDP -Action Allow
 
 # Allow VPN ports (WireGuard)
-sudo ufw allow 51820/udp
-
-# Reload firewall
-sudo ufw reload
-
-# Verify status
-sudo ufw status
+New-NetFirewallRule -DisplayName "WireGuard" -Direction Inbound -LocalPort 51820 -Protocol UDP -Action Allow
 ```
 
 ### Network Interface Configuration
 Ensure your network interfaces are properly configured:
 
-```bash
+```powershell
 # Check network interfaces
-ip addr show
+Get-NetAdapter | Select Name, Status, MacAddress
 
 # Test internet connectivity
-ping -c 4 8.8.8.8
+Test-NetConnection -ComputerName 8.8.8.8 -InformationLevel Detailed
 
 # Test DNS resolution
-nslookup google.com
+Resolve-DnsName google.com
 ```
 
 ## VPN Service Preparation `PLANNED`
@@ -150,21 +139,22 @@ Prepare your VPN credentials (will be used in Phase 6):
 1. **Obtain VPN Subscription**
    - Choose a reputable no-logs VPN provider
    - Ensure they support port forwarding
-   - Verify Linux client compatibility
+   - Verify WireGuard/OpenVPN configuration files available
 
 2. **Gather Required Information**
    - VPN server endpoint/hostname
-   - Username/credentials
+   - Username/credentials or configuration files
    - Protocol configuration (WireGuard preferred)
    - Kill switch configuration details
 
 3. **Test VPN Connection** (Manual verification)
-   ```bash
-   # Install OpenVPN or WireGuard client for testing
-   sudo apt install -y openvpn wireguard-tools
+   ```powershell
+   # Install WireGuard client for Windows (if needed for testing)
+   # Download from: https://www.wireguard.com/install/
 
    # Test basic connectivity to VPN servers
    # (specific commands depend on your VPN provider)
+   # Note: Docker containers will handle VPN connections
    ```
 
 ## Domain and DNS Setup (Optional but Recommended) `PLANNED`
@@ -195,89 +185,86 @@ nslookup proxy.yourdomain.com
 ## Storage Preparation `PLANNED`
 
 ### Local Storage Assessment
-```bash
+```powershell
 # Check available disk space
-df -h
+Get-WmiObject -Class Win32_LogicalDisk | Select-Object Size, FreeSpace, DeviceID
 
 # Check filesystem types
-df -T
+Get-Volume | Select-Object DriveLetter, FileSystemType, Size, SizeRemaining
 
 # Check mount points
-mount | grep -E "(ext4|xfs|btrfs|zfs)"
+Get-WmiObject -Class Win32_MappedLogicalDisk | Select-Object Name, ProviderName
 ```
 
 ### Storage Performance Testing
-```bash
+```powershell
 # Test write performance
-dd if=/dev/zero of=/tmp/testfile bs=1M count=1000 conv=fdatasync
+$testFile = "$env:TEMP\testfile.tmp"
+$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+1..1000 | ForEach-Object { $null | Out-File -FilePath $testFile -Append }
+$stopwatch.Stop()
+Write-Host "Write performance: $($stopwatch.Elapsed.TotalSeconds) seconds"
 
 # Test read performance
-dd if=/tmp/testfile of=/dev/null bs=1M count=1000
+$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
+Get-Content $testFile | Out-Null
+$stopwatch.Stop()
+Write-Host "Read performance: $($stopwatch.Elapsed.TotalSeconds) seconds"
 
 # Clean up
-rm /tmp/testfile
+Remove-Item $testFile -Force
 ```
 
 ## System Optimization `PLANNED`
 
-### Kernel Parameters (Optional)
-For high-performance media serving:
+### Windows Performance Tuning
+For high-performance media serving on Windows:
 
-```bash
-# Increase max open files
-echo "fs.file-max = 2097152" | sudo tee -a /etc/sysctl.conf
+```powershell
+# Optimize Windows for file sharing
+Set-SmbServerConfiguration -EnableMultiChannel $true -Force
 
-# Optimize network settings
-echo "net.core.somaxconn = 65535" | sudo tee -a /etc/sysctl.conf
-echo "net.ipv4.tcp_max_syn_backlog = 65535" | sudo tee -a /etc/sysctl.conf
-
-# Apply changes
-sudo sysctl -p
+# Increase TCP connection limits (requires admin privileges)
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "MaxUserPort" -Value 65534
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\Tcpip\Parameters" -Name "TcpTimedWaitDelay" -Value 30
 ```
 
-### Docker Configuration
-```bash
-# Create Docker daemon configuration
-sudo tee /etc/docker/daemon.json > /dev/null <<EOF
-{
-  "log-driver": "json-file",
-  "log-opts": {
-    "max-size": "10m",
-    "max-file": "3"
-  },
-  "storage-driver": "overlay2"
-}
-EOF
+### Docker Desktop Configuration
+Docker Desktop settings are configured through the GUI:
 
-# Restart Docker
-sudo systemctl restart docker
+1. **Resources**: Allocate sufficient CPU and RAM to Docker Desktop
+2. **File Sharing**: Ensure project directories are shared with Docker
+3. **Advanced**: Enable experimental features if needed
+4. **Network**: Configure proxy settings if behind corporate firewall
+
+```powershell
+# Verify Docker Desktop is running and accessible
+docker system info
 ```
 
 ## Security Hardening `PLANNED`
 
-### SSH Configuration
-```bash
-# Backup original config
-sudo cp /etc/ssh/sshd_config /etc/ssh/sshd_config.backup
+### Windows Security Configuration
+```powershell
+# Enable Windows Defender real-time protection
+Set-MpPreference -DisableRealtimeMonitoring $false
 
-# Disable root login
-sudo sed -i 's/#PermitRootLogin yes/PermitRootLogin no/' /etc/ssh/sshd_config
+# Configure Windows Update for automatic updates
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\WindowsUpdate\Auto Update" -Name "AUOptions" -Value 4
 
-# Disable password authentication (use keys)
-sudo sed -i 's/#PasswordAuthentication yes/PasswordAuthentication no/' /etc/ssh/sshd_config
+# Enable Windows Firewall
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
+```
 
-# Restart SSH
-sudo systemctl restart ssh
+### Remote Desktop Security (if using RDP)
+```powershell
+# Configure RDP security settings
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "SecurityLayer" -Value 2
+Set-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp" -Name "UserAuthentication" -Value 1
 ```
 
 ### Automatic Updates
-```bash
-# Configure unattended upgrades
-sudo dpkg-reconfigure --priority=low unattended-upgrades
-
-# Verify configuration
-cat /etc/apt/apt.conf.d/50unattended-upgrades
-```
+Windows Update handles automatic updates. Ensure your system is set to download and install updates automatically.
 
 ## Pre-Deployment Checklist `PLANNED`
 
@@ -301,32 +288,36 @@ Once all prerequisites are met, proceed to [Phase 2: Repository Setup and Initia
 
 ### Common Issues
 
-**Docker permission denied:**
-```bash
-# Add user to docker group
-sudo usermod -aG docker $USER
-# Logout and login again
+**Docker Desktop not starting:**
+```powershell
+# Check if Hyper-V is enabled
+Get-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V
+
+# Restart Docker Desktop service
+Restart-Service com.docker.service
+
+# Check Docker Desktop logs in Windows Event Viewer
 ```
 
 **Firewall blocking connections:**
-```bash
-# Check UFW status
-sudo ufw status
+```powershell
+# Check Windows Firewall status
+Get-NetFirewallProfile
 
 # Temporarily disable for testing
-sudo ufw disable
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled False
 # Re-enable after testing
-sudo ufw enable
+Set-NetFirewallProfile -Profile Domain,Public,Private -Enabled True
 ```
 
 **Storage permission issues:**
-```bash
+```powershell
 # Check current user
 whoami
 
-# Check group membership
-groups
+# Check current directory permissions
+Get-Acl . | Format-List
 
-# Fix permissions if needed
-sudo chown -R $USER:$USER /path/to/directory
+# Fix permissions if needed (run as administrator)
+icacls "C:\path\to\directory" /grant "USERNAME:(OI)(CI)F" /T
 ```

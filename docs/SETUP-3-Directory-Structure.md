@@ -34,34 +34,33 @@ The Ultimate Plex Media Stack uses a **hybrid storage approach**:
 ## Directory Structure Creation `PLANNED`
 
 ### Navigate to Project Directory
-```bash
+```powershell
 # Ensure you're in the ultimate-plex-stack directory
-cd /path/to/ultimate-plex-stack
+cd C:\path\to\ultimate-plex-stack
 
 # Verify current location
 pwd
 ```
 
 ### Create Core Directory Structure
-```bash
+```powershell
 # Create main directories following the hybrid storage strategy
-mkdir -p config \
-         downloads/{movies,tv,music,photos,complete} \
-         transcode \
-         media/{movies,tv,music,photos} \
-         temp \
-         shared
+mkdir config -Force
+mkdir downloads\movies, downloads\tv, downloads\music, downloads\photos, downloads\complete -Force
+mkdir transcode -Force
+mkdir media\movies, media\tv, media\music, media\photos -Force
+mkdir temp, shared -Force
 
 # Verify structure creation
-tree -a -L 3 . | head -20
+tree /F /A
 ```
 
 ### Detailed Directory Breakdown
 
 #### Application Configurations (Local - Always)
-```bash
+```powershell
 # Create service-specific config directories
-mkdir -p config/plex \
+mkdir config\plex -Force
          config/radarr \
          config/sonarr \
          config/bazarr \
@@ -75,82 +74,58 @@ mkdir -p config/plex \
 ```
 
 #### Downloads Directory Structure (Local - Always)
-```bash
+```powershell
 # Create organized download directories
-mkdir -p downloads/movies \
-         downloads/tv \
-         downloads/music \
-         downloads/photos \
-         downloads/complete \
-         downloads/incomplete \
-         downloads/torrents \
-         downloads/usenet
+mkdir downloads\movies, downloads\tv, downloads\music, downloads\photos -Force
+mkdir downloads\complete, downloads\incomplete, downloads\torrents, downloads\usenet -Force
 ```
 
 #### Media Libraries (Local Initially - NAS Later)
-```bash
+```powershell
 # Create initial local media library structure
-mkdir -p media/movies \
-         media/tv \
-         media/music \
-         media/photos \
-         media/books \
-         media/audiobooks
+mkdir media\movies, media\tv, media\music, media\photos -Force
+mkdir media\books, media\audiobooks -Force
 ```
 
 #### Temporary and Shared Directories (Local - Always)
-```bash
+```powershell
 # Create temporary processing directories
-mkdir -p transcode/temp \
-         transcode/cache \
-         temp/logs \
-         temp/backups \
-         shared/scripts \
-         shared/ssl
+mkdir transcode\temp, transcode\cache -Force
+mkdir temp\logs, temp\backups -Force
+mkdir shared\scripts, shared\ssl -Force
 ```
 
 ## File Permissions and Ownership `PLANNED`
 
-### Set Proper Ownership
-```bash
+### Windows Permissions
+```powershell
 # Get your user information
-echo "Current user: $(whoami)"
-echo "User ID: $(id -u)"
-echo "Group ID: $(id -g)"
+whoami
+whoami /user
 
-# Set ownership for all directories to match PUID/PGID from .env
-sudo chown -R $PUID:$PGID config/
-sudo chown -R $PUID:$PGID downloads/
-sudo chown -R $PUID:$PGID transcode/
-sudo chown -R $PUID:$PGID media/
-sudo chown -R $PUID:$PGID temp/
-sudo chown -R $PUID:$PGID shared/
-```
+# On Windows with Docker Desktop, permissions are managed automatically
+# Ensure your user account has full control over the project directories
+# Docker Desktop will handle container access permissions
 
-### Set Directory Permissions
-```bash
-# Set secure permissions for config directories (no world access)
-chmod -R 755 config/
-chmod -R 755 downloads/
-chmod -R 755 transcode/
-chmod -R 755 media/
-chmod -R 755 temp/
-chmod -R 755 shared/
+# Verify permissions on key directories
+Get-Acl config | Format-List
+Get-Acl downloads | Format-List
+Get-Acl media | Format-List
 
 # Ensure download directories are writable
 chmod -R 775 downloads/
 ```
 
 ### Verify Permissions
-```bash
-# Check ownership
-ls -la | grep -E "^d"
+```powershell
+# Check directory structure
+dir
 
-# Check permissions recursively for key directories
-ls -ld config/
-ls -ld downloads/
-ls -ld media/
-ls -ld transcode/
+# Check permissions for key directories
+Get-Acl config | Select Path, Owner
+Get-Acl downloads | Select Path, Owner
+Get-Acl media | Select Path, Owner
+Get-Acl transcode | Select Path, Owner
 ```
 
 ## Storage Space Verification `PLANNED`
@@ -234,9 +209,9 @@ docker run --rm \
 ## Backup and Recovery Preparation `PLANNED`
 
 ### Create Backup Scripts Directory
-```bash
+```powershell
 # Create backup script location
-mkdir -p shared/scripts/backups
+mkdir shared\scripts\backups -Force
 
 # Create basic backup script template
 cat > shared/scripts/backups/backup-config.sh << 'EOF'
@@ -406,37 +381,35 @@ With the directory structure and storage properly configured, proceed to [Phase 
 ### Common Issues
 
 **Permission denied errors:**
-```bash
-# Check current ownership
-ls -ld /path/to/directory
+```powershell
+# Check current permissions
+Get-Acl C:\path\to\directory | Format-List
 
-# Fix ownership
-sudo chown -R $PUID:$PGID /path/to/directory
-
-# Check if you're in the correct group
-groups
+# On Windows with Docker Desktop, ensure your user has full control
+# Docker Desktop manages container permissions automatically
+# Check if Docker Desktop can access the directories
 ```
 
 **Insufficient storage space:**
 ```bash
 # Check largest directories
-du -sh * | sort -hr | head -10
+Get-ChildItem | Sort-Object Length -Descending | Select-Object Name, @{Name="Size(GB)";Expression={[math]::Round($_.Length/1GB,2)}} | Select-Object -First 10
 
 # Free up space if needed
-# Option 1: Clean package cache
-sudo apt autoremove && sudo apt autoclean
+# Option 1: Windows Disk Cleanup
+cleanmgr.exe /d C: /VERYLOWDISK
 
 # Option 2: Clear Docker cache
 docker system prune -a
 ```
 
 **Docker volume mount failures:**
-```bash
+```powershell
 # Test individual mounts
-docker run --rm -v "$(pwd)/config:/test" alpine ls -la /test
+docker run --rm -v "${PWD}/config:/test" alpine ls -la /test
 
-# Check SELinux/AppArmor if applicable
-sudo ausearch -m avc -ts recent | grep docker
+# On Windows, ensure directories are shared in Docker Desktop settings
+# Check Docker Desktop file sharing settings
 ```
 
 **Performance issues:**

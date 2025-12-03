@@ -55,8 +55,8 @@ echo "DOMAIN: $DOMAIN"
 docker --version
 docker compose version
 
-# Check Docker daemon status
-sudo systemctl status docker --no-pager -l
+# Check Docker Desktop status
+# Docker Desktop runs as a Windows service
 
 # Verify Docker can run containers
 docker run --rm hello-world
@@ -79,12 +79,18 @@ docker run --rm \
 ## Core Services Deployment `PLANNED`
 
 ### Deploy Core Services
-```bash
+```powershell
 # Deploy services using the core profile
-docker compose --profile core up -d
+make up-d
+
+# Alternative: Direct Docker Compose command
+# docker compose --profile core up -d
 
 # Monitor deployment progress
-docker compose --profile core logs -f --tail=50
+make logs
+
+# Alternative: Direct command
+# docker compose --profile core logs -f --tail=50
 ```
 
 ### Expected Services
@@ -137,10 +143,9 @@ else
 fi
 EOF
 
-chmod +x shared/scripts/health-check.sh
-
+# On Windows, scripts are executable by default
 # Run health check
-./shared/scripts/health-check.sh
+.\shared\scripts\health-check.sh
 ```
 
 ### Service Logs Review
