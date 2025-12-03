@@ -95,10 +95,10 @@ TZ=America/New_York
 **Domain Configuration:**
 ```bash
 # Your domain name (used for reverse proxy SSL certificates)
-DOMAIN=yourdomain.com
+DOMAIN=cooperstation.stream
 
 # Optional: Subdomain prefix if using a subdomain
-SUBDOMAIN=plex    # Results in plex.yourdomain.com
+SUBDOMAIN=plex    # Results in plex.cooperstation.stream
 ```
 
 ### Plex Configuration
@@ -143,8 +143,6 @@ Set up initial local paths (these can be migrated to NAS later):
 # Local media directories (initial setup - will migrate to NAS)
 MOVIES_PATH=./media/movies
 TV_PATH=./media/tv
-MUSIC_PATH=./media/music
-PHOTOS_PATH=./media/photos
 
 # Downloads and temp directories (always stay local for performance)
 DOWNLOADS_PATH=./downloads
@@ -164,7 +162,7 @@ PGID=1000
 TZ=America/New_York
 
 # Domain Configuration
-DOMAIN=yourdomain.com
+DOMAIN=cooperstation.stream
 SUBDOMAIN=plex
 
 # Plex Configuration
@@ -183,8 +181,6 @@ VPN_PROTOCOL=wireguard
 # Media Paths (Local initially)
 MOVIES_PATH=./media/movies
 TV_PATH=./media/tv
-MUSIC_PATH=./media/music
-PHOTOS_PATH=./media/photos
 
 # System Paths (Always Local)
 DOWNLOADS_PATH=./downloads
@@ -236,10 +232,10 @@ Ensure your domain DNS is properly configured:
 
 ```powershell
 # Test DNS resolution for your domain
-Resolve-DnsName yourdomain.com
+Resolve-DnsName cooperstation.stream
 
 # If using subdomains, test those too
-Resolve-DnsName plex.yourdomain.com
+Resolve-DnsName plex.cooperstation.stream
 ```
 
 ### SSL Certificate Preparation
@@ -252,7 +248,7 @@ The reverse proxy (Nginx Proxy Manager) will handle SSL certificates via Let's E
 Test SSL challenge accessibility:
 ```powershell
 # Test HTTP access (should work if firewall is configured correctly)
-Invoke-WebRequest -Uri http://yourdomain.com -Method Head
+Invoke-WebRequest -Uri http://cooperstation.stream -Method Head
 ```
 
 **Note**: Update status to `COMPLETED` after verifying domain DNS configuration and SSL certificate preparation for Let's Encrypt.
@@ -357,7 +353,7 @@ docker compose --profile core config --verbose
 Get-DnsClientServerAddress | Select ServerAddresses
 
 # Test with different DNS
-Resolve-DnsName yourdomain.com -Server 8.8.8.8
+Resolve-DnsName cooperstation.stream -Server 8.8.8.8
 ```
 
 **Permission issues:**

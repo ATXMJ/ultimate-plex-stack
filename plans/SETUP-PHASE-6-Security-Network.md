@@ -132,15 +132,15 @@ echo "Default credentials: admin@example.com / changeme"
 2. **SSL Certificate Configuration**
    - Go to SSL Certificates → Add SSL Certificate
    - Choose "Let's Encrypt"
-   - Domain: `yourdomain.com`
-   - Email: your-email@yourdomain.com
+   - Domain: `cooperstation.stream`
+   - Email: your-email@cooperstation.stream
 
 ### Create Proxy Hosts
 
 #### Plex Media Server
 ```bash
 # Create proxy host for Plex
-# Domain: plex.yourdomain.com
+# Domain: plex.cooperstation.stream
 # Forward to: http://plex:32400
 # SSL: Enable with Let's Encrypt
 # Websockets: Enable (required for Plex)
@@ -149,7 +149,7 @@ echo "Default credentials: admin@example.com / changeme"
 #### Overseerr
 ```bash
 # Create proxy host for Overseerr
-# Domain: overseerr.yourdomain.com (or requests.yourdomain.com)
+# Domain: overseerr.cooperstation.stream (or requests.cooperstation.stream)
 # Forward to: http://overseerr:5055
 # SSL: Enable
 # Authentication: None (uses Plex auth)
@@ -160,19 +160,19 @@ echo "Default credentials: admin@example.com / changeme"
 # Create proxy hosts for admin services with authentication
 
 # Radarr
-# Domain: radarr.yourdomain.com
+# Domain: radarr.cooperstation.stream
 # Forward to: http://radarr:7878
 # SSL: Enable
 # Access List: Admin Only (create auth list)
 
 # Sonarr
-# Domain: sonarr.yourdomain.com
+# Domain: sonarr.cooperstation.stream
 # Forward to: http://sonarr:8989
 # SSL: Enable
 # Access List: Admin Only
 
 # Prowlarr
-# Domain: prowlarr.yourdomain.com
+# Domain: prowlarr.cooperstation.stream
 # Forward to: http://prowlarr:9696
 # SSL: Enable
 # Access List: Admin Only
@@ -213,7 +213,7 @@ Now that services are behind the reverse proxy, update internal service configur
 #### Overseerr External URL
 ```bash
 # In Overseerr Settings → General
-# Overseerr URL: https://overseerr.yourdomain.com
+# Overseerr URL: https://overseerr.cooperstation.stream
 ```
 
 ### Plex Remote Access
@@ -308,23 +308,23 @@ chmod +x shared/scripts/configure-firewall.sh
 echo "Testing SSL certificates..."
 
 # Test main domain
-openssl s_client -connect yourdomain.com:443 -servername yourdomain.com < /dev/null 2>/dev/null | openssl x509 -noout -dates
+openssl s_client -connect cooperstation.stream:443 -servername cooperstation.stream < /dev/null 2>/dev/null | openssl x509 -noout -dates
 
 # Test subdomains
-openssl s_client -connect plex.yourdomain.com:443 -servername plex.yourdomain.com < /dev/null 2>/dev/null | openssl x509 -noout -dates
+openssl s_client -connect plex.cooperstation.stream:443 -servername plex.cooperstation.stream < /dev/null 2>/dev/null | openssl x509 -noout -dates
 
 # Test with curl
-curl -I https://plex.yourdomain.com
-curl -I https://radarr.yourdomain.com
+curl -I https://plex.cooperstation.stream
+curl -I https://radarr.cooperstation.stream
 ```
 
 ### Authentication Testing
 ```bash
 # Test basic auth for protected services
-curl -u admin:password https://radarr.yourdomain.com/api/v3/system/status
+curl -u admin:password https://radarr.cooperstation.stream/api/v3/system/status
 
 # Test Plex token authentication
-curl -H "X-Plex-Token: YOUR_TOKEN" https://plex.yourdomain.com/library/sections
+curl -H "X-Plex-Token: YOUR_TOKEN" https://plex.cooperstation.stream/library/sections
 ```
 
 ### VPN Leak Testing
@@ -416,7 +416,7 @@ fi
 
 # Check SSL certificates
 echo -e "\nSSL Certificate Status:"
-if openssl s_client -connect yourdomain.com:443 < /dev/null 2>/dev/null | openssl x509 -noout -checkend 2592000 > /dev/null; then
+if openssl s_client -connect cooperstation.stream:443 < /dev/null 2>/dev/null | openssl x509 -noout -checkend 2592000 > /dev/null; then
     echo "✓ SSL certificate valid (>30 days)"
 else
     echo "✗ SSL certificate expires soon or invalid"
@@ -424,7 +424,7 @@ fi
 
 # Check service accessibility
 echo -e "\nService Access Status:"
-if curl -s --max-time 5 https://plex.yourdomain.com > /dev/null; then
+if curl -s --max-time 5 https://plex.cooperstation.stream > /dev/null; then
     echo "✓ Plex accessible via HTTPS"
 else
     echo "✗ Plex not accessible via HTTPS"
@@ -446,7 +446,7 @@ chmod +x shared/scripts/security-monitor.sh
 docker compose --profile proxy logs nginx-proxy-manager
 
 # Test domain DNS
-nslookup yourdomain.com
+nslookup cooperstation.stream
 
 # Check firewall blocking port 80
 sudo ufw status | grep 80
@@ -467,7 +467,7 @@ sudo iptables -L | grep wg0
 **Authentication Failures:**
 ```bash
 # Test basic auth manually
-curl -u username:password https://radarr.yourdomain.com
+curl -u username:password https://radarr.cooperstation.stream
 
 # Check NPM access list configuration
 # Verify username/password in NPM admin

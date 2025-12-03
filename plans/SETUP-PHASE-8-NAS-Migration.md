@@ -51,8 +51,6 @@ When working through this phase with the AI assistant:
 # /volume1/media/ (or equivalent mount point)
 # ├── movies/
 # ├── tv/
-# ├── music/
-# ├── photos/
 # └── books/ (future use)
 ```
 
@@ -164,14 +162,6 @@ echo "TV Shows:" >> temp/media-inventory.txt
 find media/tv/ -type f -name "*.mkv" -o -name "*.mp4" | wc -l >> temp/media-inventory.txt
 du -sh media/tv/ >> temp/media-inventory.txt
 
-echo "Music:" >> temp/media-inventory.txt
-find media/music/ -type f -name "*.mp3" -o -name "*.flac" | wc -l >> temp/media-inventory.txt
-du -sh media/music/ >> temp/media-inventory.txt
-
-echo "Photos:" >> temp/media-inventory.txt
-find media/photos/ -type f -name "*.jpg" -o -name "*.png" | wc -l >> temp/media-inventory.txt
-du -sh media/photos/ >> temp/media-inventory.txt
-
 cat temp/media-inventory.txt
 ```
 
@@ -192,7 +182,7 @@ docker compose ps
 ```bash
 # Use rsync for efficient and resumable transfer
 # Preserve permissions and timestamps
-rsync -avh --progress --stats media/ /mnt/nas/media/
+rsync -avh --progress --stats media/ /mnt/gargantua/media/
 
 # Alternative: Use cp with progress (simpler but less robust)
 # cp -rv media/* /mnt/nas/media/
@@ -205,25 +195,25 @@ echo "Original files:"
 find media/ -type f | wc -l
 
 echo "Migrated files:"
-find /mnt/nas/media/ -type f | wc -l
+find /mnt/gargantua/media/ -type f | wc -l
 
 # Compare directory sizes
 du -sh media/
-du -sh /mnt/nas/media/
+du -sh /mnt/gargantua/media/
 
 # Detailed comparison (takes time for large libraries)
-diff -r media/ /mnt/nas/media/ || echo "Differences found - review manually"
+diff -r media/ /mnt/gargantua/media/ || echo "Differences found - review manually"
 ```
 
 ### Test NAS File Access
 ```bash
 # Test file access from NAS
-ls -la /mnt/nas/media/movies/
-ls -la /mnt/nas/media/tv/
+ls -la /mnt/gargantua/media/movies/
+ls -la /mnt/gargantua/media/tv/
 
 # Test read/write permissions
-touch /mnt/nas/media/test-access
-rm /mnt/nas/media/test-access
+touch /mnt/gargantua/media/test-access
+rm /mnt/gargantua/media/test-access
 ```
 
 **Note**: Update status to `COMPLETED` after successfully migrating all media files to NAS storage and verifying file integrity.
@@ -237,22 +227,18 @@ cp docker-compose.yml docker-compose.yml.local-only
 
 # Update volume mappings for media libraries
 # Change from local paths to NAS paths
-sed -i 's|./media/movies:/movies|/mnt/nas/media/movies:/movies|g' docker-compose.yml
-sed -i 's|./media/tv:/tv|/mnt/nas/media/tv:/tv|g' docker-compose.yml
-sed -i 's|./media/music:/music|/mnt/nas/media/music:/music|g' docker-compose.yml
-sed -i 's|./media/photos:/photos|/mnt/nas/media/photos:/photos|g' docker-compose.yml
+sed -i 's|./media/movies:/movies|/mnt/gargantua/media/movies:/movies|g' docker-compose.yml
+sed -i 's|./media/tv:/tv|/mnt/gargantua/media/tv:/tv|g' docker-compose.yml
 
 # Verify changes
-grep -A 2 -B 2 "mnt/nas" docker-compose.yml
+grep -A 2 -B 2 "mnt/gargantua" docker-compose.yml
 ```
 
 ### Update Environment Variables
 ```bash
 # Update .env file with NAS paths
-sed -i 's|MOVIES_PATH=./media/movies|MOVIES_PATH=/mnt/nas/media/movies|g' .env
-sed -i 's|TV_PATH=./media/tv|TV_PATH=/mnt/nas/media/tv|g' .env
-sed -i 's|MUSIC_PATH=./media/music|MUSIC_PATH=/mnt/nas/media/music|g' .env
-sed -i 's|PHOTOS_PATH=./media/photos|PHOTOS_PATH=/mnt/nas/media/photos|g' .env
+sed -i 's|MOVIES_PATH=./media/movies|MOVIES_PATH=/mnt/gargantua/media/movies|g' .env
+sed -i 's|TV_PATH=./media/tv|TV_PATH=/mnt/gargantua/media/tv|g' .env
 
 # Keep these LOCAL (do not change):
 # DOWNLOADS_PATH=./downloads
@@ -290,7 +276,7 @@ docker compose --profile core exec sonarr ls -la /tv/
 ### Plex Library Rescan
 ```bash
 # Access Plex web interface
-echo "Access Plex at: https://plex.yourdomain.com"
+echo "Access Plex at: https://plex.cooperstation.stream"
 
 # For each library:
 # 1. Go to Library settings
@@ -354,15 +340,15 @@ mv media/ temp/media-local-backup/
 
 # Create symlink structure if needed (optional)
 # mkdir media
-# ln -s /mnt/nas/media/movies media/movies
-# ln -s /mnt/nas/media/tv media/tv
+# ln -s /mnt/gargantua/media/movies media/movies
+# ln -s /mnt/gargantua/media/tv media/tv
 # etc.
 ```
 
 ### Update Monitoring Scripts
 ```bash
 # Update storage monitoring to include NAS
-sed -i 's|du -sh config/ downloads/ transcode/ media/ temp/ shared/|du -sh config/ downloads/ transcode/ temp/ shared/ /mnt/nas/media|g' shared/scripts/monitor-storage.sh
+sed -i 's|du -sh config/ downloads/ transcode/ media/ temp/ shared/|du -sh config/ downloads/ transcode/ temp/ shared/ /mnt/gargantua/media|g' shared/scripts/monitor-storage.sh
 ```
 
 ### Update Backup Scripts
@@ -391,7 +377,7 @@ BACKUP_DEST="/mnt/backup-drive/nas-backup"
 DATE=$(date +%Y%m%d_%H%M%S)
 
 rsync -avh --delete --backup --backup-dir="$BACKUP_DEST/archives/$DATE" \
-    /mnt/nas/media/ "$BACKUP_DEST/current/"
+    /mnt/gargantua/media/ "$BACKUP_DEST/current/"
 
 echo "NAS backup completed: $DATE"
 EOF
@@ -409,7 +395,7 @@ chmod +x shared/scripts/backup-nas.sh
 ping your-nas-ip
 
 # Test mount manually
-sudo mount -t nfs your-nas-ip:/volume1/media /mnt/nas/media
+sudo mount -t nfs your-nas-ip:/volume1/media /mnt/gargantua/media
 
 # Check /etc/fstab syntax
 sudo mount -a 2>&1
@@ -421,13 +407,13 @@ showmount -e your-nas-ip
 **Permission issues:**
 ```bash
 # Verify NAS permissions
-sudo -u $PUID ls -la /mnt/nas/media/
+sudo -u $PUID ls -la /mnt/gargantua/media/
 
 # Check Docker access
 docker compose --profile core exec plex id
 
 # Fix permissions if needed
-sudo chown -R $PUID:$PGID /mnt/nas/media/
+sudo chown -R $PUID:$PGID /mnt/gargantua/media/
 ```
 
 **Service access issues:**
@@ -505,7 +491,7 @@ echo "=== NAS Performance Report ==="
 
 # Mount status
 echo "Mount Status:"
-df -h /mnt/nas/media
+df -h /mnt/gargantua/media
 
 # Network performance test
 echo -e "\nNetwork Performance:"
@@ -513,7 +499,7 @@ dd if=/dev/zero bs=1M count=100 | ssh user@nas-ip "cat > /dev/null"
 
 # I/O performance
 echo -e "\nI/O Performance:"
-time dd if=/mnt/nas/media/testfile of=/dev/null bs=1M count=100 2>&1 | tail -1
+time dd if=/mnt/gargantua/media/testfile of=/dev/null bs=1M count=100 2>&1 | tail -1
 
 echo "NAS monitoring complete"
 EOF

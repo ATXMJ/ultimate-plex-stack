@@ -50,8 +50,6 @@ Internet ── VPN ── Reverse Proxy ── Services
   - `/config` - Plex configuration and metadata
   - `/media/movies` - Movie library
   - `/media/tv` - TV show library
-  - `/media/music` - Music library
-  - `/media/photos` - Photo library
   - `/transcode` - Temporary transcoding files
 - **Environment Variables**:
   - `PLEX_CLAIM` - Plex account claim token
@@ -233,11 +231,9 @@ The stack uses a hybrid approach: **server and application data remains local** 
 ### NAS Storage Layout (Media Libraries Only)
 
 ```
-NAS Mount Point (e.g., /mnt/nas/media/)
+Gargantua Mount Point (/mnt/gargantua/media/) ✅ **DECIDED**
 ├── movies/                  # Movie library (NAS)
 ├── tv/                      # TV show library (NAS)
-├── music/                   # Music library (NAS)
-├── photos/                 # Photo library (NAS)
 └── books/                  # Books/Audiobooks (NAS - future)
 ```
 
@@ -257,8 +253,6 @@ volumes:
   # Media libraries - LOCAL (initially)
   - ./media/movies:/movies
   - ./media/tv:/tv
-  - ./media/music:/music
-  - ./media/photos:/photos
 ```
 
 #### NAS Migration (Media Libraries Only)
@@ -273,19 +267,15 @@ volumes:
   - ./transcode:/transcode
 
   # Media libraries - MOVED TO NAS
-  - /mnt/nas/media/movies:/movies
-  - /mnt/nas/media/tv:/tv
-  - /mnt/nas/media/music:/music
-  - /mnt/nas/media/photos:/photos
+  - /mnt/gargantua/media/movies:/movies
+  - /mnt/gargantua/media/tv:/tv
 ```
 
 #### Environment Variables for Flexibility
 ```bash
 # Media library paths (update when migrating to NAS)
-MOVIES_PATH=/mnt/nas/media/movies    # Change from ./media/movies
-TV_PATH=/mnt/nas/media/tv            # Change from ./media/tv
-MUSIC_PATH=/mnt/nas/media/music      # Change from ./media/music
-PHOTOS_PATH=/mnt/nas/media/photos    # Change from ./media/photos
+MOVIES_PATH=/mnt/gargantua/media/movies    # Change from ./media/movies
+TV_PATH=/mnt/gargantua/media/tv            # Change from ./media/tv
 
 # Keep downloads and transcode local for performance
 DOWNLOADS_PATH=./downloads           # Always local
@@ -304,7 +294,7 @@ TRANSCODE_PATH=./transcode           # Always local
 
 **NAS Storage (Media Libraries Only):**
 - **Minimum**: 2TB for initial media library
-- **Recommended**: 4TB+ for growth (movies + TV + music + photos)
+- **Recommended**: 4TB+ for growth (movies + TV)
 - **RAID**: Hardware RAID 5/6 or software RAID with redundancy
 - **Backup**: Multiple copies, offsite backup solution
 - **Network**: Gigabit Ethernet minimum, 10GbE recommended for large libraries
@@ -398,14 +388,14 @@ For services without native authentication (Radarr, Sonarr, Bazarr, Tdarr, Prowl
 4. **OAuth Integration**: Use external authentication providers
 
 **Recommended Configuration:**
-- Create separate subdomains (e.g., `radarr.yourdomain.com`, `sonarr.yourdomain.com`)
+- Create separate subdomains (e.g., `radarr.cooperstation.stream`, `sonarr.cooperstation.stream`)
 - Enable SSL certificates for each subdomain
 - Configure basic auth or IP restrictions for admin-only services
 - Keep Plex and Overseerr publicly accessible (with their native auth)
 
 **Example Nginx Proxy Manager Setup:**
 ```
-Proxy Host: radarr.yourdomain.com
+Proxy Host: radarr.cooperstation.stream
 - Forward to: http://radarr:7878
 - SSL: Enable with Let's Encrypt
 - Access List: Admin-only (basic auth or IP restriction)
@@ -443,7 +433,7 @@ VPN_PASSWORD=pass456
 PLEX_CLAIM=claim-abc123def456
 
 # Domain (for reverse proxy)
-DOMAIN=plex.mydomain.com
+DOMAIN=cooperstation.stream
 ```
 
 ### Docker Compose Profiles
@@ -499,7 +489,7 @@ services:
    mkdir config, downloads, transcode -Force
 
    # Create initial local media directories (will migrate to NAS later)
-   mkdir media\movies, media\tv, media\music, media\photos -Force
+   mkdir media\movies, media\tv -Force
    ```
 
 4. **Deploy Services**
@@ -566,19 +556,15 @@ When ready to migrate media libraries to NAS while keeping server data local:
      - ./transcode:/transcode
 
      # Change these to NAS
-     - /mnt/nas/media/movies:/movies    # was ./media/movies:/movies
-     - /mnt/nas/media/tv:/tv            # was ./media/tv:/tv
-     - /mnt/nas/media/music:/music      # was ./media/music:/music
-     - /mnt/nas/media/photos:/photos    # was ./media/photos:/photos
+     - /mnt/gargantua/media/movies:/movies    # was ./media/movies:/movies
+     - /mnt/gargantua/media/tv:/tv            # was ./media/tv:/tv
    ```
 
 4. **Update Environment Variables**
    ```bash
    # In .env file
-   MOVIES_PATH=/mnt/nas/media/movies
-   TV_PATH=/mnt/nas/media/tv
-   MUSIC_PATH=/mnt/nas/media/music
-   PHOTOS_PATH=/mnt/nas/media/photos
+   MOVIES_PATH=/mnt/gargantua/media/movies
+   TV_PATH=/mnt/gargantua/media/tv
    ```
 
 5. **Restart Services**

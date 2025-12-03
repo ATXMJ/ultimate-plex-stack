@@ -46,6 +46,11 @@ docker compose --profile core ps plex
 echo "Access Plex at: http://$(hostname -I | awk '{print $1}'):32400/web"
 ```
 
+### Plex Server Naming
+1. **Set Server Name**
+   - In Plex Settings → General
+   - Set server name to: `Endurance` ✅ **DECIDED**
+
 ### Plex Claim and Account Setup
 1. **Access Plex Web Interface**
    - Open http://your-server-ip:32400/web
@@ -62,8 +67,6 @@ docker compose --profile core logs plex | grep -i claim
 1. **Add Media Libraries**
    - Movies: `/movies` (maps to `./media/movies`)
    - TV Shows: `/tv` (maps to `./media/tv`)
-   - Music: `/music` (maps to `./media/music`)
-   - Photos: `/photos` (maps to `./media/photos`)
 
 2. **Library Settings**
    - Enable "Scan my library automatically"

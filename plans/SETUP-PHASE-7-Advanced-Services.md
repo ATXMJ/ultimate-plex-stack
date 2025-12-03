@@ -67,9 +67,8 @@ echo "Default credentials: admin / adminadmin"
 2. **Download Directories**
    - Default save path: `/downloads`
    - Create subdirectories for organization:
-     - `/downloads/movies`
-     - `/downloads/tv`
-     - `/downloads/music`
+    - `/downloads/movies`
+    - `/downloads/tv`
 
 3. **Connection Settings**
    - Global maximum number of connections: 500
@@ -97,7 +96,7 @@ docker compose --profile torrent exec qbittorrent curl -s https://ipinfo.io/ip
 #### qBittorrent Reverse Proxy Setup
 ```bash
 # Add to Nginx Proxy Manager
-# Domain: qbittorrent.yourdomain.com
+# Domain: qbittorrent.cooperstation.stream
 # Forward to: http://qbittorrent:8080
 # SSL: Enable
 # Access List: Admin Only (basic auth)
@@ -140,7 +139,6 @@ echo "NZBGet: http://$(hostname -I | awk '{print $1}'):6789"
 4. **Download Categories**
    - Movies: `/downloads/movies`
    - TV: `/downloads/tv`
-   - Music: `/downloads/music`
 
 **Note**: Update status to `COMPLETED` after configuring qBittorrent and/or NZBGet with VPN integration and initial settings.
 
@@ -230,7 +228,7 @@ echo "Tdarr Server: http://$(hostname -I | awk '{print $1}'):8266"
 #### Tdarr Reverse Proxy
 ```bash
 # Add to Nginx Proxy Manager
-# Domain: tdarr.yourdomain.com
+# Domain: tdarr.cooperstation.stream
 # Forward to: http://tdarr:8265
 # SSL: Enable
 # Access List: Admin Only

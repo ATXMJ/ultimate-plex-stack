@@ -4,7 +4,7 @@ This document outlines the comprehensive naming convention for the Ultimate Plex
 
 ## 🌟 **Core Theme: Cooper Station**
 
-**Primary Domain**: `cooperstation.stream`
+**Primary Domain**: `cooperstation.stream` ✅ **DECIDED**
 
 **Theme Inspiration**: Named after Joseph Cooper (Matthew McConaughey's character) and his role as a space station commander. The domain represents the central command center for your media operations - the "station" where all your digital exploration and content management takes place.
 
@@ -13,12 +13,12 @@ This document outlines the comprehensive naming convention for the Ultimate Plex
 ## 🖥️ **Infrastructure Components**
 
 ### **Server Computer (Host Machine)**
-- **Name**: `Cooper Station` or `Endurance Base`
+- **Name**: `Endurance` ✅ **DECIDED**
 - **Hostname**: `cooper-station`
 - **Purpose**: The central command center, like Cooper's role as mission commander
 
 ### **NAS Drive/Storage System**
-- **Name**: `Gargantua` (the supermassive black hole)
+- **Name**: `Gargantua` ✅ **DECIDED**
 - **Mount Point**: `/mnt/gargantua`
 - **SMB Share**: `\\gargantua\media`
 - **Purpose**: The "black hole" that consumes and stores all your media content
@@ -99,8 +99,6 @@ tdarr.cooperstation.stream         # Media transcoding
 ├── media/
 │   ├── movies/          # Movie collection
 │   ├── tv/             # TV show collection
-│   ├── music/          # Music library
-│   ├── photos/         # Photo collection
 │   └── books/          # Audiobooks (future)
 └── backups/
     └── cooper-archives/

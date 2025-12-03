@@ -51,7 +51,7 @@ uptime
 # Verify network connectivity
 echo "=== Network Status ==="
 ping -c 2 8.8.8.8
-curl -s https://yourdomain.com | head -1
+curl -s https://cooperstation.stream | head -1
 ```
 
 ### Test Data Preparation
@@ -86,7 +86,7 @@ cp temp/test-media/* media/tv/ 2>/dev/null || true
 #### Plex Media Server Validation
 ```bash
 # Test Plex accessibility
-curl -I https://plex.yourdomain.com
+curl -I https://plex.cooperstation.stream
 
 # Test library scanning
 curl -X POST "http://plex:32400/library/sections/all/refresh" \
@@ -132,7 +132,7 @@ curl -s http://localhost:9696/api/v1/indexer | jq length
 #### Overseerr Testing
 ```bash
 # Test Overseerr accessibility
-curl -I https://overseerr.yourdomain.com
+curl -I https://overseerr.cooperstation.stream
 
 # Test Plex integration
 # Manual: Verify media libraries appear in Overseerr
@@ -243,13 +243,13 @@ docker stats --no-stream
 echo "=== Security Tests ==="
 
 # Test public access (should be blocked)
-curl -s https://radarr.yourdomain.com | grep -i "auth"
+curl -s https://radarr.cooperstation.stream | grep -i "auth"
 
 # Test authenticated access
-curl -u admin:password https://radarr.yourdomain.com/api/v3/system/status
+curl -u admin:password https://radarr.cooperstation.stream/api/v3/system/status
 
 # Test SSL certificate validity
-openssl s_client -connect plex.yourdomain.com:443 < /dev/null 2>/dev/null | openssl x509 -noout -dates
+openssl s_client -connect plex.cooperstation.stream:443 < /dev/null 2>/dev/null | openssl x509 -noout -dates
 ```
 
 ### Network Security Testing
@@ -532,13 +532,13 @@ if docker compose --profile core ps | grep -q "Up"; then
 fi
 
 # Web access
-if curl -s https://plex.yourdomain.com > /dev/null; then
+if curl -s https://plex.cooperstation.stream > /dev/null; then
     echo "✓ Web interfaces accessible"
     ((PASSED_TESTS++))
 fi
 
 # SSL validation
-if openssl s_client -connect plex.yourdomain.com:443 < /dev/null 2>/dev/null | openssl x509 -noout -checkend 604800 > /dev/null; then
+if openssl s_client -connect plex.cooperstation.stream:443 < /dev/null 2>/dev/null | openssl x509 -noout -checkend 604800 > /dev/null; then
     echo "✓ SSL certificates valid"
     ((PASSED_TESTS++))
 fi
