@@ -4,6 +4,8 @@
 
 This specification defines a comprehensive personal media server stack built with Docker Compose, providing automated media management, streaming, and content acquisition capabilities. The stack is designed to be initially deployed on local storage with easy migration paths to NAS systems.
 
+This repository includes complete configuration for serving the Plex stack securely via your own custom domain name, with automatic SSL certificate management, reverse proxy setup, and remote access capabilities.
+
 ## Architecture Overview
 
 ### Core Components
@@ -329,10 +331,91 @@ iptables -I OUTPUT -s 172.20.0.0/16 -j DROP
 - Reverse proxy handles external access
 
 ### Access Control
-- **Reverse Proxy**: SSL/TLS termination with Let's Encrypt
-- **Authentication**: Individual service authentication
-- **Network Restrictions**: Firewall rules limiting access
-- **VPN for Remote Access**: Optional WireGuard server for remote management
+
+#### Authentication Overview
+Each service in the stack requires individual authentication configuration. The stack is designed with security-first defaults, requiring explicit setup of credentials for all web interfaces.
+
+**User Access Patterns:**
+- **End Users**: Primarily access Plex (streaming) and Overseerr (content requests)
+- **Administrators**: Access all management services (Radarr, Sonarr, Bazarr, Tdarr, Prowlarr)
+- **Services without native authentication** are secured through reverse proxy authentication
+
+#### Service Authentication Details
+
+**Plex Media Server**
+- **Authentication**: Native - Required, uses Plex account integration
+- **Setup**: Claim token required during initial setup
+- **User Management**: Plex account users, family sharing support
+- **Remote Access**: Configurable through Plex account settings
+
+**Overseerr**
+- **Authentication**: Native - Required
+- **Methods**: Plex account integration (recommended) or local accounts
+- **Setup**: Must configure authentication during initial setup
+- **Integration**: Seamlessly integrates with Plex user management
+
+**Management Services (Radarr, Sonarr, Bazarr, Prowlarr)**
+- **Authentication**: Reverse proxy required (no native auth)
+- **Default State**: No authentication (must be secured via proxy)
+- **Setup**: Configure authentication in Nginx Proxy Manager
+- **Access**: Admin-only via secured subdomains
+
+**Tdarr**
+- **Authentication**: Optional native auth available
+- **Default State**: No authentication
+- **Setup**: Configure in web interface or secure via reverse proxy
+
+**Content Acquisition (qBittorrent, NZBGet)**
+- **Authentication**: Required
+- **Setup**: Configure strong username/password during initial setup
+- **Security Note**: These services handle sensitive download operations
+
+**Tdarr**
+- **Authentication**: Optional
+- **Default State**: No authentication
+- **Setup**: Configure in web interface if needed
+
+**Nginx Proxy Manager**
+- **Authentication**: Required for admin interface
+- **Setup**: Configure admin credentials during initial setup
+- **Purpose**: Manages SSL certificates and routing
+
+#### Authentication Best Practices
+- **Strong Passwords**: Use complex passwords for all services
+- **Unique Credentials**: Different passwords for each service
+- **Plex Integration**: Leverage Plex's built-in user management where possible
+- **Network Security**: Combine authentication with network restrictions
+- **Regular Updates**: Change default passwords immediately after setup
+- **VPN Protection**: Route sensitive services through VPN when possible
+
+#### Reverse Proxy Authentication for Admin Services
+For services without native authentication (Radarr, Sonarr, Bazarr, Tdarr, Prowlarr), secure access through Nginx Proxy Manager:
+
+**Setup Options:**
+1. **Basic Authentication**: Username/password protection at proxy level
+2. **IP Restrictions**: Limit access to specific IP addresses/networks
+3. **VPN-Only Access**: Require VPN connection for admin services
+4. **OAuth Integration**: Use external authentication providers
+
+**Recommended Configuration:**
+- Create separate subdomains (e.g., `radarr.yourdomain.com`, `sonarr.yourdomain.com`)
+- Enable SSL certificates for each subdomain
+- Configure basic auth or IP restrictions for admin-only services
+- Keep Plex and Overseerr publicly accessible (with their native auth)
+
+**Example Nginx Proxy Manager Setup:**
+```
+Proxy Host: radarr.yourdomain.com
+- Forward to: http://radarr:7878
+- SSL: Enable with Let's Encrypt
+- Access List: Admin-only (basic auth or IP restriction)
+```
+
+#### Multi-User Considerations
+- **Plex Accounts**: Primary user management system
+- **Overseerr Integration**: Provides request management with user authentication
+- **Access Levels**: Configure appropriate permissions for different users
+- **Family Sharing**: Plex supports multiple user accounts with different access levels
 
 ## Configuration Management
 
