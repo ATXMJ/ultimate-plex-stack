@@ -23,7 +23,7 @@ When working through this phase with the AI assistant:
 - **Performance Monitoring**: The agent will help monitor system resources during deployment
 - **Troubleshooting**: If services fail to start, the agent will guide you through diagnosis and fixes
 
-## Core Services Overview
+## Core Services Overview `PLANNED`
 
 The core profile includes essential services for media streaming and management:
 
@@ -33,7 +33,7 @@ The core profile includes essential services for media streaming and management:
 - **Prowlarr**: Centralized indexer management
 - **Overseerr**: User request management and media discovery
 
-## Pre-Deployment Verification
+## Pre-Deployment Verification `PLANNED`
 
 ### Environment Validation
 ```bash
@@ -76,7 +76,7 @@ docker run --rm \
   alpine touch /test_config/test /test_downloads/test /test_media/test
 ```
 
-## Core Services Deployment
+## Core Services Deployment `PLANNED`
 
 ### Deploy Core Services
 ```bash
@@ -101,7 +101,7 @@ docker compose --profile core ps
 # - overseerr
 ```
 
-## Service Startup Verification
+## Service Startup Verification `PLANNED`
 
 ### Health Check Script
 ```bash
@@ -164,7 +164,7 @@ docker compose --profile core logs prowlarr 2>&1 | grep -i error | tail -5
 docker compose --profile core logs overseerr 2>&1 | grep -i error | tail -5
 ```
 
-## Network Connectivity Testing
+## Network Connectivity Testing `PLANNED`
 
 ### Internal Network Verification
 ```bash
@@ -200,7 +200,7 @@ docker compose --profile core exec -T prowlarr netstat -tln | grep 9696
 docker compose --profile core exec -T overseerr netstat -tln | grep 5055
 ```
 
-## Initial Service Access Testing
+## Initial Service Access Testing `PLANNED`
 
 ### Web Interface Availability
 ```bash
@@ -231,7 +231,7 @@ docker compose --profile core exec radarr nslookup plex
 docker compose --profile core exec sonarr nslookup prowlarr
 ```
 
-## Configuration Directory Verification
+## Configuration Directory Verification `PLANNED`
 
 ### Service Configuration Creation
 ```bash
@@ -264,7 +264,7 @@ ls -la config/sonarr/test_sonarr
 rm config/plex/test_plex config/radarr/test_radarr config/sonarr/test_sonarr
 ```
 
-## Resource Usage Monitoring
+## Resource Usage Monitoring `PLANNED`
 
 ### Initial Resource Check
 ```bash
@@ -286,7 +286,7 @@ echo "Container log sizes:"
 docker compose --profile core ps -q | xargs docker inspect --format='{{.Name}}: {{.LogPath}}' | xargs ls -lh | awk '{print $5, $9}'
 ```
 
-## Service-Specific Initial Setup
+## Service-Specific Initial Setup `PLANNED`
 
 ### Plex Media Server
 ```bash
@@ -362,16 +362,16 @@ docker compose --profile core down -v
 docker compose --profile core up -d
 ```
 
-## Deployment Validation Checklist
+## Deployment Validation Checklist `PLANNED`
 
-- [ ] Core services deployed successfully
-- [ ] All containers are in running state
-- [ ] No critical errors in service logs
-- [ ] Network connectivity between services verified
-- [ ] Web interfaces accessible locally
-- [ ] Configuration directories populated
-- [ ] Volume mounts working correctly
-- [ ] Resource usage within acceptable limits
+- [ ] Core services deployed successfully `PLANNED`
+- [ ] All containers are in running state `PLANNED`
+- [ ] No critical errors in service logs `PLANNED`
+- [ ] Network connectivity between services verified `PLANNED`
+- [ ] Web interfaces accessible locally `PLANNED`
+- [ ] Configuration directories populated `PLANNED`
+- [ ] Volume mounts working correctly `PLANNED`
+- [ ] Resource usage within acceptable limits `PLANNED`
 
 ## Next Steps
 

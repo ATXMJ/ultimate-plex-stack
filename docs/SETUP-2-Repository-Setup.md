@@ -24,7 +24,7 @@ When working through this phase with the AI assistant:
 - **Testing**: The agent will help test Docker Compose configuration before proceeding
 - **Backup Creation**: The agent will ensure you have backups of initial configurations
 
-## Repository Cloning
+## Repository Cloning `PLANNED`
 
 ### Clone the Repository
 ```bash
@@ -52,7 +52,7 @@ ultimate-plex-stack/
 └── scripts/               # Setup and utility scripts
 ```
 
-## Environment Variables Configuration
+## Environment Variables Configuration `PLANNED`
 
 ### Create Environment File
 ```bash
@@ -192,7 +192,7 @@ CONFIG_PATH=./config
 NVIDIA_VISIBLE_DEVICES=all
 ```
 
-## Docker Compose Configuration
+## Docker Compose Configuration `PLANNED`
 
 ### Verify Docker Compose File
 ```bash
@@ -222,7 +222,7 @@ docker compose config --profiles
 docker compose --profile core config
 ```
 
-## Domain and SSL Preparation
+## Domain and SSL Preparation `PLANNED`
 
 ### DNS Verification
 Ensure your domain DNS is properly configured:
@@ -248,7 +248,7 @@ Test SSL challenge accessibility:
 curl -I http://yourdomain.com
 ```
 
-## Initial Configuration Validation
+## Initial Configuration Validation `PLANNED`
 
 ### Environment Variables Check
 ```bash
@@ -284,7 +284,7 @@ netstat -tuln | grep -E "(80|443|32400)"
 docker network ls | grep plex-stack || echo "Network will be created on first run"
 ```
 
-## Backup Configuration
+## Backup Configuration `PLANNED`
 ```bash
 # Create a backup of your initial configuration
 cp .env .env.backup
@@ -295,19 +295,19 @@ git add .
 git commit -m "Initial configuration setup"
 ```
 
-## Configuration Checklist
+## Configuration Checklist `PLANNED`
 
-- [ ] Repository cloned successfully
-- [ ] .env file created from .env.example
-- [ ] User/Group IDs (PUID/PGID) configured
-- [ ] Timezone (TZ) set correctly
-- [ ] Domain configuration completed
-- [ ] Plex claim token obtained and configured
-- [ ] VPN credentials configured
-- [ ] Media paths set up for local storage
-- [ ] Docker Compose configuration validated
-- [ ] DNS resolution verified
-- [ ] SSL ports accessible for Let's Encrypt
+- [ ] Repository cloned successfully `PLANNED`
+- [ ] .env file created from .env.example `PLANNED`
+- [ ] User/Group IDs (PUID/PGID) configured `PLANNED`
+- [ ] Timezone (TZ) set correctly `PLANNED`
+- [ ] Domain configuration completed `PLANNED`
+- [ ] Plex claim token obtained and configured `PLANNED`
+- [ ] VPN credentials configured `PLANNED`
+- [ ] Media paths set up for local storage `PLANNED`
+- [ ] Docker Compose configuration validated `PLANNED`
+- [ ] DNS resolution verified `PLANNED`
+- [ ] SSL ports accessible for Let's Encrypt `PLANNED`
 
 ## Next Steps
 

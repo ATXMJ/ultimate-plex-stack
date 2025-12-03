@@ -23,7 +23,7 @@ When working through this phase with the AI assistant:
 - **Backup Planning**: The agent will help set up initial backup scripts
 - **Progress Monitoring**: Regular verification of directory creation and permissions
 
-## Storage Strategy Overview
+## Storage Strategy Overview `PLANNED`
 
 The Ultimate Plex Media Stack uses a **hybrid storage approach**:
 
@@ -31,7 +31,7 @@ The Ultimate Plex Media Stack uses a **hybrid storage approach**:
 - **Local Storage (Initial)**: Media libraries (will migrate to NAS later)
 - **NAS Storage (Future)**: Media libraries only (after migration)
 
-## Directory Structure Creation
+## Directory Structure Creation `PLANNED`
 
 ### Navigate to Project Directory
 ```bash
@@ -109,7 +109,7 @@ mkdir -p transcode/temp \
          shared/ssl
 ```
 
-## File Permissions and Ownership
+## File Permissions and Ownership `PLANNED`
 
 ### Set Proper Ownership
 ```bash
@@ -153,7 +153,7 @@ ls -ld media/
 ls -ld transcode/
 ```
 
-## Storage Space Verification
+## Storage Space Verification `PLANNED`
 
 ### Check Available Storage
 ```bash
@@ -191,7 +191,7 @@ du -sh temp/
 du -sh shared/
 ```
 
-## Storage Optimization
+## Storage Optimization `PLANNED`
 
 ### Filesystem Considerations
 ```bash
@@ -231,7 +231,7 @@ docker run --rm \
   alpine sh -c "touch /test_config/test && touch /test_downloads/test && touch /test_media/test && touch /test_transcode/test && echo 'Volume mounts working correctly'"
 ```
 
-## Backup and Recovery Preparation
+## Backup and Recovery Preparation `PLANNED`
 
 ### Create Backup Scripts Directory
 ```bash
@@ -263,7 +263,7 @@ chmod +x shared/scripts/backups/backup-config.sh
 ./shared/scripts/backups/backup-config.sh
 ```
 
-## Directory Structure Validation
+## Directory Structure Validation `PLANNED`
 
 ### Complete Structure Verification
 ```bash
@@ -356,7 +356,7 @@ chmod +x shared/scripts/validate-permissions.sh
 ./shared/scripts/validate-permissions.sh
 ```
 
-## Storage Monitoring Setup
+## Storage Monitoring Setup `PLANNED`
 
 ### Create Storage Monitoring Script
 ```bash
@@ -385,17 +385,17 @@ chmod +x shared/scripts/monitor-storage.sh
 ./shared/scripts/monitor-storage.sh
 ```
 
-## Setup Checklist
+## Setup Checklist `PLANNED`
 
-- [ ] All required directories created
-- [ ] Proper ownership set (PUID:PGID)
-- [ ] Correct permissions applied
-- [ ] Sufficient storage space verified
-- [ ] Storage performance tested
-- [ ] Docker volume mounts validated
-- [ ] Backup scripts created
-- [ ] Directory structure validated
-- [ ] Storage monitoring configured
+- [ ] All required directories created `PLANNED`
+- [ ] Proper ownership set (PUID:PGID) `PLANNED`
+- [ ] Correct permissions applied `PLANNED`
+- [ ] Sufficient storage space verified `PLANNED`
+- [ ] Storage performance tested `PLANNED`
+- [ ] Docker volume mounts validated `PLANNED`
+- [ ] Backup scripts created `PLANNED`
+- [ ] Directory structure validated `PLANNED`
+- [ ] Storage monitoring configured `PLANNED`
 
 ## Next Steps
 

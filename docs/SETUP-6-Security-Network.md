@@ -24,7 +24,7 @@ When working through this phase with the AI assistant:
 - **Testing Security**: Together you'll test authentication, SSL, and VPN functionality
 - **Access Verification**: The agent will help verify that security measures work without blocking legitimate access
 
-## Security Architecture Overview
+## Security Architecture Overview `PLANNED`
 
 The security setup includes:
 - **VPN Gateway**: Protects torrent and usenet traffic
@@ -32,7 +32,7 @@ The security setup includes:
 - **Authentication**: Secure access to management services
 - **Firewall Rules**: Network access control
 
-## VPN Gateway Setup
+## VPN Gateway Setup `PLANNED`
 
 ### Deploy VPN Services
 ```bash
@@ -107,7 +107,7 @@ EOF
 chmod +x shared/scripts/vpn-killswitch.sh
 ```
 
-## Nginx Proxy Manager Setup
+## Nginx Proxy Manager Setup `PLANNED`
 
 ### Initial NPM Configuration
 ```bash
@@ -185,7 +185,7 @@ echo "Default credentials: admin@example.com / changeme"
    - Add IP restrictions for admin services
    - Allow only trusted networks
 
-## Service Authentication Configuration
+## Service Authentication Configuration `PLANNED`
 
 ### Update Service URLs
 
@@ -220,7 +220,7 @@ Now that services are behind the reverse proxy, update internal service configur
    - Ensure claim token is still valid
    - Re-claim if necessary
 
-## Firewall Configuration
+## Firewall Configuration `PLANNED`
 
 ### Update UFW Rules
 ```bash
@@ -276,7 +276,7 @@ chmod +x shared/scripts/configure-firewall.sh
 ./shared/scripts/configure-firewall.sh
 ```
 
-## SSL Certificate Management
+## SSL Certificate Management `PLANNED`
 
 ### Let's Encrypt Automation
 ```bash
@@ -294,7 +294,7 @@ chmod +x shared/scripts/configure-firewall.sh
 # - Update proxy hosts to use custom certificates
 ```
 
-## Network Security Testing
+## Network Security Testing `PLANNED`
 
 ### SSL Certificate Validation
 ```bash
@@ -328,7 +328,7 @@ curl -H "X-Plex-Token: YOUR_TOKEN" https://plex.yourdomain.com/library/sections
 # Verify torrent traffic routes through VPN
 ```
 
-## Service Security Hardening
+## Service Security Hardening `PLANNED`
 
 ### Disable Unnecessary Services
 ```bash
@@ -359,7 +359,7 @@ docker compose --profile core logs | grep -i "unauthorized\|forbidden\|error"
 # Configure in docker-compose.yml logging section
 ```
 
-## Backup Security Configurations
+## Backup Security Configurations `PLANNED`
 
 ```bash
 # Create security backup
@@ -379,7 +379,7 @@ cp -r shared/ssl "$BACKUP_DIR/"
 echo "Security backup created in: $BACKUP_DIR"
 ```
 
-## Monitoring and Alerts
+## Monitoring and Alerts `PLANNED`
 
 ### Security Monitoring Script
 ```bash
@@ -488,18 +488,18 @@ sudo ufw allow ssh
 sudo ufw allow 80,443/tcp
 ```
 
-## Security Validation Checklist
+## Security Validation Checklist `PLANNED`
 
-- [ ] VPN gateway configured with kill switch
-- [ ] Nginx Proxy Manager deployed and configured
-- [ ] SSL certificates obtained and working
-- [ ] Proxy hosts created for all services
-- [ ] Authentication configured for admin services
-- [ ] Firewall rules updated and secure
-- [ ] Service URLs updated for reverse proxy
-- [ ] SSL certificate validation passing
-- [ ] Authentication working correctly
-- [ ] Security configurations backed up
+- [ ] VPN gateway configured with kill switch `PLANNED`
+- [ ] Nginx Proxy Manager deployed and configured `PLANNED`
+- [ ] SSL certificates obtained and working `PLANNED`
+- [ ] Proxy hosts created for all services `PLANNED`
+- [ ] Authentication configured for admin services `PLANNED`
+- [ ] Firewall rules updated and secure `PLANNED`
+- [ ] Service URLs updated for reverse proxy `PLANNED`
+- [ ] SSL certificate validation passing `PLANNED`
+- [ ] Authentication working correctly `PLANNED`
+- [ ] Security configurations backed up `PLANNED`
 
 ## Next Steps
 

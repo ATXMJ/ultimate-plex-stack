@@ -24,7 +24,7 @@ When working through this phase with the AI assistant:
 - **Iterative Testing**: Re-testing after fixes with the agent's guidance
 - **Documentation**: The agent will help document test results and create a final readiness assessment
 
-## Testing Overview
+## Testing Overview `PLANNED`
 
 The validation process includes:
 - **Functional Testing**: Core features and integrations
@@ -33,7 +33,7 @@ The validation process includes:
 - **User Experience Testing**: Real-world usage scenarios
 - **Monitoring Setup**: Ongoing health and performance tracking
 
-## Pre-Testing Preparation
+## Pre-Testing Preparation `PLANNED`
 
 ### System Health Check
 ```bash
@@ -75,7 +75,7 @@ cp temp/test-media/* media/tv/ 2>/dev/null || true
 # Set up test client devices
 ```
 
-## Functional Testing
+## Functional Testing `PLANNED`
 
 ### Core Service Testing
 
@@ -162,7 +162,7 @@ curl -s http://localhost:6767/api/system/status | jq .version
 # Manual: Verify subtitle download for test media
 ```
 
-## End-to-End Pipeline Testing
+## End-to-End Pipeline Testing `PLANNED`
 
 ### Media Acquisition Pipeline
 ```bash
@@ -227,7 +227,7 @@ docker stats --no-stream
 # Document any issues or friction points
 ```
 
-## Security Testing
+## Security Testing `PLANNED`
 
 ### Access Control Validation
 ```bash
@@ -267,7 +267,7 @@ sudo ufw status
 # Test backup security
 ```
 
-## Performance Testing
+## Performance Testing `PLANNED`
 
 ### Benchmarking Script
 ```bash
@@ -327,7 +327,7 @@ docker system df
 du -sh config/ downloads/ transcode/ media/ temp/
 ```
 
-## User Experience Testing
+## User Experience Testing `PLANNED`
 
 ### Client Compatibility Testing
 ```bash
@@ -352,7 +352,7 @@ du -sh config/ downloads/ transcode/ media/ temp/
 # Gather user feedback on workflows
 ```
 
-## Monitoring and Alerting Setup
+## Monitoring and Alerting Setup `PLANNED`
 
 ### Health Monitoring Configuration
 ```bash
@@ -413,7 +413,7 @@ echo "0 2 * * * /path/to/ultimate-plex-stack/shared/scripts/backups/backup-confi
 # Document backup/recovery procedures
 ```
 
-## Test Results Documentation
+## Test Results Documentation `PLANNED`
 
 ### Create Test Report
 ```bash
@@ -487,17 +487,17 @@ EOF
 echo "Test results template created: temp/test-results-$(date +%Y%m%d).md"
 ```
 
-## Final System Validation
+## Final System Validation `PLANNED`
 
-### Go-Live Checklist
-- [ ] All critical functionality tested and working
-- [ ] Performance meets requirements
-- [ ] Security measures validated
-- [ ] Monitoring and alerting configured
-- [ ] Backup procedures tested
-- [ ] Documentation complete
-- [ ] User training provided (if applicable)
-- [ ] Support procedures established
+### Go-Live Checklist `PLANNED`
+- [ ] All critical functionality tested and working `PLANNED`
+- [ ] Performance meets requirements `PLANNED`
+- [ ] Security measures validated `PLANNED`
+- [ ] Monitoring and alerting configured `PLANNED`
+- [ ] Backup procedures tested `PLANNED`
+- [ ] Documentation complete `PLANNED`
+- [ ] User training provided (if applicable) `PLANNED`
+- [ ] Support procedures established `PLANNED`
 
 ### Production Readiness Assessment
 ```bash

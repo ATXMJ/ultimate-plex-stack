@@ -24,7 +24,7 @@ When working through this phase with the AI assistant:
 - **Rollback Planning**: Ensuring you can revert changes if issues arise
 - **Post-Migration Testing**: Comprehensive testing to ensure everything works with NAS storage
 
-## Migration Prerequisites
+## Migration Prerequisites `PLANNED`
 
 ### NAS Requirements
 - **Storage Capacity**: 2TB+ for initial media library
@@ -41,7 +41,7 @@ When working through this phase with the AI assistant:
 - [ ] Services are running normally
 - [ ] You have maintenance window planned
 
-## NAS Preparation
+## NAS Preparation `PLANNED`
 
 ### Create NAS Share Structure
 ```bash
@@ -74,7 +74,7 @@ showmount -e your-nas-ip
 smbclient -L your-nas-ip
 ```
 
-## Mount NAS Storage
+## Mount NAS Storage `PLANNED`
 
 ### Create Mount Point
 ```bash
@@ -123,7 +123,7 @@ sudo mount -t cifs //your-nas-ip/media /mnt/nas/media -o username=your-user,pass
 # //your-nas-ip/media /mnt/nas/media cifs username=your-user,password=your-pass,uid=$PUID,gid=$PGID 0 0
 ```
 
-## Pre-Migration Backup
+## Pre-Migration Backup `PLANNED`
 
 ### Full System Backup
 ```bash
@@ -168,7 +168,7 @@ du -sh media/photos/ >> temp/media-inventory.txt
 cat temp/media-inventory.txt
 ```
 
-## Media Migration
+## Media Migration `PLANNED`
 
 ### Stop Services Temporarily
 ```bash
@@ -217,7 +217,7 @@ touch /mnt/nas/media/test-access
 rm /mnt/nas/media/test-access
 ```
 
-## Update Docker Configuration
+## Update Docker Configuration `PLANNED`
 
 ### Modify docker-compose.yml
 ```bash
@@ -252,7 +252,7 @@ sed -i 's|PHOTOS_PATH=./media/photos|PHOTOS_PATH=/mnt/nas/media/photos|g' .env
 grep "PATH=" .env
 ```
 
-## Service Restart and Testing
+## Service Restart and Testing `PLANNED`
 
 ### Restart Services
 ```bash
@@ -294,7 +294,7 @@ echo "Access Plex at: https://plex.yourdomain.com"
 # Check for any playback issues
 ```
 
-## Post-Migration Validation
+## Post-Migration Validation `PLANNED`
 
 ### Functional Testing
 ```bash
@@ -325,7 +325,7 @@ docker stats
 ls -la temp/backups/
 ```
 
-## Cleanup and Optimization
+## Cleanup and Optimization `PLANNED`
 
 ### Remove Local Media Files
 ```bash
@@ -354,7 +354,7 @@ sed -i 's|du -sh config/ downloads/ transcode/ media/ temp/ shared/|du -sh confi
 # Consider separate NAS backup strategy
 ```
 
-## NAS Backup Strategy
+## NAS Backup Strategy `PLANNED`
 
 ### Implement NAS Backup
 ```bash
@@ -444,21 +444,21 @@ docker compose --profile core down
 docker compose --profile core up -d
 ```
 
-## Migration Validation Checklist
+## Migration Validation Checklist `PLANNED`
 
-- [ ] NAS properly mounted and accessible
-- [ ] Pre-migration backup completed
-- [ ] Media successfully copied to NAS
-- [ ] File integrity verified
-- [ ] Docker configuration updated
-- [ ] Environment variables updated
-- [ ] Services restarted successfully
-- [ ] Plex libraries rescanned
-- [ ] Media playback tested
-- [ ] Download/import pipeline verified
-- [ ] Performance acceptable
-- [ ] NAS backup strategy implemented
-- [ ] Local storage cleaned up (optional)
+- [ ] NAS properly mounted and accessible `PLANNED`
+- [ ] Pre-migration backup completed `PLANNED`
+- [ ] Media successfully copied to NAS `PLANNED`
+- [ ] File integrity verified `PLANNED`
+- [ ] Docker configuration updated `PLANNED`
+- [ ] Environment variables updated `PLANNED`
+- [ ] Services restarted successfully `PLANNED`
+- [ ] Plex libraries rescanned `PLANNED`
+- [ ] Media playback tested `PLANNED`
+- [ ] Download/import pipeline verified `PLANNED`
+- [ ] Performance acceptable `PLANNED`
+- [ ] NAS backup strategy implemented `PLANNED`
+- [ ] Local storage cleaned up (optional) `PLANNED`
 
 ## Next Steps
 

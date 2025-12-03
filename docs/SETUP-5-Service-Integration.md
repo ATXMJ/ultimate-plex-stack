@@ -24,7 +24,7 @@ When working through this phase with the AI assistant:
 - **Integration Verification**: Testing each service connection as you configure it
 - **Workflow Testing**: Together you'll test complete workflows (request → download → library addition)
 
-## Service Configuration Order
+## Service Configuration Order `PLANNED`
 
 Configure services in this order to ensure proper integration:
 1. **Plex Media Server** - Core streaming service
@@ -33,7 +33,7 @@ Configure services in this order to ensure proper integration:
 4. **Sonarr** - TV show automation
 5. **Overseerr** - Request management
 
-## Plex Media Server Configuration
+## Plex Media Server Configuration `PLANNED`
 
 ### Initial Plex Setup
 ```bash
@@ -76,7 +76,7 @@ docker compose --profile core exec plex ls -la /media/movies
 docker compose --profile core exec plex ls -la /tv
 ```
 
-## Prowlarr Indexer Configuration
+## Prowlarr Indexer Configuration `PLANNED`
 
 ### Initial Prowlarr Setup
 ```bash
@@ -115,7 +115,7 @@ docker compose --profile core logs prowlarr | grep -i password
 echo "Copy the API Key from Prowlarr Settings → General"
 ```
 
-## Radarr Configuration
+## Radarr Configuration `PLANNED`
 
 ### Initial Radarr Setup
 ```bash
@@ -157,7 +157,7 @@ echo "Access Radarr at: http://$(hostname -I | awk '{print $1}'):7878"
 # Completed: downloads/complete/movies
 ```
 
-## Sonarr Configuration
+## Sonarr Configuration `PLANNED`
 
 ### Initial Sonarr Setup
 ```bash
@@ -196,7 +196,7 @@ echo "Access Sonarr at: http://$(hostname -I | awk '{print $1}'):8989"
 - Configure preferred release groups
 - Set up delay profiles for better quality releases
 
-## Overseerr Configuration
+## Overseerr Configuration `PLANNED`
 
 ### Initial Overseerr Setup
 ```bash
@@ -227,7 +227,7 @@ echo "Access Overseerr at: http://$(hostname -I | awk '{print $1}'):5055"
    - Set up user access levels
    - Configure request limits
 
-## Service Integration Testing
+## Service Integration Testing `PLANNED`
 
 ### Test Prowlarr Connectivity
 ```bash
@@ -256,7 +256,7 @@ docker compose --profile core exec sonarr ping -c 2 overseerr
 docker compose --profile core exec overseerr ping -c 2 prowlarr
 ```
 
-## Media Pipeline Testing
+## Media Pipeline Testing `PLANNED`
 
 ### Manual Media Addition Test
 1. **Add Test Movie in Radarr**
@@ -282,7 +282,7 @@ curl -X POST "http://plex:32400/library/sections/1/refresh" -H "X-Plex-Token: YO
 docker compose --profile core logs -f plex | grep -i scan
 ```
 
-## Configuration Backup
+## Configuration Backup `PLANNED`
 
 ### Save Service Configurations
 ```bash
@@ -303,7 +303,7 @@ docker compose --profile core config > "$BACKUP_DIR/docker-compose-core.yml"
 echo "Integration backup created in: $BACKUP_DIR"
 ```
 
-## Performance and Resource Monitoring
+## Performance and Resource Monitoring `PLANNED`
 
 ### Service Resource Usage
 ```bash
@@ -393,17 +393,17 @@ sudo rm -rf config/radarr/* config/sonarr/* config/prowlarr/*
 docker compose --profile core up -d
 ```
 
-## Integration Validation Checklist
+## Integration Validation Checklist `PLANNED`
 
-- [ ] Plex Media Server claimed and libraries configured
-- [ ] Prowlarr indexers configured and tested
-- [ ] Radarr connected to Prowlarr and media folders set
-- [ ] Sonarr connected to Prowlarr and media folders set
-- [ ] Overseerr connected to Plex and configured
-- [ ] Cross-service communication verified
-- [ ] Manual media addition tested
-- [ ] Library scanning working
-- [ ] Service configurations backed up
+- [ ] Plex Media Server claimed and libraries configured `PLANNED`
+- [ ] Prowlarr indexers configured and tested `PLANNED`
+- [ ] Radarr connected to Prowlarr and media folders set `PLANNED`
+- [ ] Sonarr connected to Prowlarr and media folders set `PLANNED`
+- [ ] Overseerr connected to Plex and configured `PLANNED`
+- [ ] Cross-service communication verified `PLANNED`
+- [ ] Manual media addition tested `PLANNED`
+- [ ] Library scanning working `PLANNED`
+- [ ] Service configurations backed up `PLANNED`
 
 ## Next Steps
 

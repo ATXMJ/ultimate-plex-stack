@@ -4,68 +4,68 @@ This guide provides a high-level implementation plan for setting up the Ultimate
 
 ## Major Setup Phases
 
-### Phase 1: Prerequisites and Environment Preparation
+### Phase 1: Prerequisites and Environment Preparation `PLANNED`
 **File**: [SETUP-1-Prerequisites.md](./SETUP-1-Prerequisites.md)
-- Verify system requirements (Linux, Docker, storage)
-- Configure user permissions and security settings
-- Set up firewall and network access rules
-- Prepare VPN service credentials
+- Verify system requirements (Linux, Docker, storage) `PLANNED`
+- Configure user permissions and security settings `PLANNED`
+- Set up firewall and network access rules `PLANNED`
+- Prepare VPN service credentials `PLANNED`
 
-### Phase 2: Repository Setup and Initial Configuration
+### Phase 2: Repository Setup and Initial Configuration `PLANNED`
 **File**: [SETUP-2-Repository-Setup.md](./SETUP-2-Repository-Setup.md)
-- Clone the ultimate-plex-stack repository
-- Create and configure environment variables (.env file)
-- Set up domain configuration for reverse proxy
-- Initialize basic Docker Compose configuration
+- Clone the ultimate-plex-stack repository `PLANNED`
+- Create and configure environment variables (.env file) `PLANNED`
+- Set up domain configuration for reverse proxy `PLANNED`
+- Initialize basic Docker Compose configuration `PLANNED`
 
-### Phase 3: Directory Structure and Storage Setup
+### Phase 3: Directory Structure and Storage Setup `PLANNED`
 **File**: [SETUP-3-Directory-Structure.md](./SETUP-3-Directory-Structure.md)
-- Create local directory structure for configs and temp files
-- Set up initial local media directories
-- Configure proper file permissions and ownership
-- Prepare storage layout following hybrid storage strategy
+- Create local directory structure for configs and temp files `PLANNED`
+- Set up initial local media directories `PLANNED`
+- Configure proper file permissions and ownership `PLANNED`
+- Prepare storage layout following hybrid storage strategy `PLANNED`
 
-### Phase 4: Core Services Deployment
+### Phase 4: Core Services Deployment `PLANNED`
 **File**: [SETUP-4-Core-Services.md](./SETUP-4-Core-Services.md)
-- Deploy core media management services (Plex, Radarr, Sonarr)
-- Start supporting services (Bazarr, Prowlarr, Overseerr)
-- Configure Docker networks and service isolation
-- Verify initial service startup and basic connectivity
+- Deploy core media management services (Plex, Radarr, Sonarr) `PLANNED`
+- Start supporting services (Bazarr, Prowlarr, Overseerr) `PLANNED`
+- Configure Docker networks and service isolation `PLANNED`
+- Verify initial service startup and basic connectivity `PLANNED`
 
-### Phase 5: Service Configuration and Integration
+### Phase 5: Service Configuration and Integration `PLANNED`
 **File**: [SETUP-5-Service-Integration.md](./SETUP-5-Service-Integration.md)
-- Configure Plex Media Server and claim setup
-- Set up indexer connections through Prowlarr
-- Integrate Radarr/Sonarr with download clients
-- Configure Overseerr for request management
+- Configure Plex Media Server and claim setup `PLANNED`
+- Set up indexer connections through Prowlarr `PLANNED`
+- Integrate Radarr/Sonarr with download clients `PLANNED`
+- Configure Overseerr for request management `PLANNED`
 
-### Phase 6: Security and Network Setup
+### Phase 6: Security and Network Setup `PLANNED`
 **File**: [SETUP-6-Security-Network.md](./SETUP-6-Security-Network.md)
-- Configure VPN gateway and kill switch for torrent/usenet
-- Set up Nginx Proxy Manager for SSL and reverse proxy
-- Implement authentication for all services
-- Configure firewall rules and network security
+- Configure VPN gateway and kill switch for torrent/usenet `PLANNED`
+- Set up Nginx Proxy Manager for SSL and reverse proxy `PLANNED`
+- Implement authentication for all services `PLANNED`
+- Configure firewall rules and network security `PLANNED`
 
-### Phase 7: Advanced Services (Optional)
+### Phase 7: Advanced Services (Optional) `PLANNED`
 **File**: [SETUP-7-Advanced-Services.md](./SETUP-7-Advanced-Services.md)
-- Deploy Tdarr for media transcoding
-- Set up content acquisition services (qBittorrent, NZBGet)
-- Configure GPU acceleration for transcoding (if available)
-- Integrate advanced services with existing stack
+- Deploy Tdarr for media transcoding `PLANNED`
+- Set up content acquisition services (qBittorrent, NZBGet) `PLANNED`
+- Configure GPU acceleration for transcoding (if available) `PLANNED`
+- Integrate advanced services with existing stack `PLANNED`
 
-### Phase 8: NAS Migration (Optional)
+### Phase 8: NAS Migration (Optional) `PLANNED`
 **File**: [SETUP-8-NAS-Migration.md](./SETUP-8-NAS-Migration.md)
-- Prepare NAS storage and mount points
-- Migrate media libraries from local to NAS storage
-- Update Docker volume mappings
-- Verify Plex library scanning and integrity
+- Prepare NAS storage and mount points `PLANNED`
+- Migrate media libraries from local to NAS storage `PLANNED`
+- Update Docker volume mappings `PLANNED`
+- Verify Plex library scanning and integrity `PLANNED`
 
-### Phase 9: Testing and Validation
+### Phase 9: Testing and Validation `PLANNED`
 **File**: [SETUP-9-Testing-Validation.md](./SETUP-9-Testing-Validation.md)
-- Perform end-to-end testing of media acquisition pipeline
-- Validate streaming functionality and transcoding
-- Test security configurations and access controls
-- Set up monitoring and backup procedures
+- Perform end-to-end testing of media acquisition pipeline `PLANNED`
+- Validate streaming functionality and transcoding `PLANNED`
+- Test security configurations and access controls `PLANNED`
+- Set up monitoring and backup procedures `PLANNED`
 
 ## Quick Start Commands
 

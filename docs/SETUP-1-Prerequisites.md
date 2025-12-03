@@ -23,7 +23,7 @@ When working through this phase with the AI assistant:
 - **Troubleshooting**: If issues arise, the agent will guide you through diagnosis and resolution
 - **Safety First**: The agent will include precautions to avoid disrupting existing services
 
-## System Requirements
+## System Requirements `PLANNED`
 
 ### Hardware Requirements
 
@@ -75,7 +75,7 @@ docker --version
 docker compose version
 ```
 
-## User and Permission Setup
+## User and Permission Setup `PLANNED`
 
 ### Create Dedicated Service User (Recommended)
 ```bash
@@ -94,7 +94,7 @@ su - plex
 ### File System Permissions
 The setup requires proper permissions for Docker volume mounts and media access.
 
-## Network and Firewall Configuration
+## Network and Firewall Configuration `PLANNED`
 
 ### Firewall Setup (UFW)
 ```bash
@@ -137,7 +137,7 @@ ping -c 4 8.8.8.8
 nslookup google.com
 ```
 
-## VPN Service Preparation
+## VPN Service Preparation `PLANNED`
 
 ### VPN Requirements
 - **Provider**: Mullvad, ProtonVPN, or similar no-logs provider
@@ -167,7 +167,7 @@ Prepare your VPN credentials (will be used in Phase 6):
    # (specific commands depend on your VPN provider)
    ```
 
-## Domain and DNS Setup (Optional but Recommended)
+## Domain and DNS Setup (Optional but Recommended) `PLANNED`
 
 ### Domain Requirements
 - **Registrar**: Any ICANN-accredited registrar
@@ -192,7 +192,7 @@ nslookup plex.yourdomain.com
 nslookup proxy.yourdomain.com
 ```
 
-## Storage Preparation
+## Storage Preparation `PLANNED`
 
 ### Local Storage Assessment
 ```bash
@@ -218,7 +218,7 @@ dd if=/tmp/testfile of=/dev/null bs=1M count=1000
 rm /tmp/testfile
 ```
 
-## System Optimization
+## System Optimization `PLANNED`
 
 ### Kernel Parameters (Optional)
 For high-performance media serving:
@@ -253,7 +253,7 @@ EOF
 sudo systemctl restart docker
 ```
 
-## Security Hardening
+## Security Hardening `PLANNED`
 
 ### SSH Configuration
 ```bash
@@ -279,19 +279,19 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades
 cat /etc/apt/apt.conf.d/50unattended-upgrades
 ```
 
-## Pre-Deployment Checklist
+## Pre-Deployment Checklist `PLANNED`
 
-- [ ] System meets hardware requirements
-- [ ] Linux distribution is supported
-- [ ] Docker and Docker Compose are installed and working
-- [ ] User account created with proper permissions
-- [ ] Firewall configured with basic rules
-- [ ] Network connectivity verified
-- [ ] VPN service subscription obtained
-- [ ] Domain configured (optional)
-- [ ] Storage space verified and performant
-- [ ] System optimized for media serving
-- [ ] Security hardening applied
+- [ ] System meets hardware requirements `PLANNED`
+- [ ] Linux distribution is supported `PLANNED`
+- [ ] Docker and Docker Compose are installed and working `PLANNED`
+- [ ] User account created with proper permissions `PLANNED`
+- [ ] Firewall configured with basic rules `PLANNED`
+- [ ] Network connectivity verified `PLANNED`
+- [ ] VPN service subscription obtained `PLANNED`
+- [ ] Domain configured (optional) `PLANNED`
+- [ ] Storage space verified and performant `PLANNED`
+- [ ] System optimized for media serving `PLANNED`
+- [ ] Security hardening applied `PLANNED`
 
 ## Next Steps
 
