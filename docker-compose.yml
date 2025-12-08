@@ -1,0 +1,264 @@
+---
+version: "3.8"
+
+networks:
+  proxy:
+    name: proxy
+    external: true
+
+services:
+  # ================================================================================
+  # VPN GATEWAY - Gluetun
+  # ================================================================================
+  # This container provides a secure VPN gateway for download clients.
+  # All download traffic is routed through NordVPN with WireGuard protocol.
+  # Built-in kill switch ensures no traffic leaks if VPN disconnects.
+  vpn:
+    image: qmcgaw/gluetun:latest
+    container_name: vpn
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    ports:
+      # qBittorrent WebUI
+      - "8080:8080"
+      # qBittorrent connection port
+      - "8694:8694"
+      - "8694:8694/udp"
+      # NZBGet WebUI (if needed later)
+      - "6789:6789"
+    environment:
+      - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
+      - VPN_TYPE=${VPN_PROTOCOL}
+      # NordVPN with OpenVPN uses token authentication
+      # Username is always "token" for NordVPN token auth
+      - OPENVPN_USER=token
+      - OPENVPN_PASSWORD=${VPN_TOKEN}
+      - SERVER_REGIONS=United States
+      # Kill switch is enabled by default in Gluetun
+      - FIREWALL_OUTBOUND_SUBNETS=172.16.0.0/12,192.168.0.0/16
+      - TZ=${TZ}
+      - PUID=${PUID}
+      - PGID=${PGID}
+      # Log level for troubleshooting
+      - LOG_LEVEL=info
+    volumes:
+      - ${CONFIG_ROOT}/vpn:/gluetun
+    networks:
+      - proxy
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "/gluetun-entrypoint", "healthcheck"]
+      interval: 60s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # ================================================================================
+  # DOWNLOAD CLIENTS - Routed through VPN
+  # ================================================================================
+  # These services use network_mode: "service:vpn" to route ALL traffic through VPN
+  # They share the VPN container's network stack and have no direct internet access
+  
+  # qBittorrent - Torrent client
+  qbittorrent:
+    image: lscr.io/linuxserver/qbittorrent:latest
+    container_name: qbittorrent
+    # CRITICAL: This routes ALL qBittorrent traffic through the VPN container
+    network_mode: "service:vpn"
+    depends_on:
+      vpn:
+        condition: service_healthy
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - WEBUI_PORT=8080
+      - TORRENTING_PORT=8694
+    volumes:
+      - ${CONFIG_ROOT}/qbittorrent:/config
+      - ${DOWNLOAD_ROOT}:/downloads
+      - ${MEDIA_ROOT}:/media
+    restart: unless-stopped
+
+  # ================================================================================
+  # MEDIA SERVER - Direct connection (NO VPN)
+  # ================================================================================
+  
+  # Plex Media Server
+  plex:
+    image: lscr.io/linuxserver/plex:latest
+    container_name: plex
+    network_mode: host
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - VERSION=docker
+      - PLEX_CLAIM=${PLEX_CLAIM}
+    volumes:
+      - ${CONFIG_ROOT}/plex:/config
+      - ${MEDIA_ROOT}/tv:/tv
+      - ${MEDIA_ROOT}/movies:/movies
+      - transcode:/transcode
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+  # ================================================================================
+  # MEDIA MANAGEMENT - Direct connection (NO VPN)
+  # ================================================================================
+  
+  # Radarr - Movie management
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/radarr:/config
+      - ${DOWNLOAD_ROOT}:/downloads
+      - ${MEDIA_ROOT}/movies:/movies
+    networks:
+      - proxy
+    ports:
+      - "7878:7878"
+    restart: unless-stopped
+
+  # Sonarr - TV show management
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/sonarr:/config
+      - ${DOWNLOAD_ROOT}:/downloads
+      - ${MEDIA_ROOT}/tv:/tv
+    networks:
+      - proxy
+    ports:
+      - "8989:8989"
+    restart: unless-stopped
+
+  # Prowlarr - Indexer management
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/prowlarr:/config
+    networks:
+      - proxy
+    ports:
+      - "9696:9696"
+    restart: unless-stopped
+
+  # Bazarr - Subtitle management
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/bazarr:/config
+      - ${MEDIA_ROOT}/movies:/movies
+      - ${MEDIA_ROOT}/tv:/tv
+    networks:
+      - proxy
+    ports:
+      - "6767:6767"
+    restart: unless-stopped
+
+  # Overseerr - Request management
+  overseerr:
+    image: lscr.io/linuxserver/overseerr:latest
+    container_name: overseerr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/overseerr:/config
+    networks:
+      - proxy
+    ports:
+      - "5055:5055"
+    restart: unless-stopped
+
+  # ================================================================================
+  # REVERSE PROXY - Direct connection (NO VPN)
+  # ================================================================================
+  
+  # Nginx Proxy Manager
+  npm:
+    image: jc21/nginx-proxy-manager:latest
+    container_name: npm
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ${CONFIG_ROOT}/npm/data:/data
+      - ${CONFIG_ROOT}/npm/letsencrypt:/etc/letsencrypt
+    networks:
+      - proxy
+    ports:
+      - "80:80"
+      - "443:443"
+      - "81:81"
+    restart: unless-stopped
+
+  # ================================================================================
+  # MEDIA PROCESSING - Direct connection (NO VPN)
+  # ================================================================================
+  
+  # Tdarr - Media transcoding
+  tdarr:
+    image: ghcr.io/haveagitgat/tdarr:latest
+    container_name: tdarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+      - UMASK_SET=002
+      - nodeName=MainNode
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+      - internalNode=true
+      - inContainer=true
+      - ffmpegVersion=6
+    volumes:
+      - ${CONFIG_ROOT}/tdarr/server:/app/server
+      - ${CONFIG_ROOT}/tdarr/configs:/app/configs
+      - ${CONFIG_ROOT}/tdarr/logs:/app/logs
+      - ${MEDIA_ROOT}:/media
+      - transcode:/temp
+    networks:
+      - proxy
+    ports:
+      - "8265:8265"
+      - "8266:8266"
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped
+
+volumes:
+  transcode:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ${CONFIG_ROOT}/../transcode
+
