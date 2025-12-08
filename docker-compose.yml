@@ -104,8 +104,6 @@ services:
       - ${MEDIA_ROOT}/tv:/tv
       - ${MEDIA_ROOT}/movies:/movies
       - transcode:/transcode
-    devices:
-      - /dev/dri:/dev/dri
     restart: unless-stopped
 
   # ================================================================================
