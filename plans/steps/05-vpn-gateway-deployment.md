@@ -69,9 +69,10 @@ This document details the deployment of the VPN container (gluetun or similar) w
 - **Container:** qmcgaw/gluetun:latest
 - **Provider:** NordVPN
 - **Protocol:** OpenVPN TCP (port 443)
-- **Server:** United States region
-- **Masked IP:** 185.153.177.180
+- **Server Preference:** Panama (primary), Switzerland (fallback)
+- **Current Server:** ch408.nordvpn.com (Switzerland, Zurich)
+- **Masked IP:** 31.40.215.212
 - **Kill Switch:** Enabled (built-in)
 - **DNS:** Cloudflare (via gluetun)
-- **Status:** ✅ Operational
+- **Status:** ✅ Operational (Healthy)
 

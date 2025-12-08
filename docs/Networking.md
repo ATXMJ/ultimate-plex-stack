@@ -38,15 +38,17 @@
 - **Provider:** NordVPN
 - **Protocol:** OpenVPN (TCP)
 - **Authentication:** Service Credentials
-- **Server Region:** United States
+- **Server Preference:** Panama (primary), Switzerland (fallback)
 - **Container:** gluetun (qmcgaw/gluetun:latest)
 - **Status:** ✅ Active and verified
 
 ### Connection Details
-- **Verified Public IP:** 185.153.177.180 (Masked through NordVPN)
+- **Current Server:** ch408.nordvpn.com (Switzerland, Zurich)
+- **Verified Public IP:** 31.40.215.212 (Masked through NordVPN)
 - **Connection Type:** TCP over port 443
 - **Tunnel Interface:** tun0
 - **DNS:** Cloudflare (via gluetun built-in DNS)
+- **Health Status:** ✅ Healthy
 
 ### Services Using VPN
 - **qBittorrent** (torrent client) - Routes ALL traffic through VPN

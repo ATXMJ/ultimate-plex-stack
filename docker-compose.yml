@@ -34,8 +34,9 @@ services:
       # NordVPN with OpenVPN uses service credentials
       - OPENVPN_USER=${VPN_USERNAME}
       - OPENVPN_PASSWORD=${VPN_PASSWORD}
-      - SERVER_REGIONS=United States
-      # Use TCP for more reliable connection
+      # Server countries: Panama (primary), Switzerland (fallback)
+      - SERVER_COUNTRIES=Panama,Switzerland
+      # Use TCP (more reliable for NordVPN with these credentials)
       - OPENVPN_PROTOCOL=tcp
       # Kill switch is enabled by default in Gluetun
       - FIREWALL_OUTBOUND_SUBNETS=172.16.0.0/12,192.168.0.0/16
