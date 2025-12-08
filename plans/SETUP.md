@@ -39,10 +39,10 @@ This document outlines the high-level step-by-step plan for implementing the Ult
 
 ## Phase 3: Networking & Security Layer
 
-5.  **VPN Gateway Deployment** [PLANNED] ([Detail](steps/06-vpn-gateway-deployment.md))
-    *   Deploy VPN container (WireGuard/OpenVPN).
-    *   Configure firewall/iptables "kill switch" rules.
-    *   Verify secure connection and IP masking.
+5.  **VPN Gateway Deployment** [COMPLETE] ([Detail](steps/05-vpn-gateway-deployment.md))
+    *   Deploy VPN container (gluetun with NordVPN OpenVPN).
+    *   Configure firewall/iptables "kill switch" rules (built-in).
+    *   Verify secure connection and IP masking (185.153.177.180).
 
 6.  **Reverse Proxy Deployment** [PLANNED] ([Detail](steps/07-reverse-proxy-deployment.md))
     *   Deploy Nginx Proxy Manager.

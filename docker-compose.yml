@@ -31,11 +31,12 @@ services:
     environment:
       - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
       - VPN_TYPE=${VPN_PROTOCOL}
-      # NordVPN with OpenVPN uses token authentication
-      # Username is always "token" for NordVPN token auth
-      - OPENVPN_USER=token
-      - OPENVPN_PASSWORD=${VPN_TOKEN}
+      # NordVPN with OpenVPN uses service credentials
+      - OPENVPN_USER=${VPN_USERNAME}
+      - OPENVPN_PASSWORD=${VPN_PASSWORD}
       - SERVER_REGIONS=United States
+      # Use TCP for more reliable connection
+      - OPENVPN_PROTOCOL=tcp
       # Kill switch is enabled by default in Gluetun
       - FIREWALL_OUTBOUND_SUBNETS=172.16.0.0/12,192.168.0.0/16
       - TZ=${TZ}

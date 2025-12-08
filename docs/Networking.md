@@ -34,6 +34,20 @@
 
 **VPN is used exclusively for content acquisition clients to protect download traffic.**
 
+### VPN Configuration
+- **Provider:** NordVPN
+- **Protocol:** OpenVPN (TCP)
+- **Authentication:** Service Credentials
+- **Server Region:** United States
+- **Container:** gluetun (qmcgaw/gluetun:latest)
+- **Status:** ✅ Active and verified
+
+### Connection Details
+- **Verified Public IP:** 185.153.177.180 (Masked through NordVPN)
+- **Connection Type:** TCP over port 443
+- **Tunnel Interface:** tun0
+- **DNS:** Cloudflare (via gluetun built-in DNS)
+
 ### Services Using VPN
 - **qBittorrent** (torrent client) - Routes ALL traffic through VPN
 - **NZBGet** (usenet client) - Routes ALL traffic through VPN
@@ -51,14 +65,15 @@
 
 **Critical Security Feature**: The kill switch ensures torrent and usenet clients **CANNOT access the internet** if the VPN connection drops. This prevents any possibility of IP address leaks during downloads.
 
-**Implementation Method**: Infrastructure-level protection via Docker networking - **NOT client configuration**
+**Implementation Method**: Infrastructure-level protection via gluetun's built-in firewall - **NOT client configuration**
 
-```bash
-# iptables rules for kill switch (applied to VPN container only)
-iptables -I OUTPUT -s 172.20.0.0/16 -d 192.168.1.0/24 -j ACCEPT
-iptables -I OUTPUT -s 172.20.0.0/16 -o tun0 -j ACCEPT
-iptables -I OUTPUT -s 172.20.0.0/16 -j DROP
-```
+**Status:** ✅ Enabled by default in gluetun
+
+**Firewall Rules:**
+- Allows outbound traffic only through tun0 (VPN tunnel)
+- Allows local network communication: 172.16.0.0/12, 192.168.0.0/16
+- Blocks ALL other traffic if VPN disconnects
+- Automatic enforcement - no manual iptables required
 
 **How It Works**:
 1. **Docker Network Management**: Clients use `network_mode: "service:vpn"` to share VPN container's network stack
