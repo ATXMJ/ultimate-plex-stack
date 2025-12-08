@@ -51,7 +51,7 @@ This document outlines the high-level step-by-step plan for implementing the Ult
 
 ## Phase 4: Core Services Deployment
 
-7.  **Plex Media Server** [PLANNED] ([Detail](steps/08-plex-media-server.md))
+7.  **Plex Media Server** [COMPLETE] ([Detail](steps/07-plex-media-server.md))
     *   Deploy Plex container (`core` profile).
     *   Verify Web UI access.
     *   Claim server and configure initial libraries.

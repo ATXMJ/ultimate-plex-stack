@@ -4,25 +4,29 @@
 
 ### Plex Media Server
 - **Purpose**: Primary media streaming and library management
-- **Image**: `plexinc/pms-docker:latest`
+- **Image**: `lscr.io/linuxserver/plex:latest`
+- **Status**: ✅ **DEPLOYED AND CONFIGURED**
+- **Access**: http://localhost:32400/web
 - **Ports**:
-  - `32400/tcp` - Plex Web UI
-  - `32400/udp` - Plex DLNA
-  - `32469/tcp` - Plex DLNA
-  - `32410/udp` - GDM network discovery
-  - `32412/udp` - GDM network discovery
-  - `32413/udp` - GDM network discovery
-  - `32414/udp` - GDM network discovery
+  - `32400/tcp` - Plex Web UI and streaming
 - **Volumes**:
   - `/config` - Plex configuration and metadata
-  - `/media/movies` - Movie library
-  - `/media/tv` - TV show library
+  - `/movies` - Movie library (mapped to `MEDIA_ROOT/movies`)
+  - `/tv` - TV show library (mapped to `MEDIA_ROOT/tv`)
   - `/transcode` - Temporary transcoding files
 - **Environment Variables**:
-  - `PLEX_CLAIM` - Plex account claim token
-  - `ADVERTISE_IP` - IP address to advertise to clients
-  - `ALLOWED_NETWORKS` - Comma-separated list of allowed networks
+  - `PLEX_CLAIM` - Plex account claim token (used for initial setup)
+  - `PUID` - User ID for file permissions
+  - `PGID` - Group ID for file permissions
   - `TZ` - Timezone
+  - `VERSION` - Docker versioning
+- **Libraries Configured**:
+  - Movies: `/movies` folder
+  - TV Shows: `/tv` folder
+- **Network**: Direct internet connection (NOT via VPN)
+- **Notes**:
+  - Remote access not yet configured (will be added in Step 14)
+  - Hardware transcoding disabled (no GPU passthrough on Windows)
 
 ## Content Management Services
 
