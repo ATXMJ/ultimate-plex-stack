@@ -1,6 +1,6 @@
 # Step 6: Reverse Proxy Deployment
 
-**Status:** `PLANNED`
+**Status:** `COMPLETE`
 
 This document details the deployment of Nginx Proxy Manager (NPM) to handle external access and SSL termination.
 
@@ -51,8 +51,8 @@ This document details the deployment of Nginx Proxy Manager (NPM) to handle exte
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 ## Verification Checklist
-- [ ] NPM container running.
-- [ ] Admin UI accessible at port 81.
-- [ ] Default credentials changed.
-- [ ] External HTTP access verified.
+- [x] NPM container running.
+- [x] Admin UI accessible at port 81.
+- [x] Default credentials changed.
+- [x] External HTTP access verified.
 

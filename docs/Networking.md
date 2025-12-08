@@ -181,6 +181,44 @@ Proxy Host: radarr.cooperstation.stream
 - Access List: Admin-only (basic auth or IP restriction)
 ```
 
+## Reverse Proxy Deployment
+
+### Nginx Proxy Manager (NPM)
+The reverse proxy handles external access, SSL termination, and secure routing to internal services.
+
+**Deployment Details:**
+- **Container**: `jc21/nginx-proxy-manager:latest`
+- **Service Name**: `npm`
+- **Status**: ✅ Deployed and running
+- **Admin Interface**: `http://localhost:81` (local access only)
+- **External Ports**: 80 (HTTP), 443 (HTTPS)
+
+**Configuration:**
+- **Data Directory**: `./config/npm/data` - Stores configuration, SSL certificates, and proxy hosts
+- **Let's Encrypt Directory**: `./config/npm/letsencrypt` - Stores Let's Encrypt certificates and keys
+- **Network**: Connected to `proxy` network for internal service communication
+- **Environment Variables**: Standard PUID/PGID and timezone configuration
+
+**Security Features:**
+- **SSL Termination**: Automatic SSL certificate management via Let's Encrypt
+- **HTTP to HTTPS Redirect**: Automatic redirection for secure connections
+- **Access Control**: Per-proxy-host authentication and IP restrictions
+- **Rate Limiting**: Built-in protection against abuse
+- **Fail2Ban Integration**: Optional brute force protection
+
+**Current Deployment Status:**
+- ✅ Container running and healthy
+- ✅ Ports 80, 443, and 81 properly exposed
+- ✅ Data persistence configured
+- ⏳ SSL certificates pending domain configuration
+- ⏳ Proxy hosts pending service routing setup
+
+**Next Steps:**
+- Configure DNS records for subdomains (`plex.cooperstation.stream`, `radarr.cooperstation.stream`, etc.)
+- Set up SSL certificates via Let's Encrypt
+- Create proxy hosts for each service with appropriate authentication
+- Implement access lists for admin services
+
 ### Multi-User Considerations
 - **Plex Accounts**: Primary user management system
 - **Overseerr Integration**: Provides request management with user authentication

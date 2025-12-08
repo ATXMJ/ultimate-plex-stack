@@ -1,6 +1,10 @@
 **/*.env
 **/dotenv
 
+# Docker container data and configuration
+config/*/data/
+config/*/letsencrypt/
+
 # Created by https://www.toptal.com/developers/gitignore/api/windows,linux,macos,visualstudiocode
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,linux,macos,visualstudiocode
 

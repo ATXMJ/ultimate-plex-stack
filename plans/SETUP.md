@@ -44,7 +44,7 @@ This document outlines the high-level step-by-step plan for implementing the Ult
     *   Configure firewall/iptables "kill switch" rules (built-in).
     *   Verify secure connection and IP masking (185.153.177.180).
 
-6.  **Reverse Proxy Deployment** [PLANNED] ([Detail](steps/07-reverse-proxy-deployment.md))
+6.  **Reverse Proxy Deployment** [COMPLETE] ([Detail](steps/06-reverse-proxy-deployment.md))
     *   Deploy Nginx Proxy Manager.
     *   Configure initial admin access.
     *   Set up SSL certificate generation (Let's Encrypt).
