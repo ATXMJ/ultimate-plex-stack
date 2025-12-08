@@ -56,7 +56,7 @@ This document outlines the high-level step-by-step plan for implementing the Ult
     *   Verify Web UI access.
     *   Claim server and configure initial libraries.
 
-8.  **Content Acquisition Services (VPN-Routed)** [PLANNED] ([Detail](steps/09-content-acquisition-services.md))
+8.  **Content Acquisition Services (VPN-Routed)** [COMPLETE] ([Detail](steps/08-content-acquisition-services.md))
     *   Deploy qBittorrent and/or NZBGet.
     *   **Crucial:** Verify routing through VPN container (`network_mode: service:vpn`).
     *   Test kill switch functionality.

@@ -118,19 +118,26 @@
 
 ### Torrent Client (qBittorrent)
 - **Purpose**: BitTorrent downloading
-- **Image**: `linuxserver/qbittorrent:latest`
+- **Image**: `lscr.io/linuxserver/qbittorrent:latest`
+- **Status**: ✅ **DEPLOYED AND CONFIGURED**
 - **Network Mode**: `service:vpn` - ALL traffic routes through VPN gateway
 - **Ports**: `8080/tcp` (Web UI, exposed via VPN container)
+- **Access**: http://localhost:8080 (temporary password provided at startup)
 - **Volumes**:
-  - `/config` - qBittorrent configuration
-  - `/downloads` - Download directory
+  - `/config` - qBittorrent configuration (mapped to `CONFIG_ROOT/qbittorrent`)
+  - `/downloads` - Download directory (mapped to `DOWNLOAD_ROOT`)
 - **Environment Variables**:
   - `PUID` - User ID for file permissions
   - `PGID` - Group ID for file permissions
   - `TZ` - Timezone
-  - `WEBUI_PORT` - Web UI port
+  - `WEBUI_PORT` - Web UI port (8080)
+  - `TORRENTING_PORT` - Torrent connection port (8694)
 - **VPN Protection**: Kill switch **completely blocks ALL internet access** if VPN disconnects - client cannot operate without active VPN connection
 - **Configuration Note**: VPN protection is enforced via Docker networking - **no VPN configuration needed in qBittorrent settings**
+- **Download Paths**:
+  - Default Save Path: `/downloads/complete/`
+  - Incomplete Save Path: `/downloads/incomplete/`
+- **Network**: Routes through NordVPN WireGuard (Switzerland)
 
 ### Usenet Client (NZBGet)
 - **Purpose**: Usenet downloading

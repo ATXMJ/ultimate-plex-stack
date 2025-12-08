@@ -36,23 +36,23 @@
 
 ### VPN Configuration
 - **Provider:** NordVPN
-- **Protocol:** OpenVPN (TCP)
+- **Protocol:** WireGuard (switched from OpenVPN for better performance)
 - **Authentication:** Service Credentials
 - **Server Preference:** Panama (primary), Switzerland (fallback)
 - **Container:** gluetun (qmcgaw/gluetun:latest)
 - **Status:** ✅ Active and verified
 
 ### Connection Details
-- **Current Server:** ch408.nordvpn.com (Switzerland, Zurich)
-- **Verified Public IP:** 31.40.215.212 (Masked through NordVPN)
-- **Connection Type:** TCP over port 443
+- **Current Server:** Switzerland (Zurich region)
+- **Verified Public IP:** 185.255.128.57 (Masked through NordVPN)
+- **Connection Type:** WireGuard UDP
 - **Tunnel Interface:** tun0
 - **DNS:** Cloudflare (via gluetun built-in DNS)
 - **Health Status:** ✅ Healthy
 
 ### Services Using VPN
-- **qBittorrent** (torrent client) - Routes ALL traffic through VPN
-- **NZBGet** (usenet client) - Routes ALL traffic through VPN
+- **qBittorrent** (torrent client) - ✅ **DEPLOYED**: Routes ALL traffic through VPN
+- **NZBGet** (usenet client) - PLANNED: Routes ALL traffic through VPN
 
 ### Services NOT Using VPN (Direct Internet Connection)
 - **Plex Media Server** - Direct connection for streaming
