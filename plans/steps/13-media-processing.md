@@ -1,4 +1,4 @@
-# Step 12: Media Processing
+# Step 13: Media Processing
 
 **Status:** `PLANNED`
 
@@ -50,5 +50,7 @@ This document details the setup of Tdarr for transcoding automation (Optional).
     *   Update the status at the top of this file to `COMPLETE`.
     *   Update `plans/SETUP.md` to mark Step 13 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
+
+
 
 

@@ -1,4 +1,4 @@
-# Step 14: Reverse Proxy Routing
+# Step 15: Reverse Proxy Routing
 
 **Status:** `PLANNED`
 
@@ -32,7 +32,7 @@ This document details the configuration of Nginx Proxy Manager to expose service
 
 2.  **Security Hardening** [PLANNED]
     *   **Access Lists:** Create an Access List in NPM for Admin tools (Radarr, Sonarr, etc.).
-        *   Allow only LAN IPs or require Basic Auth.
+    *   Allow only LAN IPs or require Basic Auth.
     *   **Agent Instructions:** If user wants admin services exposed externally, help them set up Basic Auth with strong credentials.
     *   *Note:* Overseerr and Plex are generally safe to expose publicly with their native auth, but Radarr/Sonarr should have an extra layer.
     *   Update the status of this sub-step to `[COMPLETE]`.
@@ -51,5 +51,7 @@ This document details the configuration of Nginx Proxy Manager to expose service
     *   Update the status at the top of this file to `COMPLETE`.
     *   Update `plans/SETUP.md` to mark Step 15 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
+
+
 
 

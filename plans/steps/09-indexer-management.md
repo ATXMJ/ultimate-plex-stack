@@ -1,6 +1,6 @@
 # Step 9: Indexer Management
 
-**Status:** `PLANNED`
+**Status:** `COMPLETE`
 
 This document details the deployment of Prowlarr to manage torrent and usenet indexers.
 
@@ -13,40 +13,40 @@ This document details the deployment of Prowlarr to manage torrent and usenet in
 
 ## Detailed Implementation Steps
 
-1.  **Configure Docker Compose Service** [PLANNED]
+1.  **Configure Docker Compose Service** [COMPLETE]
     *   Review `prowlarr` service.
     *   Ports: `9696:9696`.
     *   Volumes: `./config/prowlarr:/config`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-2.  **Start Prowlarr** [PLANNED]
+2.  **Start Prowlarr** [COMPLETE]
     *   Run: `docker compose up -d prowlarr`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **Initial Setup** [PLANNED]
+3.  **Initial Setup** [COMPLETE]
     *   Open browser: `http://localhost:9696`.
     *   Set up Authentication (Forms - Username/Password).
     *   **Agent Instructions:** Prompt user for username and password they want to set for Prowlarr.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-4.  **Add Indexers** [PLANNED]
+4.  **Add Indexers** [COMPLETE]
     *   Go to **Indexers > Add Indexer**.
     *   Search for public trackers (e.g., 1337x, RARBG alternatives).
     *   **Agent Instructions:** Ask user which indexers they prefer. If they have private tracker accounts, help them configure those. Otherwise, suggest reliable public trackers.
     *   Test and Save.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-5.  **Configure FlareSolverr (Optional)** [PLANNED]
+5.  **Configure FlareSolverr (Optional)** [COMPLETE]
     *   If using public trackers with Cloudflare protection, ensure `flaresolverr` container is running.
     *   In Prowlarr, add FlareSolverr as a proxy tag or indexer proxy.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-6.  **Update Documentation** [PLANNED]
+6.  **Update Documentation** [COMPLETE]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update `docs/Services.md` with Prowlarr configuration details.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-7.  **Mark Step as Complete** [PLANNED]
+7.  **Mark Step as Complete** [COMPLETE]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
     *   Update `plans/SETUP.md` to mark Step 10 as `[COMPLETE]`.

@@ -73,14 +73,23 @@
 
 ### Prowlarr (Indexer Manager)
 - **Purpose**: Centralized indexer management for Radarr/Sonarr
-- **Image**: `linuxserver/prowlarr:latest`
+- **Image**: `lscr.io/linuxserver/prowlarr:latest`
+- **Status**: ✅ **DEPLOYED AND CONFIGURED**
+- **Access**: http://localhost:9696
 - **Ports**: `9696/tcp`
 - **Volumes**:
-  - `/config` - Prowlarr configuration
+  - `/config` - Prowlarr configuration (mapped to `CONFIG_ROOT/prowlarr`)
 - **Environment Variables**:
   - `PUID` - User ID for file permissions
   - `PGID` - Group ID for file permissions
   - `TZ` - Timezone
+- **Network**: Direct internet connection (NOT via VPN)
+- **Authentication**: Currently set to none (local access only)
+- **API Key**: Configured (available in Prowlarr settings)
+- **Notes**:
+  - Indexers can be added through the web interface
+  - Supports both public and private torrent trackers
+  - FlareSolverr integration available for Cloudflare-protected sites (not currently configured)
 
 ### Overseerr (Request Management)
 - **Purpose**: User request management and media discovery
@@ -122,7 +131,7 @@
 - **Status**: ✅ **DEPLOYED AND CONFIGURED**
 - **Network Mode**: `service:vpn` - ALL traffic routes through VPN gateway
 - **Ports**: `8080/tcp` (Web UI, exposed via VPN container)
-- **Access**: http://localhost:8080 (temporary password provided at startup)
+- **Access**: http://localhost:8080 (static password configured via config file)
 - **Volumes**:
   - `/config` - qBittorrent configuration (mapped to `CONFIG_ROOT/qbittorrent`)
   - `/downloads` - Download directory (mapped to `DOWNLOAD_ROOT`)
@@ -134,6 +143,7 @@
   - `TORRENTING_PORT` - Torrent connection port (8694)
 - **VPN Protection**: Kill switch **completely blocks ALL internet access** if VPN disconnects - client cannot operate without active VPN connection
 - **Configuration Note**: VPN protection is enforced via Docker networking - **no VPN configuration needed in qBittorrent settings**
+- **Password Configuration**: Static password set via PBKDF2 hash in `qBittorrent.conf` (not environment variable)
 - **Download Paths**:
   - Default Save Path: `/downloads/complete/`
   - Incomplete Save Path: `/downloads/incomplete/`

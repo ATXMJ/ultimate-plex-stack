@@ -11,6 +11,10 @@ This document details the setup of download clients (qBittorrent/NZBGet) and ens
 - Route their traffic through the `vpn` service.
 - Verify they share the VPN's IP address.
 
+## Implementation Notes
+- **Password Configuration**: LinuxServer qBittorrent container does not support `WEBUI_PASSWORD` environment variable. Password must be set via manual PBKDF2 hash in `qBittorrent.conf`.
+- **Hash Generation**: Use Python script with PBKDF2-SHA256, 10000 iterations, 32-byte salt/hash, base64 encoded.
+
 ## Detailed Implementation Steps
 
 1.  **Configure Docker Compose Service** [COMPLETE]
@@ -27,9 +31,8 @@ This document details the setup of download clients (qBittorrent/NZBGet) and ens
 
 3.  **Access Web UI** [COMPLETE]
     *   Open browser: `http://localhost:8080` (qBittorrent).
-    *   Default creds: `admin` / `adminadmin`.
-    *   **Action:** Change password immediately.
-    *   **Agent Instructions:** Prompt user for new qBittorrent password and confirm they've saved it securely.
+    *   Credentials: `admin` / `izSgN3sh88mpZx` (statically configured via config file).
+    *   **Note:** Password is permanently set via PBKDF2 hash in qBittorrent.conf, not environment variables.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 4.  **Verify Network Routing (The "Leak Test")** [COMPLETE]

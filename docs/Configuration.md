@@ -32,6 +32,41 @@ DOMAIN=cooperstation.stream
 ACME_EMAIL=your_email@example.com  # For Let's Encrypt SSL notifications
 ```
 
+## Buildarr Configuration (`buildarr.yml`)
+
+- **Purpose**: Configuration-as-code for the Arr ecosystem (Prowlarr, Radarr, Sonarr, optionally Bazarr).
+- **Location**: `buildarr.yml` in the project root (kept under version control).
+- **Scope**:
+  - Prowlarr: indexers, authentication, app (Radarr/Sonarr) integrations.
+  - Radarr/Sonarr: root folders, quality profiles, download client linkage.
+  - Bazarr: optional, if a suitable plugin or automation path is used.
+- **Execution Modes**:
+  - As a **Docker service** (`buildarr` container) that watches the config file.
+  - As a **one-shot CLI** (Python venv on the host) run manually when config changes.
+
+Example (conceptual) structure:
+
+```yaml
+buildarr:
+  watch_config: false
+
+prowlarr:
+  hostname: prowlarr
+  port: 9696
+  protocol: http
+  api_key: YOUR_PROWLARR_API_KEY
+
+radarr:
+  hostname: radarr
+  port: 7878
+  protocol: http
+
+sonarr:
+  hostname: sonarr
+  port: 8989
+  protocol: http
+```
+
 ## Docker Compose Profiles
 
 ```yaml

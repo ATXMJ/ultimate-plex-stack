@@ -1,10 +1,10 @@
-# Step 11: Request Management
+# Step 12: Request Management
 
 **Status:** `PLANNED`
 
 This document details the setup of Overseerr for managing media requests.
 
-**Agent Instructions:** This step requires API keys from Radarr and Sonarr (configured in Step 10). Retrieve these from the user or guide them to find the keys in each service's settings.
+**Agent Instructions:** This step requires API keys from Radarr and Sonarr (configured in Step 11 - Media Management). Retrieve these from the user or guide them to find the keys in each service's settings.
 
 ## Objectives
 - Deploy Overseerr.
@@ -58,5 +58,7 @@ This document details the setup of Overseerr for managing media requests.
     *   Update the status at the top of this file to `COMPLETE`.
     *   Update `plans/SETUP.md` to mark Step 12 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
+
+
 
 
