@@ -83,29 +83,29 @@ This document outlines the high-level step-by-step plan for implementing the Ult
     *   Connect to Plex for authentication.
     *   Connect to Radarr/Sonarr for fulfillment.
 
-## Phase 6: Optimization & Processing
+## Phase 6: Integration & Final Polish
 
-13. **Media Processing** [PLANNED] ([Detail](steps/13-media-processing.md))
-    *   Deploy Tdarr (optional/advanced).
-    *   Configure transcoding nodes/plugins.
-
-## Phase 7: Integration & Final Polish
-
-14. **Service Interlinking** [PLANNED] ([Detail](steps/14-service-interlinking.md))
+13. **Service Interlinking** [PLANNED] ([Detail](steps/13-service-interlinking.md))
     *   Finalize API key exchanges between services.
     *   Configure download paths and categories (mappings).
 
-15. **Reverse Proxy Routing** [PLANNED] ([Detail](steps/15-reverse-proxy-routing.md))
-    *   Set up subdomains/hosts in Nginx Proxy Manager for all services.
+14. **Reverse Proxy Routing** [PLANNED] ([Detail](steps/14-reverse-proxy-routing.md))
+    *   Set up subdomains/hosts in Nginx Proxy Manager for Plex and Overseerr.
     *   Enable SSL for all external-facing endpoints.
 
-16. **System Verification** [PLANNED] ([Detail](steps/16-system-verification.md))
+15. **System Verification** [PLANNED] ([Detail](steps/15-system-verification.md))
     *   End-to-end test: Request -> Download -> Process -> Stream.
 
-## Phase 8: Future Migration (Post-Setup)
+## Phase 7: Future Migration (Post-Setup)
 
-17. **NAS Migration** [PLANNED] ([Detail](steps/17-nas-migration.md))
+16. **NAS Migration** [PLANNED] ([Detail](steps/16-nas-migration.md))
     *   Mount NAS storage to host.
     *   Migrate media files.
     *   Update volume mappings in Docker Compose.
     *   Restart stack and rescan libraries.
+
+## Phase 8: Advanced Media Processing (Optional)
+
+17. **Media Processing** [PLANNED] ([Detail](steps/17-media-processing.md))
+    *   Deploy Tdarr (optional/advanced).
+    *   Configure transcoding nodes/plugins.

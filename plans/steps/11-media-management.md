@@ -21,7 +21,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
         *   Radarr: `7878`
         *   Sonarr: `8989`
         *   Bazarr: `6767`
-    *   These ports are for **LAN-only** access; they are **not exposed via reverse proxy** in Step 15.
+    *   These ports are for **LAN-only** access; they are **not exposed via reverse proxy** in Step 14.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 2.  **Apply Buildarr Configuration** [PLANNED]
@@ -39,7 +39,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
         *   On the Windows host:
             *   These internal paths are backed by `${MOVIES_PATH}` and `${TV_PATH}` in the environment.
             *   During initial setup, they point to local folders (e.g., `C:\plex-server\ultimate-plex-stack\media\movies`).
-            *   After NAS migration (Step 17), they will point to NAS folders (e.g., `G:\media\movies`) but **still map into the containers as `/movies` and `/tv`**.
+            *   After NAS migration (Step 16), they will point to NAS folders (e.g., `G:\media\movies`) but **still map into the containers as `/movies` and `/tv`**.
     *   Run Buildarr to apply configuration:
         ```powershell
         docker compose run --rm buildarr apply

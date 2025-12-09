@@ -1,4 +1,4 @@
-# Step 14: Service Interlinking
+# Step 13: Service Interlinking
 
 **Status:** `PLANNED`
 
@@ -43,7 +43,7 @@ This document serves as a checklist and guide to finalize the connections betwee
 6.  **Mark Step as Complete** [PLANNED]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
-    *   Update `plans/SETUP.md` to mark Step 14 as `[COMPLETE]`.
+    *   Update `plans/SETUP.md` to mark Step 13 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 

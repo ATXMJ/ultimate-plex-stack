@@ -18,7 +18,7 @@ This document details the setup of Overseerr for managing media requests.
 1.  **Deploy Container** [PLANNED]
     *   Run: `docker compose up -d overseerr`.
     *   Port (LAN access): `5055`.
-    *   Overseerr will later be exposed externally only via Nginx Proxy Manager in Step 15 under `overseerr.cooperstation.stream`.
+    *   Overseerr will later be exposed externally only via Nginx Proxy Manager in Step 14 under `overseerr.cooperstation.stream`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 2.  **Initial Setup** [PLANNED]

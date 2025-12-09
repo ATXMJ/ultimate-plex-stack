@@ -83,7 +83,7 @@ This document details the introduction of Buildarr for declarative, version-cont
         *   On the host, these paths come from environment variables such as:
           *   `MOVIES_PATH` → maps to `/movies`
           *   `TV_PATH` → maps to `/tv`
-        *   **Do not change** the internal container paths (`/movies`, `/tv`) even after NAS migration – only the host side (`MOVIES_PATH`, `TV_PATH`) will change in Step 17.
+        *   **Do not change** the internal container paths (`/movies`, `/tv`) even after NAS migration – only the host side (`MOVIES_PATH`, `TV_PATH`) will change in Step 16.
     *   Configure:
         *   At least one movie quality profile and one TV quality profile.
         *   Download clients pointing at `qbittorrent:8080` (and/or NZBGet) with credentials from Step 8.

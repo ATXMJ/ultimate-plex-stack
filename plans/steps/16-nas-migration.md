@@ -1,4 +1,4 @@
-# Step 17: NAS Migration
+# Step 16: NAS Migration
 
 **Status:** `PLANNED`
 
@@ -63,7 +63,7 @@ This document details the procedure to migrate the media library to a NAS after 
 6.  **Mark Step as Complete** [PLANNED]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
-    *   Update `plans/SETUP.md` to mark Step 17 as `[COMPLETE]`.
+    *   Update `plans/SETUP.md` to mark Step 16 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 
