@@ -88,13 +88,6 @@ transcode/             # Plex transcode temporary files
    - Status updated to `COMPLETE`
    - `plans/SETUP.md` will be updated next
 
-## Verification Checklist
-- [x] All configuration subdirectories created (11 total: plex, radarr, sonarr, bazarr, prowlarr, overseerr, qbittorrent, nzbget, tdarr, npm, vpn)
-- [x] All download subdirectories created (movies/, tv/, complete/)
-- [x] All media subdirectories created (movies/, tv/)
-- [x] Transcode directory created
-- [x] Directory structure verified via PowerShell listing
-- [x] Documentation reviewed (no updates needed)
 
 ## Notes
 - These directories will be bind-mounted into Docker containers.

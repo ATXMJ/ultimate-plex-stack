@@ -53,9 +53,4 @@ This document details the procedure to migrate the media library to a NAS after 
     *   Update `plans/SETUP.md` to mark Step 17 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] NAS mounted.
-- [ ] Media copied.
-- [ ] Containers restarted with new volumes.
-- [ ] Library intact.
 

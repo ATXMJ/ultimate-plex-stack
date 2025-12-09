@@ -53,10 +53,3 @@ This document details the verification steps for the host hardware and operating
     *   Update `plans/SETUP.md` to mark Step 1 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [x] Windows 11 Pro confirmed.
-- [x] Docker Desktop running with WSL 2 backend.
-- [x] `docker run hello-world` successful.
-- [x] Virtualization enabled in BIOS/OS.
-- [x] Sufficient SSD storage available (>200GB free).
-

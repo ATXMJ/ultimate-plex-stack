@@ -41,7 +41,4 @@ This document details the end-to-end testing of the complete stack.
     *   Update `plans/SETUP.md` to mark Step 16 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] Full lifecycle test successful.
-- [ ] Logs show no critical errors.
 

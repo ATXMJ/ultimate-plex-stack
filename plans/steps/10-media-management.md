@@ -70,9 +70,4 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
     *   Update `plans/SETUP.md` to mark Step 11 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] Radarr/Sonarr/Bazarr running.
-- [ ] Prowlarr syncing indexers to Radarr/Sonarr.
-- [ ] Download client connected in Radarr/Sonarr (Test succeeds).
-- [ ] Root folders configured.
 

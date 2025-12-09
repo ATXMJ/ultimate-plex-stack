@@ -52,8 +52,4 @@ This document details the deployment of Prowlarr to manage torrent and usenet in
     *   Update `plans/SETUP.md` to mark Step 10 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] Prowlarr running.
-- [ ] UI accessible.
-- [ ] At least one indexer added and tested successfully.
 

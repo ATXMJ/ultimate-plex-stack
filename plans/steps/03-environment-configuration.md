@@ -85,15 +85,6 @@ This document details the configuration of the environment variables that contro
     *   Update `plans/SETUP.md` to mark Step 3 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [x] `dotenv` file exists.
-- [x] `TZ` confirmed (America/Denver - Mountain Time).
-- [x] PUID/PGID set.
-- [x] VPN credentials configured (NordVPN access token).
-- [x] Domain details entered (cooperstation.stream).
-- [x] ACME_EMAIL configured (txaggiemichael@gmail.com).
-- [x] Documentation updated.
-
 ## Current Status Summary
 - ✅ File created with structure
 - ✅ Paths configured (Windows absolute paths)

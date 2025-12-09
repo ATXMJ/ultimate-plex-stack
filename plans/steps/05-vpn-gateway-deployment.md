@@ -58,12 +58,6 @@ This document details the deployment of the VPN container (gluetun or similar) w
     *   Status updated to `COMPLETE` at top of this file
     *   `plans/SETUP.md` updated to mark Step 5 as `[COMPLETE]`
 
-## Verification Checklist
-- [x] VPN container running healthy
-- [x] Public IP checked and masked (185.153.177.180)
-- [x] Kill switch verified (gluetun firewall enabled)
-- [x] Connection stable (TCP/443 to NordVPN)
-- [x] Documentation updated
 
 ## Final Configuration Summary
 - **Container:** qmcgaw/gluetun:latest

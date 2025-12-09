@@ -52,8 +52,4 @@ This document details the configuration of Nginx Proxy Manager to expose service
     *   Update `plans/SETUP.md` to mark Step 15 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] All subdomains load over HTTPS.
-- [ ] Valid Let's Encrypt certs.
-- [ ] Admin apps protected by extra Auth/ACL.
 

@@ -59,9 +59,4 @@ This document details the setup of Overseerr for managing media requests.
     *   Update `plans/SETUP.md` to mark Step 12 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] Overseerr running.
-- [ ] Login via Plex works.
-- [ ] Radarr/Sonarr connected.
-- [ ] Test request propagates to Radarr/Sonarr.
 

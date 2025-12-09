@@ -96,9 +96,3 @@ This document details the network planning required before deploying the stack, 
     *   Update `plans/SETUP.md` to mark Step 2 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [x] VPN Config file and credentials confirmed.
-- [x] Domain name `cooperstation.stream` confirmed.
-- [x] DHCP Reservation configured for `192.168.1.124`.
-- [x] Port Forwarding rules added to Netgear Orbi.
-- [x] Internal network name `proxy` selected.

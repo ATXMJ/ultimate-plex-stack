@@ -67,12 +67,6 @@ This document details the deployment and initial configuration of Plex Media Ser
     *   Update `plans/SETUP.md` to mark Step 7 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] Plex claim token obtained and configured.
-- [ ] Plex container running healthy.
-- [ ] Web UI accessible at `http://localhost:32400/web`.
-- [ ] Server successfully claimed to user account.
-- [ ] At least one media library configured.
 
 ## Important Notes
 - **Claim Token Expiration:** The Plex claim token is only valid for 4 minutes after generation. If deployment fails or takes too long, you'll need to generate a new token.

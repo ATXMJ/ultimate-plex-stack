@@ -59,9 +59,4 @@ This document details the setup of download clients (qBittorrent/NZBGet) and ens
     *   Update `plans/SETUP.md` to mark Step 9 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] qBittorrent UI accessible.
-- [ ] `network_mode: "service:vpn"` confirmed in compose.
-- [ ] curl from inside qBittorrent returns VPN IP.
-- [ ] Real IP is successfully masked.
 

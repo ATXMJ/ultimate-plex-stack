@@ -50,9 +50,4 @@ This document details the deployment of Nginx Proxy Manager (NPM) to handle exte
     *   Update `plans/SETUP.md` to mark Step 7 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [x] NPM container running.
-- [x] Admin UI accessible at port 81.
-- [x] Default credentials changed.
-- [x] External HTTP access verified.
 

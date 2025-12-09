@@ -51,9 +51,4 @@ This document details the setup of Tdarr for transcoding automation (Optional).
     *   Update `plans/SETUP.md` to mark Step 13 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-## Verification Checklist
-- [ ] Tdarr UI accessible.
-- [ ] Node connected.
-- [ ] Library scan picks up files.
-- [ ] Test transcode initiates.
 

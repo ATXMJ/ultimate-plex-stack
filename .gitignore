@@ -1,6 +1,9 @@
 **/*.env
 **/dotenv
 
+# Python
+.python-version
+
 # Docker container data and configuration
 config/*/
 !config/*/.gitkeep
