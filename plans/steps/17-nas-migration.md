@@ -14,32 +14,45 @@ This document details the procedure to migrate the media library to a NAS after 
 ## Detailed Implementation Steps
 
 1.  **Mount NAS on Host** [PLANNED]
-    *   **Agent Instructions:** Prompt user for NAS IP address, share name, and any required credentials.
-    *   Create mount point: `mkdir C:\mnt\nas\media`.
-    *   Map Network Drive (Persistent):
+    *   **Agent Instructions:** Prompt user for NAS IP address or hostname (e.g., `gargantua`), share name (e.g., `media`), and any required credentials.
+    *   NAS Name: `Gargantua`.
+    *   Map NAS `media` share to **drive G:** on Windows (persistent mapping):
         ```powershell
-        New-PSDrive -Name "Z" -PSProvider FileSystem -Root "\\nas-ip\share" -Persist
+        # Example – adjust hostname/share if needed
+        New-PSDrive -Name "G" -PSProvider FileSystem -Root "\\gargantua\media" -Persist
         ```
-        *Note:* Docker Desktop for Windows requires the drive to be mounted or accessible via UNC paths. Using UNC `\\nas-ip\share` directly in docker-compose is sometimes tricky on Windows; often better to mount to a drive letter or directory link.
+    *   Ensure Docker Desktop is configured to share the `G:` drive under **Settings > Resources > File Sharing** so containers can mount it.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 2.  **Copy Media** [PLANNED]
     *   Stop containers: `docker compose down`.
-    *   Move data: `Robocopy C:\plex-server\media Z:\media /MIR`.
+    *   Move data from local media folder to Gargantua `G:` drive:
+        ```powershell
+        Robocopy C:\plex-server\ultimate-plex-stack\media G:\media /MIR
+        ```
+    *   This preserves the `movies/` and `tv/` subfolder structure under `G:\media`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 3.  **Update Docker Compose** [PLANNED]
     *   Edit `docker-compose.yml`.
     *   Change volumes for Plex, Radarr, Sonarr:
-        *   Old: `- ./media/movies:/movies`
-        *   New: `- //nas-ip/share/movies:/movies` (Check Docker Desktop syntax for UNC) OR mapped drive.
-    *   *Best Practice:* Update `.env` variable `MEDIA_ROOT` to point to the new location, if you used variables.
+        *   Old (local):
+            *   `- ./media/movies:/movies`
+            *   `- ./media/tv:/tv`
+        *   New (NAS via Gargantua G: drive):
+            *   `- G:\media\movies:/movies`
+            *   `- G:\media\tv:/tv`
+        *   Inside containers, the paths **remain** `/movies` and `/tv`. Only the host side changes from `./media/...` to `G:\media\...`.
+    *   *Best Practice:* Update environment variables (if used) to point to the new location:
+        *   `MOVIES_PATH=G:\media\movies`
+        *   `TV_PATH=G:\media\tv`
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 4.  **Restart & Verify** [PLANNED]
     *   `docker compose up -d`.
     *   Check Plex: Files should be available.
-    *   *Note:* If paths changed inside the container (e.g., `/movies` mapped to a different underlying set of files but same internal path), Plex might just work. If internal paths change, disable "Empty trash automatically" before scan to prevent metadata loss.
+    *   *Note:* Because the internal container paths (`/movies`, `/tv`) did **not** change, Plex and the Arr services should continue to work without reconfiguration. You are only changing where those folders live on the Windows host (now Gargantua `G:` instead of local disk).
+    *   If you do need to rescan, consider disabling "Empty trash automatically" in Plex before the first scan to avoid accidental metadata loss.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 5.  **Update Documentation** [PLANNED]

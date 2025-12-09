@@ -12,8 +12,10 @@ This document details the end-to-end testing of the complete stack.
 ## Detailed Implementation Steps
 
 1.  **The "Request to Stream" Test** [PLANNED]
-    **Agent Instructions:** Walk through each stage with user, verifying each step completes successfully:
-    1.  **Request:** User logs into `overseerr.cooperstation.stream` (or domain from Step 3) and requests a movie.
+    **Agent Instructions:** Walk through each stage with user, verifying each step completes successfully. This flow can be tested either:
+    *   Entirely on the LAN using `http://localhost:5055` (Overseerr) and `http://localhost:32400/web` (Plex), or
+    *   End‑to‑end over the internet using `https://overseerr.cooperstation.stream` and `https://plex.cooperstation.stream` after Step 15 is finished.
+    1.  **Request:** User logs into Overseerr (LAN or `overseerr.cooperstation.stream`) and requests a movie.
     2.  **Approval:** (Auto-approve or Admin approves).
     3.  **Search:** Radarr picks up request, searches indexers (via Prowlarr).
     4.  **Download:** Radarr sends NZB/Magnet to qBittorrent (via VPN).

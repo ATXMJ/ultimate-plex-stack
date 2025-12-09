@@ -4,7 +4,9 @@
 
 This document details the configuration of Nginx Proxy Manager to expose services securely.
 
-**Agent Instructions:** Use domain from Step 3 configuration. Prompt user which services they want publicly accessible vs. LAN-only. For admin services (Radarr/Sonarr), recommend additional authentication.
+**Design Decision:** Only **Plex** and **Overseerr** are intended to be accessible from the public internet, and both already require authentication. All other services (Radarr, Sonarr, Prowlarr, qBittorrent, NZBGet, Tdarr, NPM admin, etc.) remain **LAN-only** and are not proxied externally.
+
+**Agent Instructions:** Use the domain from Step 3 (`cooperstation.stream`). Do not expose admin/automation services publicly. If the user later insists on remote admin access, treat that as an advanced, opt-in change with strict access controls.
 
 ## Objectives
 - Configure Proxy Hosts for all services.
@@ -14,27 +16,37 @@ This document details the configuration of Nginx Proxy Manager to expose service
 
 1.  **Create Proxy Hosts** [PLANNED]
     *   Login to NPM (`localhost:81`).
-    *   **Add Proxy Host:**
-        *   **Domain Names:** `plex.cooperstation.stream` (use domain from Step 3)
-        *   **Forward Hostname:** `plex` (use container name).
+    *   **Add Proxy Host – Plex (Public, Auth via Plex):**
+        *   **Domain Names:** `plex.cooperstation.stream`
+        *   **Forward Hostname/IP:** `plex` (Docker container name on `proxy` network).
         *   **Forward Port:** `32400`.
+        *   **Scheme:** `http`.
         *   **SSL:** Request a new Let's Encrypt certificate.
             *   Enable "Force SSL".
             *   Enable "HTTP/2 Support".
-    *   **Agent Instructions:** Prompt user which services to expose:
-        *   Typically public: Plex, Overseerr
-        *   Typically restricted: Radarr, Sonarr, Prowlarr, qBittorrent
-    *   **Repeat for each service user wants exposed:**
-        *   `overseerr.cooperstation.stream` -> `overseerr:5055`
-        *   `radarr.cooperstation.stream` -> `radarr:7878` (Enable Basic Auth or restricted access!)
-        *   `sonarr.cooperstation.stream` -> `sonarr:8989` (Enable Basic Auth!)
+    *   **Add Proxy Host – Overseerr (Public, Auth via Plex/Overseerr):**
+        *   **Domain Names:** `overseerr.cooperstation.stream`
+        *   **Forward Hostname/IP:** `overseerr`
+        *   **Forward Port:** `5055`.
+        *   **Scheme:** `http`.
+        *   **SSL:** Request a new Let's Encrypt certificate.
+            *   Enable "Force SSL".
+            *   Enable "HTTP/2 Support".
+    *   **Do NOT create public proxy hosts** for Radarr/Sonarr/Prowlarr/qBittorrent/NZBGet/Tdarr/NPM admin. These remain accessible only on the LAN (e.g., `http://localhost:7878`).
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 2.  **Security Hardening** [PLANNED]
-    *   **Access Lists:** Create an Access List in NPM for Admin tools (Radarr, Sonarr, etc.).
-    *   Allow only LAN IPs or require Basic Auth.
-    *   **Agent Instructions:** If user wants admin services exposed externally, help them set up Basic Auth with strong credentials.
-    *   *Note:* Overseerr and Plex are generally safe to expose publicly with their native auth, but Radarr/Sonarr should have an extra layer.
+    *   **NPM Admin UI (`localhost:81`):**
+        *   Ensure the admin interface is **not** proxied publicly.
+        *   Access it only via LAN (host browser or VPN into home network).
+    *   **Plex & Overseerr Hosts:**
+        *   Rely on Plex and Overseerr’s own authentication for user login.
+        *   Optionally enable NPM rate limiting or IP allow‑lists if desired, but not required for baseline.
+    *   **If, in the future, admin services must be remote:**
+        *   Treat as an advanced change:
+            *   Create proxy hosts only for required tools.
+            *   Protect them with NPM Access Lists (Basic Auth + IP allow‑lists or VPN-only).
+        *   Document these changes clearly when they are made.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 3.  **DNS Verification** [PLANNED]

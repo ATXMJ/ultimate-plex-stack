@@ -100,16 +100,16 @@ volumes:
   - ./downloads:/downloads
   - ./transcode:/transcode
 
-  # Change these to NAS
-  - /mnt/gargantua/media/movies:/movies    # was ./media/movies:/movies
-  - /mnt/gargantua/media/tv:/tv            # was ./media/tv:/tv
+  # Change these to NAS (Gargantua G: drive on Windows)
+  - G:\media\movies:/movies    # was ./media/movies:/movies
+  - G:\media\tv:/tv            # was ./media/tv:/tv
 ```
 
 ### 4. Update Environment Variables
 ```bash
-# In .env file
-MOVIES_PATH=/mnt/gargantua/media/movies
-TV_PATH=/mnt/gargantua/media/tv
+# In .env file (or dotenv)
+MOVIES_PATH=G:\media\movies
+TV_PATH=G:\media\tv
 ```
 
 ### 5. Restart Services

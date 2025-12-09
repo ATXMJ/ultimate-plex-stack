@@ -27,11 +27,15 @@ The stack uses a hybrid approach: **server and application data remains local** 
 
 ## NAS Storage Layout (Media Libraries Only)
 
+**NAS Name:** `Gargantua`
+
+On Windows, Gargantua will be mounted as the `G:` drive, with a `media` share:
+
 ```
-Gargantua Mount Point (/mnt/gargantua/media/) ✅ **DECIDED**
-├── movies/                  # Movie library (NAS)
-├── tv/                      # TV show library (NAS)
-└── books/                  # Books/Audiobooks (NAS - future)
+G:\media\
+├── movies\                 # Movie library (NAS)
+├── tv\                     # TV show library (NAS)
+└── books\                  # Books/Audiobooks (NAS - future)
 ```
 
 ## Volume Mapping Strategy
@@ -63,16 +67,16 @@ volumes:
   - ./downloads:/downloads
   - ./transcode:/transcode
 
-  # Media libraries - MOVED TO NAS
-  - /mnt/gargantua/media/movies:/movies
-  - /mnt/gargantua/media/tv:/tv
+  # Media libraries - MOVED TO NAS (Gargantua G: drive on Windows)
+  - G:\media\movies:/movies
+  - G:\media\tv:/tv
 ```
 
 ### Environment Variables for Flexibility
 ```bash
 # Media library paths (update when migrating to NAS)
-MOVIES_PATH=/mnt/gargantua/media/movies    # Change from ./media/movies
-TV_PATH=/mnt/gargantua/media/tv            # Change from ./media/tv
+MOVIES_PATH=G:\media\movies    # Change from ./media/movies
+TV_PATH=G:\media\tv            # Change from ./media/tv
 
 # Keep downloads and transcode local for performance
 DOWNLOADS_PATH=./downloads           # Always local

@@ -4,7 +4,9 @@
 
 This document details the setup of Overseerr for managing media requests.
 
-**Agent Instructions:** This step requires API keys from Radarr and Sonarr (configured in Step 11 - Media Management). Retrieve these from the user or guide them to find the keys in each service's settings.
+**Design Decision:** Only **Plex** and **Overseerr** will be remotely accessible from the internet, both of which have their own authentication. All other services (Radarr, Sonarr, Prowlarr, qBittorrent, etc.) remain **LAN-only** and are never exposed via reverse proxy.
+
+**Agent Instructions:** This step requires API keys from Radarr and Sonarr (configured and verified via Buildarr in Step 11). Guide the user to retrieve these keys from each service's settings if needed, but prefer documenting them in `buildarr.yml` rather than manually re-entering them in UIs.
 
 ## Objectives
 - Deploy Overseerr.
@@ -15,7 +17,8 @@ This document details the setup of Overseerr for managing media requests.
 
 1.  **Deploy Container** [PLANNED]
     *   Run: `docker compose up -d overseerr`.
-    *   Port: `5055`.
+    *   Port (LAN access): `5055`.
+    *   Overseerr will later be exposed externally only via Nginx Proxy Manager in Step 15 under `overseerr.cooperstation.stream`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 2.  **Initial Setup** [PLANNED]
@@ -33,13 +36,13 @@ This document details the setup of Overseerr for managing media requests.
         *   Port: `7878`
         *   API Key: (From Radarr).
         *   Quality Profile: Select one.
-        *   Root Folder: `/movies`.
+        *   Root Folder: `/movies` (internal container path – backed by `${MOVIES_PATH}` on the host).
     *   Update the status of this sub-step to `[COMPLETE]`.
     *   **Sonarr:**
         *   Hostname: `sonarr`
         *   Port: `8989`
         *   API Key: (From Sonarr).
-        *   Root Folder: `/tv`.
+        *   Root Folder: `/tv` (internal container path – backed by `${TV_PATH}` on the host).
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 4.  **Test Request** [PLANNED]
@@ -50,7 +53,7 @@ This document details the setup of Overseerr for managing media requests.
 
 5.  **Update Documentation** [PLANNED]
     *   Once all preceding steps in this document are `[COMPLETE]`:
-    *   Update `docs/Services.md` with Overseerr configuration details.
+    *   Update `docs/Services.md` with Overseerr configuration details, noting that it is the only non-Plex service intended for remote user access.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 6.  **Mark Step as Complete** [PLANNED]

@@ -2,9 +2,11 @@
 
 **Status:** `PLANNED`
 
-This document details the setup of Tdarr for transcoding automation (Optional).
+This document details the setup of Tdarr for transcoding automation.
 
-**Agent Instructions:** This is an optional step. Ask user if they want to set up automated transcoding. If yes, prompt for preferences: target codec (H.265/H.264), quality settings, and whether they have GPU hardware acceleration available.
+**Design Decision:** Tdarr is an **optional, advanced** component. It can significantly increase CPU/GPU and disk I/O usage. The default, recommended path is to **skip this step** until the core “request → download → import → stream” flow is stable and you are sure the hardware can handle continuous transcoding.
+
+**Agent Instructions:** Confirm with the user that they want automated transcoding and that they understand the resource impact. Tie Tdarr to an `advanced` Docker Compose profile so it is only started intentionally. Prompt for preferences: target codec (H.265/H.264), quality settings, and whether they have GPU hardware acceleration available.
 
 ## Objectives
 - Deploy Tdarr Server and Node.
@@ -12,8 +14,12 @@ This document details the setup of Tdarr for transcoding automation (Optional).
 
 ## Detailed Implementation Steps
 
-1.  **Deploy Containers** [PLANNED]
-    *   Run: `docker compose up -d tdarr`.
+1.  **Deploy Containers (Advanced Profile)** [PLANNED]
+    *   Ensure `tdarr` is attached to an `advanced` profile in `docker-compose.yml` (see `docs/Configuration.md` for profile design).
+    *   Start Tdarr only when explicitly desired:
+        ```powershell
+        docker compose --profile advanced up -d tdarr
+        ```
     *   Ports: `8265` (WebUI), `8266` (Server).
     *   Update the status of this sub-step to `[COMPLETE]`.
 
