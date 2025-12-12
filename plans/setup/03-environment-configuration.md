@@ -82,7 +82,7 @@ This document details the configuration of the environment variables that contro
 8.  **Mark Step as Complete** [COMPLETE]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
-    *   Update `plans/SETUP.md` to mark Step 3 as `[COMPLETE]`.
+    *   Update `setup/SETUP.md` to mark Step 3 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 ## Current Status Summary

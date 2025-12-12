@@ -93,6 +93,6 @@ This document details the network planning required before deploying the stack, 
 
 7.  **Mark Step as Complete** [COMPLETE]
     *   Update the status at the top of this file to `COMPLETE`.
-    *   Update `plans/SETUP.md` to mark Step 2 as `[COMPLETE]`.
+    *   Update `setup/SETUP.md` to mark Step 2 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 

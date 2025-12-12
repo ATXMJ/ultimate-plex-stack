@@ -61,7 +61,7 @@ This document details the configuration of Nginx Proxy Manager to expose service
 5.  **Mark Step as Complete** [PLANNED]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
-    *   Update `plans/SETUP.md` to mark Step 14 as `[COMPLETE]`.
+    *   Update `setup/SETUP.md` to mark Step 14 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 

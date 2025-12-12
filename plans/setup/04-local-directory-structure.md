@@ -86,7 +86,7 @@ transcode/             # Plex transcode temporary files
 7. **Mark Step as Complete** [COMPLETE]
    - All substeps completed successfully
    - Status updated to `COMPLETE`
-   - `plans/SETUP.md` will be updated next
+   - `setup/SETUP.md` will be updated next
 
 
 ## Notes

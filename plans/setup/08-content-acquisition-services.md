@@ -59,7 +59,7 @@ This document details the setup of download clients (qBittorrent/NZBGet) and ens
 7.  **Mark Step as Complete** [COMPLETE]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
-    *   Update `plans/SETUP.md` to mark Step 9 as `[COMPLETE]`.
+    *   Update `setup/SETUP.md` to mark Step 9 as `[COMPLETE]`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 

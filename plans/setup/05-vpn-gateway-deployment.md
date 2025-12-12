@@ -56,7 +56,7 @@ This document details the deployment of the VPN container (gluetun or similar) w
 
 8.  **Mark Step as Complete** [COMPLETE]
     *   Status updated to `COMPLETE` at top of this file
-    *   `plans/SETUP.md` updated to mark Step 5 as `[COMPLETE]`
+    *   `setup/SETUP.md` updated to mark Step 5 as `[COMPLETE]`
 
 
 ## Final Configuration Summary
