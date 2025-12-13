@@ -1,10 +1,169 @@
 buildarr:
+  # Buildarr runs as an on-demand, one-shot tool (see Step 10 / 10.1).
   watch_config: false
 
+################################################################################
+## Prowlarr – Indexer Management (Step 9 + 10 + 10.1)
+##
+## NOTE:
+## - This section is intentionally conservative and uses placeholders.
+## - Fill in your real API keys, auth credentials, indexers, and Apps
+##   before running:
+##       docker compose run --rm buildarr apply
+## - Field names are based on the Buildarr Prowlarr plugin; verify against
+##   your installed version if you run into validation errors.
+################################################################################
 prowlarr:
+  # Connectivity (matches docker-compose service `prowlarr`)
   hostname: prowlarr
   port: 9696
   protocol: http
-  api_key: YOUR_PROWLARR_API_KEY_HERE
 
+  # REQUIRED: Prowlarr API key from the UI (Settings ➜ General).
+  api_key: ${PROWLARR_API_KEY}
+
+  # Optional: If you enabled Forms Authentication in Step 9, model it here.
+  # If you left auth disabled, you can remove this block or keep `enabled: false`.
+  authentication:
+    enabled: enabled
+    method: forms
+    username: ${PROWLARR_AUTH_USERNAME}
+    password: ${PROWLARR_AUTH_PASSWORD}
+
+  # Optional: Model your indexers here. Start with a single public indexer and
+  # expand as needed. Replace the EXAMPLE_* placeholders with real values.
+  #
+  # For private trackers, add separate entries with their specific
+  # implementation / categories / API keys.
+  indexers:
+    - name: EXAMPLE_PUBLIC_INDEXER
+      enabled: true
+      # implementation: torznab
+      # url: https://example-indexer.invalid
+      # api_key: YOUR_INDEXER_API_KEY_HERE
+      # categories: [2000, 5000]   # Example: Movies/TV categories
+      # tags: ["public"]
+
+  # Optional: Prowlarr Apps for Radarr/Sonarr.
+  # IMPORTANT:
+  #   - You must first retrieve the Radarr / Sonarr API keys from each UI.
+  #   - After updating these values, re-run Buildarr.
+  apps:
+    - name: radarr
+      type: radarr
+      url: http://radarr:7878
+      api_key: ${RADARR_API_KEY}
+      sync_level: full
+    - name: sonarr
+      type: sonarr
+      url: http://sonarr:8989
+      api_key: ${SONARR_API_KEY}
+      sync_level: full
+
+################################################################################
+## Radarr – Movies (Step 11)
+##
+## Models:
+## - Root folder (/movies inside container, backed by MEDIA_ROOT/movies on host)
+## - Basic quality profiles
+## - qBittorrent download client (routed through `vpn` service)
+##
+## Fill in API keys and qBittorrent credentials before applying.
+################################################################################
+radarr:
+  # Connectivity (matches docker-compose service `radarr`)
+  hostname: radarr
+  port: 7878
+  protocol: http
+
+  # REQUIRED: Radarr API key from Settings ➜ General.
+  api_key: ${RADARR_API_KEY}
+
+  # Root movie folder inside the container.
+  # Host path: ${MEDIA_ROOT}/movies  ➜  /movies (see docker-compose.yml).
+  root_folders:
+    - path: /movies
+      default: true
+
+  # Baseline quality profiles. Adjust names/behavior to your preferences.
+  quality_profiles:
+    - name: HD-1080p
+      upgrade_allowed: true
+    - name: UHD-2160p
+      upgrade_allowed: true
+
+  # Download client: qBittorrent (hosted behind `vpn` container).
+  # qBittorrent listens on port 8080 on the docker network, exposed via vpn.
+  download_clients:
+    - name: qbittorrent
+      type: qbittorrent
+      host: qbittorrent
+      port: 8080
+      use_ssl: false
+      username: ${QBITTORRENT_USERNAME}
+      password: ${QBITTORRENT_PASSWORD}
+      category: movies
+
+################################################################################
+## Sonarr – TV (Step 11)
+##
+## Models:
+## - Root folder (/tv inside container, backed by MEDIA_ROOT/tv on host)
+## - Basic quality profiles
+## - qBittorrent download client (same instance as Radarr)
+################################################################################
+sonarr:
+  # Connectivity (matches docker-compose service `sonarr`)
+  hostname: sonarr
+  port: 8989
+  protocol: http
+
+  # REQUIRED: Sonarr API key from Settings ➜ General.
+  api_key: ${SONARR_API_KEY}
+
+  # Root TV folder inside the container.
+  # Host path: ${MEDIA_ROOT}/tv  ➜  /tv (see docker-compose.yml).
+  root_folders:
+    - path: /tv
+      default: true
+
+  # Baseline TV quality profile. Adjust to taste.
+  quality_profiles:
+    - name: HD-1080p
+      upgrade_allowed: true
+
+  # Download client: qBittorrent (same instance, different category).
+  download_clients:
+    - name: qbittorrent
+      type: qbittorrent
+      host: qbittorrent
+      port: 8080
+      use_ssl: false
+      username: YOUR_QBITTORRENT_USERNAME_HERE
+      password: YOUR_QBITTORRENT_PASSWORD_HERE
+      category: tv
+
+################################################################################
+## Bazarr – Subtitles (Optional / Future)
+##
+## There is not yet a stable Buildarr plugin for Bazarr at the time this plan
+## was written. This section is here purely as documentation of desired
+## settings and DOES NOT currently drive Bazarr automatically.
+##
+## Keep Bazarr configuration primarily in the UI (Step 11), and migrate it
+## here if/when Buildarr gains first-class support.
+################################################################################
+bazarr:
+  hostname: bazarr
+  port: 6767
+  protocol: http
+
+  # Example: preferred subtitle languages.
+  subtitle_languages:
+    - en
+
+  # Example: providers. These keys are illustrative only.
+  providers:
+    - name: opensubtitles
+      enabled: true
 

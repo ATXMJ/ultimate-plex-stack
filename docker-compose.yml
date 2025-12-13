@@ -264,10 +264,15 @@ services:
     container_name: buildarr
     profiles:
       - advanced            # run only when explicitly requested
+    env_file:
+      - dotenv
     environment:
       - TZ=${TZ}
     volumes:
-      - ./buildarr.yml:/config/buildarr.yml:ro
+      - ./buildarr.yml:/config/buildarr.yml.tpl:ro
+      - ./buildarr-entrypoint.sh:/config/buildarr-entrypoint.sh:ro
+    entrypoint: /bin/sh
+    command: /config/buildarr-entrypoint.sh
     networks:
       - proxy               # must be able to reach prowlarr/radarr/sonarr
     restart: "no"

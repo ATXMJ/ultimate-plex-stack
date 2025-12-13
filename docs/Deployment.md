@@ -42,6 +42,14 @@ docker compose --profile core up -d
 - Access each service via web UI
 - Complete initial setup wizards
 - Configure indexers and download clients
+- For Prowlarr/Radarr/Sonarr, prefer modelling configuration in `buildarr.yml`
+  and applying it with:
+
+  ```powershell
+  docker compose run --rm buildarr apply
+  ```
+
+  Use the UIs to **verify** configuration rather than as the long-term source of truth.
 
 ## Service Integration
 
@@ -54,6 +62,12 @@ docker compose --profile core up -d
 ### 2. Connect Arr Services to Prowlarr
 - Add Prowlarr as indexer source
 - Configure API keys
+- Prefer documenting Prowlarr Apps (Radarr/Sonarr) and Arr connectivity in
+  `buildarr.yml`, then re-running:
+
+  ```powershell
+  docker compose run --rm buildarr apply
+  ```
 
 ### 3. Connect to Download Clients
 - Configure qBittorrent/NZBGet credentials in Radarr/Sonarr

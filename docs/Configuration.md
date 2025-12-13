@@ -37,14 +37,19 @@ ACME_EMAIL=your_email@example.com  # For Let's Encrypt SSL notifications
 - **Purpose**: Configuration-as-code for the Arr ecosystem (Prowlarr, Radarr, Sonarr, optionally Bazarr).
 - **Location**: `buildarr.yml` in the project root (kept under version control).
 - **Scope**:
-  - Prowlarr: indexers, authentication, app (Radarr/Sonarr) integrations.
-  - Radarr/Sonarr: root folders, quality profiles, download client linkage.
-  - Bazarr: optional, if a suitable plugin or automation path is used.
-- **Execution Modes**:
-  - As a **Docker service** (`buildarr` container) that watches the config file.
-  - As a **one-shot CLI** (Python venv on the host) run manually when config changes.
+  - **Prowlarr**: connectivity, authentication, indexers, and App integrations (Radarr/Sonarr).
+  - **Radarr**: connectivity, `/movies` root folder, quality profiles, and download client linkage (qBittorrent).
+  - **Sonarr**: connectivity, `/tv` root folder, quality profiles, and download client linkage (qBittorrent).
+  - **Bazarr**: optional stub (documented preferences only until a stable Buildarr plugin is available).
+- **Execution**:
+  - Buildarr is run as a **one-shot Docker tool** when configuration changes:
+    - `docker compose run --rm buildarr apply`
+  - `buildarr.watch_config` is set to `false`; Buildarr does not run continuously.
+- **Design Principle**:
+  - Treat `buildarr.yml` as the **source of truth** for Arr/Prowlarr configuration.
+  - Use the Arr/Prowlarr UIs mainly to **verify** that YAML has been applied, not as the primary way to configure services.
 
-Example (conceptual) structure:
+Example (high-level) structure:
 
 ```yaml
 buildarr:
@@ -54,17 +59,38 @@ prowlarr:
   hostname: prowlarr
   port: 9696
   protocol: http
-  api_key: YOUR_PROWLARR_API_KEY
+  api_key: YOUR_PROWLARR_API_KEY_HERE
+  # authentication, indexers, and apps (Radarr/Sonarr) defined here
 
 radarr:
   hostname: radarr
   port: 7878
   protocol: http
+  api_key: YOUR_RADARR_API_KEY_HERE
+  root_folders:
+    - path: /movies
+      default: true
+  quality_profiles:
+    - name: HD-1080p
+  download_clients:
+    - name: qbittorrent
+      host: qbittorrent
+      port: 8080
 
 sonarr:
   hostname: sonarr
   port: 8989
   protocol: http
+  api_key: YOUR_SONARR_API_KEY_HERE
+  root_folders:
+    - path: /tv
+      default: true
+  quality_profiles:
+    - name: HD-1080p
+  download_clients:
+    - name: qbittorrent
+      host: qbittorrent
+      port: 8080
 ```
 
 ## Docker Compose Profiles

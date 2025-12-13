@@ -114,11 +114,13 @@
   - Reads `buildarr.yml` from the project root (mounted into the container).
   - `buildarr.watch_config` is disabled; Buildarr runs once and exits.
 - **Scope**:
-  - Prowlarr connectivity and (in later steps) indexers/apps.
-  - Radarr/Sonarr root folders, quality profiles, and download clients (defined in later setup steps).
+  - Prowlarr connectivity, authentication, indexers, and App definitions for Radarr/Sonarr.
+  - Radarr/Sonarr connectivity, root folders (`/movies`, `/tv`), quality profiles, and download clients (qBittorrent).
+  - Optional Bazarr preferences (documented in YAML until a first-class Buildarr plugin is available).
 - **Network**: Attached to the `proxy` network so it can reach Arr/Prowlarr containers.
 - **Notes**:
   - Treat `buildarr.yml` as the source of truth; Arr/Prowlarr UIs are primarily for verification and diagnostics.
+  - When making changes to Arr or Prowlarr configuration, prefer **editing `buildarr.yml` + re-running Buildarr** over manual UI edits.
 
 ## Content Processing
 

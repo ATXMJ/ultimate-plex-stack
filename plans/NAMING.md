@@ -1,4 +1,4 @@
-# Interstellar Naming Convention
+i# Interstellar Naming Convention
 
 This document outlines the comprehensive naming convention for the Ultimate Plex Media Stack, themed around the movie *Interstellar*. All components, services, directories, networks, and infrastructure elements follow this consistent naming scheme to create an immersive, thematic experience.
 
