@@ -46,12 +46,17 @@ This document details the setup of Tdarr for transcoding automation.
     *   Enable hardware encoding in Tdarr library settings.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-5.  **Update Documentation** [PLANNED]
+5.  **Define Tdarr Policy (See Step 17.1)** [PLANNED]
+    *   Use `plans/setup/17.1-tdarr-policy.md` to document codec targets, plugin stacks, hardware acceleration settings, and resource limits before enabling unattended automation.
+    *   Do not run Tdarr continuously until the policy document is marked `[COMPLETE]`.
+    *   Update the status of this sub-step to `[COMPLETE]`.
+
+6.  **Update Documentation** [PLANNED]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update `docs/Services.md` with Tdarr configuration details.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-6.  **Mark Step as Complete** [PLANNED]
+7.  **Mark Step as Complete** [PLANNED]
     *   Once all preceding steps in this document are `[COMPLETE]`:
     *   Update the status at the top of this file to `COMPLETE`.
     *   Update `setup/SETUP.md` to mark Step 17 as `[COMPLETE]`.
