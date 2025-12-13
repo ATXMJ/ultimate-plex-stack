@@ -1,0 +1,10 @@
+buildarr:
+  watch_config: false
+
+prowlarr:
+  hostname: prowlarr
+  port: 9696
+  protocol: http
+  api_key: YOUR_PROWLARR_API_KEY_HERE
+
+

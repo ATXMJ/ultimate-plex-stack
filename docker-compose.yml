@@ -254,6 +254,24 @@ services:
       - "8266:8266"
     restart: unless-stopped
 
+  # ================================================================================
+  # CONFIGURATION AUTOMATION - Buildarr (one-shot)
+  # ================================================================================
+
+  # Buildarr - Configuration-as-code for Arr services
+  buildarr:
+    image: ghcr.io/buildarr/buildarr:latest
+    container_name: buildarr
+    profiles:
+      - advanced            # run only when explicitly requested
+    environment:
+      - TZ=${TZ}
+    volumes:
+      - ./buildarr.yml:/config/buildarr.yml:ro
+    networks:
+      - proxy               # must be able to reach prowlarr/radarr/sonarr
+    restart: "no"
+
 volumes:
   transcode:
     driver: local

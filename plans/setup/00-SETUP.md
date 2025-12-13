@@ -68,9 +68,14 @@ This document outlines the high-level step-by-step plan for implementing the Ult
     *   Configure indexers (torrent/usenet sites).
 
 10. **Configuration Automation (Buildarr)** [PLANNED] ([Detail](steps/10-buildarr-automation.md))
-    *   Introduce Buildarr for configuration-as-code of Prowlarr/Radarr/Sonarr (and optionally Bazarr).
-    *   Create and version-control a `buildarr.yml` file describing desired Arr configuration.
-    *   Decide whether Buildarr runs as a dedicated container or one-shot CLI.
+    *   Introduce Buildarr as a Dockerized, one-shot configuration tool for Prowlarr/Radarr/Sonarr (and optionally Bazarr).
+    *   Create and version-control a minimal `buildarr.yml` (global settings + basic Prowlarr connectivity).
+    *   Establish the `docker compose run --rm buildarr apply` workflow.
+
+10.1 **Arr Configuration-as-Code (Buildarr)** [PLANNED] ([Detail](steps/10.1-arr-configuration-as-code.md))
+    *   Fully model Prowlarr/Radarr/Sonarr (and optionally Bazarr) configuration in `buildarr.yml` (indexers, apps, root folders, quality profiles, download clients).
+    *   Apply Buildarr against running services and verify that Arr/Prowlarr UIs match the YAML (treating YAML as the source of truth).
+    *   Update documentation to describe Buildarr-driven configuration as the primary path for Arr services.
 
 11. **Media Management (The "Arrs")** [PLANNED] ([Detail](steps/11-media-management.md))
     *   Deploy Radarr (Movies) and Sonarr (TV).
