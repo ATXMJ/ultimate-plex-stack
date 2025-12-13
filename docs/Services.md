@@ -102,6 +102,24 @@
   - `PGID` - Group ID for file permissions
   - `TZ` - Timezone
 
+## Automation & Configuration
+
+### Buildarr (Arr Configuration-as-Code)
+- **Purpose**: Declarative configuration for Prowlarr, Radarr, Sonarr (and optionally Bazarr) via `buildarr.yml`.
+- **Image**: `ghcr.io/buildarr/buildarr:latest`
+- **Status**: ✅ **AVAILABLE (ONE-SHOT TOOL)**
+- **Invocation**: Run on demand from the project root:
+  - `docker compose run --rm buildarr apply`
+- **Configuration**:
+  - Reads `buildarr.yml` from the project root (mounted into the container).
+  - `buildarr.watch_config` is disabled; Buildarr runs once and exits.
+- **Scope**:
+  - Prowlarr connectivity and (in later steps) indexers/apps.
+  - Radarr/Sonarr root folders, quality profiles, and download clients (defined in later setup steps).
+- **Network**: Attached to the `proxy` network so it can reach Arr/Prowlarr containers.
+- **Notes**:
+  - Treat `buildarr.yml` as the source of truth; Arr/Prowlarr UIs are primarily for verification and diagnostics.
+
 ## Content Processing
 
 ### Tdarr (Media Transcoding)

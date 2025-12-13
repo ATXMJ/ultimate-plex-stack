@@ -67,7 +67,7 @@ This document outlines the high-level step-by-step plan for implementing the Ult
     *   Deploy Prowlarr.
     *   Configure indexers (torrent/usenet sites).
 
-10. **Configuration Automation (Buildarr)** [PLANNED] ([Detail](steps/10-buildarr-automation.md))
+10. **Configuration Automation (Buildarr)** [COMPLETE] ([Detail](steps/10-buildarr-automation.md))
     *   Introduce Buildarr as a Dockerized, one-shot configuration tool for Prowlarr/Radarr/Sonarr (and optionally Bazarr).
     *   Create and version-control a minimal `buildarr.yml` (global settings + basic Prowlarr connectivity).
     *   Establish the `docker compose run --rm buildarr apply` workflow.
