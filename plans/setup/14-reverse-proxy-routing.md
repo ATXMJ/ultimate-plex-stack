@@ -49,7 +49,7 @@ This document details the configuration of Nginx Proxy Manager to expose service
         *   Document these changes clearly when they are made.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **DNS Verification** [PLANNED][USER_INPUT]
+3.  **DNS Verification** [PLANNED][PROMPT_USER]
     *   Ensure public DNS records point `*.mydomain.com` (or specific subdomains) to your home IP.
     *   Update the status of this sub-step to `[COMPLETE]`.
 

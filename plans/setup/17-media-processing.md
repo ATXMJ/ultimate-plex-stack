@@ -28,7 +28,7 @@ This document details the setup of Tdarr for transcoding automation.
     *   **Nodes:** Verify the internal node is detected.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **Library Setup** [PLANNED][USER_INPUT]
+3.  **Library Setup** [PLANNED][PROMPT_USER]
     *   **Source:** `/media/movies`.
     *   **Transcode Cache:** `/transcode` (or `/temp`).
     *   **Agent Instructions:** Ask user about transcoding preferences:
@@ -40,7 +40,7 @@ This document details the setup of Tdarr for transcoding automation.
         *   *Warning:* Transcoding is CPU/GPU intensive. Ensure hardware capability.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-4.  **GPU Acceleration (If available)** [PLANNED][USER_INPUT]
+4.  **GPU Acceleration (If available)** [PLANNED][PROMPT_USER]
     *   **Agent Instructions:** Ask user if they have NVIDIA GPU or Intel QuickSync available for hardware transcoding.
     *   Ensure NVIDIA drivers or QuickSync is passed through to container in `docker-compose.yml`.
     *   Enable hardware encoding in Tdarr library settings.

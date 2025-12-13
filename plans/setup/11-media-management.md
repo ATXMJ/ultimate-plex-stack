@@ -24,7 +24,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
     *   These ports are for **LAN-only** access; they are **not exposed via reverse proxy** in Step 14.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-2.  **Apply Buildarr Configuration** [PLANNED][USER_INPUT]
+2.  **Apply Buildarr Configuration** [PLANNED][PROMPT_USER]
     *   Ensure `buildarr.yml` from Step 10 includes sections for `radarr:` and `sonarr:` with:
         *   Root folders:
             *   Movies: internal path `/movies`
@@ -46,7 +46,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
         ```
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **Radarr Verification (Do NOT reconfigure by hand)** [PLANNED][USER_INPUT]
+3.  **Radarr Verification (Do NOT reconfigure by hand)** [PLANNED][PROMPT_USER]
     *   Access Radarr on the LAN: `http://localhost:7878`.
     *   Verify (without changing settings unless debugging):
         *   **Root Folder:** `/movies` is configured as the primary root.
@@ -55,7 +55,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
     *   **If something is wrong:** Fix it in `buildarr.yml`, run `docker compose run --rm buildarr apply` again, and then refresh the UI – do not rely on manual UI changes as the long-term fix.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-4.  **Sonarr Verification (Do NOT reconfigure by hand)** [PLANNED][USER_INPUT]
+4.  **Sonarr Verification (Do NOT reconfigure by hand)** [PLANNED][PROMPT_USER]
     *   Access Sonarr on the LAN: `http://localhost:8989`.
     *   Verify:
         *   **Root Folder:** `/tv` is configured as the primary root.
@@ -64,7 +64,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
     *   As with Radarr, correct any discrepancies in `buildarr.yml`, not via long-term UI tweaks.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-5.  **Prowlarr Integration (via Buildarr, then Verify in UI)** [PLANNED][USER_INPUT]
+5.  **Prowlarr Integration (via Buildarr, then Verify in UI)** [PLANNED][PROMPT_USER]
     *   In `buildarr.yml`, ensure Prowlarr apps are configured to point at:
         *   Radarr: `http://radarr:7878` with API key from Radarr.
         *   Sonarr: `http://sonarr:8989` with API key from Sonarr.
@@ -75,7 +75,7 @@ This document details the setup of Radarr, Sonarr, and Bazarr.
     *   *Result:* Indexers in Prowlarr automatically sync to Radarr/Sonarr.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-6.  **Bazarr Setup (Primarily via UI for now)** [PLANNED][USER_INPUT]
+6.  **Bazarr Setup (Primarily via UI for now)** [PLANNED][PROMPT_USER]
     *   Access Bazarr on the LAN: `http://localhost:6767`.
     *   Connect to Sonarr and Radarr using their hostnames and API keys:
         *   Sonarr host: `sonarr`, port `8989`
