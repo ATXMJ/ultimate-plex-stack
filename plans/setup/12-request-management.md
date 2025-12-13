@@ -21,7 +21,7 @@ This document details the setup of Overseerr for managing media requests.
     *   Overseerr will later be exposed externally only via Nginx Proxy Manager in Step 14 under `overseerr.cooperstation.stream`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-2.  **Initial Setup** [PLANNED]
+2.  **Initial Setup** [PLANNED][USER_INPUT]
     *   Access `http://localhost:5055`.
     *   **Sign in with Plex:** Use your Plex account.
     *   **Plex Server:**
@@ -30,7 +30,7 @@ This document details the setup of Overseerr for managing media requests.
         *   Refresh Library: Enable.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **Service Configuration** [PLANNED]
+3.  **Service Configuration** [PLANNED][USER_INPUT]
     *   **Radarr:**
         *   Hostname: `radarr`
         *   Port: `7878`
@@ -45,7 +45,7 @@ This document details the setup of Overseerr for managing media requests.
         *   Root Folder: `/tv` (internal container path – backed by `${TV_PATH}` on the host).
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-4.  **Test Request** [PLANNED]
+4.  **Test Request** [PLANNED][USER_INPUT]
     *   Search for a movie in Overseerr.
     *   Click "Request".
     *   Check Radarr: It should appear in the queue/monitoring list.

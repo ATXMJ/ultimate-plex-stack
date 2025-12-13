@@ -11,7 +11,7 @@ This document details the end-to-end testing of the complete stack.
 
 ## Detailed Implementation Steps
 
-1.  **The "Request to Stream" Test** [PLANNED]
+1.  **The "Request to Stream" Test** [PLANNED][USER_INPUT]
     **Agent Instructions:** Walk through each stage with user, verifying each step completes successfully. This flow can be tested either:
     *   Entirely on the LAN using `http://localhost:5055` (Overseerr) and `http://localhost:32400/web` (Plex), or
     *   End‑to‑end over the internet using `https://overseerr.cooperstation.stream` and `https://plex.cooperstation.stream` after Step 14 is finished.

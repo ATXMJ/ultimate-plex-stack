@@ -12,7 +12,7 @@ This document serves as a checklist and guide to finalize the connections betwee
 
 ## Detailed Implementation Steps
 
-1.  **API Key Audit** [PLANNED]
+1.  **API Key Audit** [PLANNED][USER_INPUT]
     *   Ensure Prowlarr has valid keys for Radarr/Sonarr.
     *   Ensure Overseerr has valid keys for Radarr/Sonarr.
     *   Ensure Bazarr has valid keys for Radarr/Sonarr.
@@ -24,13 +24,13 @@ This document serves as a checklist and guide to finalize the connections betwee
     *   *Check:* If Radarr says "File not found" after download, verify the internal paths match perfectly.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **Naming Formats** [PLANNED]
+3.  **Naming Formats** [PLANNED][USER_INPUT]
     *   **Agent Instructions:** Ask user if they have specific naming format preferences or use recommended standard.
     *   Configure Radarr/Sonarr standard movie format (e.g., `{Movie Title} ({Release Year}) {Quality Full}`).
     *   This ensures clean file names for Plex.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-4.  **Notification Agents (Optional)** [PLANNED]
+4.  **Notification Agents (Optional)** [PLANNED][USER_INPUT]
     *   **Agent Instructions:** Ask user if they want notifications. If yes, prompt for Discord webhook URL or email SMTP settings.
     *   Set up Discord/Email notifications in Radarr/Sonarr/Overseerr for "On Download" or "On Request".
     *   Update the status of this sub-step to `[COMPLETE]`.

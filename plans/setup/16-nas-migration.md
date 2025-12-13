@@ -13,7 +13,7 @@ This document details the procedure to migrate the media library to a NAS after 
 
 ## Detailed Implementation Steps
 
-1.  **Mount NAS on Host** [PLANNED]
+1.  **Mount NAS on Host** [PLANNED][USER_INPUT]
     *   **Agent Instructions:** Prompt user for NAS IP address or hostname (e.g., `gargantua`), share name (e.g., `media`), and any required credentials.
     *   NAS Name: `Gargantua`.
     *   Map NAS `media` share to **drive G:** on Windows (persistent mapping):
@@ -33,7 +33,7 @@ This document details the procedure to migrate the media library to a NAS after 
     *   This preserves the `movies/` and `tv/` subfolder structure under `G:\media`.
     *   Update the status of this sub-step to `[COMPLETE]`.
 
-3.  **Update Docker Compose** [PLANNED]
+3.  **Update Docker Compose** [PLANNED][USER_INPUT]
     *   Edit `docker-compose.yml`.
     *   Change volumes for Plex, Radarr, Sonarr:
         *   Old (local):
