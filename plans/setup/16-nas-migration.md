@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 15 – System Verification](15-system-verification.md) | [Next: Step 17 – Media Processing →](17-media-processing.md)
+
 # Step 16: NAS Migration
 
 **Status:** `PLANNED`

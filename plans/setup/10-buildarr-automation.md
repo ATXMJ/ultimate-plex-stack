@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 9 – Indexer Management](09-indexer-management.md) | [Next: Step 10.1 – Arr Configuration-as-Code (Buildarr) →](10.1-arr-configuration-as-code.md)
+
 # Step 10: Configuration Automation (Buildarr)
 
 **Status:** `COMPLETE`

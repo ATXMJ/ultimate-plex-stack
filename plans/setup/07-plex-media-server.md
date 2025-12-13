@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 6 – Reverse Proxy Deployment](06-reverse-proxy-deployment.md) | [Next: Step 8 – Content Acquisition Services (VPN-Routed) →](08-content-acquisition-services.md)
+
 # Step 7: Plex Media Server
 
 **Status:** `COMPLETE`

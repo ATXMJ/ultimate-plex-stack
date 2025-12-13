@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 2 – Network Planning](02-network-planning.md) | [Next: Step 4 – Local Directory Structure Setup →](04-local-directory-structure.md)
+
 # Step 3: Environment Configuration
 
 **Status:** `COMPLETE`

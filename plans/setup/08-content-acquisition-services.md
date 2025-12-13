@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 7 – Plex Media Server](07-plex-media-server.md) | [Next: Step 9 – Indexer Management →](09-indexer-management.md)
+
 # Step 8: Content Acquisition Services (VPN-Routed)
 
 **Status:** `COMPLETE`

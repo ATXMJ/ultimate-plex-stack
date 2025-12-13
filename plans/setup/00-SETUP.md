@@ -1,3 +1,5 @@
+**Navigation:** _Start_ | [Next: Step 1 – Hardware & OS Verification →](01-hardware-os-verification.md)
+
 # Ultimate Plex Stack - High-Level Implementation Plan
 
 This document outlines the high-level step-by-step plan for implementing the Ultimate Plex Media Stack as specified in `docs/Specs.md`. 

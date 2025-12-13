@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Overview – High-Level Implementation Plan](00-SETUP.md) | [Next: Step 2 – Network Planning →](02-network-planning.md)
+
 # Step 1: Hardware & OS Verification
 
 **Status:** `COMPLETE`

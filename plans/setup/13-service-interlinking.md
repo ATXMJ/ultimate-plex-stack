@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 12 – Request Management](12-request-management.md) | [Next: Step 14 – Reverse Proxy Routing →](14-reverse-proxy-routing.md)
+
 # Step 13: Service Interlinking
 
 **Status:** `PLANNED`

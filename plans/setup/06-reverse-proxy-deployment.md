@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 5 – VPN Gateway Deployment](05-vpn-gateway-deployment.md) | [Next: Step 7 – Plex Media Server →](07-plex-media-server.md)
+
 # Step 6: Reverse Proxy Deployment
 
 **Status:** `COMPLETE`

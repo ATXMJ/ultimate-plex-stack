@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 4 – Local Directory Structure Setup](04-local-directory-structure.md) | [Next: Step 6 – Reverse Proxy Deployment →](06-reverse-proxy-deployment.md)
+
 # Step 5: VPN Gateway Deployment
 
 **Status:** `COMPLETE`

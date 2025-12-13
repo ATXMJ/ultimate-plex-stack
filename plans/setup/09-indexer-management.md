@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 8 – Content Acquisition Services (VPN-Routed)](08-content-acquisition-services.md) | [Next: Step 10 – Configuration Automation (Buildarr) →](10-buildarr-automation.md)
+
 # Step 9: Indexer Management
 
 **Status:** `COMPLETE`

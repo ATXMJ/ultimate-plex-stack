@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 3 – Environment Configuration](03-environment-configuration.md) | [Next: Step 5 – VPN Gateway Deployment →](05-vpn-gateway-deployment.md)
+
 # Step 4: Local Directory Structure Setup
 
 **Status:** `COMPLETE`

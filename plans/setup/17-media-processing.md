@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 16 – NAS Migration](16-nas-migration.md) | [Next: Step 17.1 – Tdarr Policy & Automation →](17.1-tdarr-policy.md)
+
 # Step 17: Media Processing
 
 **Status:** `PLANNED`

@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 10.1 – Arr Configuration-as-Code (Buildarr)](10.1-arr-configuration-as-code.md) | [Next: Step 12 – Request Management →](12-request-management.md)
+
 # Step 11: Media Management (The "Arrs")
 
 **Status:** `PLANNED`

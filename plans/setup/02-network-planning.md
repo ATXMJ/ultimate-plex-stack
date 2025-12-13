@@ -1,3 +1,5 @@
+**Navigation:** [← Previous: Step 1 – Hardware & OS Verification](01-hardware-os-verification.md) | [Next: Step 3 – Environment Configuration →](03-environment-configuration.md)
+
 # Step 2: Network Planning
 
 **Status:** `COMPLETE`
