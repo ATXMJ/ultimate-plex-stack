@@ -21,8 +21,8 @@ This document outlines the high-level step-by-step plan for implementing the Ult
 ## Phase 2: Environment & Storage Configuration
 
 3.  **Environment Configuration** [COMPLETE] ([Detail](steps/03-environment-configuration.md))
-    *   Create `dotenv` from `.env.example`.
-    *   **Note:** Due to globalignore, we are using `dotenv` temporarily instead of `.env`.
+    *   Create `.env` from `.env.example`.
+    *   **Note:** Due to globalignore, we are using `.env` temporarily instead of `.env`.
     *   Populate critical variables:
         *   User/Group IDs (`PUID`, `PGID`).
         *   Timezone (`TZ`).

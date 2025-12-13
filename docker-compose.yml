@@ -27,12 +27,13 @@ services:
       - "8694:8694/udp"
       # NZBGet WebUI (if needed later)
       - "6789:6789"
+    # Non-secret config comes from .env.config (via --env-file)
+    # Secrets (VPN credentials) come from .env.secrets as container env vars.
+    env_file:
+      - .env.secrets
     environment:
       - VPN_SERVICE_PROVIDER=${VPN_PROVIDER}
       - VPN_TYPE=${VPN_PROTOCOL}
-      # NordVPN with OpenVPN uses service credentials
-      - OPENVPN_USER=${VPN_USERNAME}
-      - OPENVPN_PASSWORD=${VPN_PASSWORD}
       # Server countries: Panama (primary), Switzerland (fallback)
       - SERVER_COUNTRIES=Panama,Switzerland
       # Use TCP (more reliable for NordVPN with these credentials)
@@ -71,8 +72,6 @@ services:
     depends_on:
       vpn:
         condition: service_healthy
-    env_file:
-      - dotenv
     environment:
       - PUID=${PUID}
       - PGID=${PGID}
@@ -264,8 +263,10 @@ services:
     container_name: buildarr
     profiles:
       - advanced            # run only when explicitly requested
+    # Secrets for Buildarr (e.g., API keys, qBittorrent credentials)
+    # are loaded from .env.secrets inside the container.
     env_file:
-      - dotenv
+      - .env.secrets
     environment:
       - TZ=${TZ}
     volumes:

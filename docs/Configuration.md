@@ -1,8 +1,10 @@
 # Configuration Management
 
-## Environment Variables (.env file)
+## Environment Variables (.env.config and .env.secrets)
 
 ```bash
+# .env.config  → non‑secret configuration
+
 # User/Group IDs
 PUID=1000
 PGID=1000
@@ -15,21 +17,37 @@ MEDIA_ROOT=C:/plex-server/ultimate-plex-stack/media
 DOWNLOAD_ROOT=C:/plex-server/ultimate-plex-stack/downloads
 CONFIG_ROOT=C:/plex-server/ultimate-plex-stack/config
 
-# VPN Configuration (NordVPN with WireGuard)
+# VPN Configuration (NordVPN with WireGuard/OpenVPN)
 VPN_PROVIDER=nordvpn
-VPN_TOKEN=your_nordvpn_access_token_here
 VPN_ENABLED=true
 VPN_DNS=103.86.96.100,103.86.99.100
 VPN_PROTOCOL=wireguard
-VPN_PORT=51820
+VPN_PORT=443
 VPN_KILL_SWITCH=true
-
-# Plex Configuration
-PLEX_CLAIM=your_plex_claim_here  # Get from https://www.plex.tv/claim (valid 4 minutes)
 
 # Domain (for reverse proxy)
 DOMAIN=cooperstation.stream
 ACME_EMAIL=your_email@example.com  # For Let's Encrypt SSL notifications
+```
+
+```bash
+# .env.secrets → sensitive values (never commit this file)
+
+# VPN Credentials (NordVPN service credentials for gluetun/OpenVPN)
+OPENVPN_USER=your_nordvpn_service_username
+OPENVPN_PASSWORD=your_nordvpn_service_password
+
+# Plex Configuration
+PLEX_CLAIM=your_plex_claim_here  # Get from https://www.plex.tv/claim (valid ~4 minutes)
+
+# Buildarr / Arr API keys & credentials
+PROWLARR_API_KEY=your_prowlarr_api_key_here
+PROWLARR_AUTH_USERNAME=your_prowlarr_auth_username_here
+PROWLARR_AUTH_PASSWORD=your_prowlarr_auth_password_here
+RADARR_API_KEY=your_radarr_api_key_here
+SONARR_API_KEY=your_sonarr_api_key_here
+QBITTORRENT_USERNAME=your_qbittorrent_username_here
+QBITTORRENT_PASSWORD=your_qbittorrent_password_here
 ```
 
 ## Buildarr Configuration (`buildarr.yml`)

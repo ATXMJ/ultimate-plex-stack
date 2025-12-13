@@ -11,15 +11,17 @@ This document details the configuration of the environment variables that contro
 **Note:** Plex claim token configuration has been moved to Step 7 (Plex Media Server deployment) due to its 4-minute expiration window.
 
 ## Objectives
-- Create the production `.dotenv` file.
+- Create the production `.env.config` and `.env.secrets` files.
 - Configure user permissions, timezone, and paths.
 - Set up VPN and security credentials.
 
 ## Detailed Implementation Steps
 
-1.  **Create dotenv** [COMPLETE]
-    *   Copy example: `cp .env.example dotenv` (PowerShell: `Copy-Item .env.example dotenv`).
-    *   **Note:** Due to globalignore, we are using `dotenv` temporarily instead of `.env`.
+1.  **Create .env.config and .env.secrets** [COMPLETE]
+    *   Use `docs/Configuration.md` as the canonical reference for keys and example values.
+    *   Create `.env.config` for **non-secret configuration** (paths, timezone, domain, etc.).
+    *   Create `.env.secrets` for **sensitive values** (VPN credentials, Plex claim token, API keys).
+    *   Ensure both files are excluded from git (see `.gitignore`).
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 2.  **Configure User & Group IDs** [COMPLETE]
@@ -47,16 +49,14 @@ This document details the configuration of the environment variables that contro
     *   Update the status of this sub-step to `[COMPLETE]`.
 
 5.  **Configure VPN Credentials** [COMPLETE]
-    *   **VPN_PROVIDER:** (e.g., `airvpn`, `custom`, `wireguard`, `nordvpn`).
-    *   **VPN_TOKEN:** NordVPN access token (recommended for WireGuard).
-    *   **Note:** When using NordVPN with WireGuard and access token, `VPN_USERNAME` is not required.
-    *   *Crucial:* Ensure `VPN_ENABLED=true` or equivalent profile activation is planned.
+    *   **VPN_PROVIDER:** (e.g., `airvpn`, `custom`, `wireguard`, `nordvpn`) in `.env.config`.
+    *   **OPENVPN_USER / OPENVPN_PASSWORD:** NordVPN service credentials (for OpenVPN) in `.env.secrets`.
+    *   *Crucial:* Ensure `VPN_ENABLED=true` or equivalent profile activation is planned in `.env.config`.
     *   **Current Values:**
         *   `VPN_PROVIDER=nordvpn`
-        *   `VPN_TOKEN=********` (configured) ✓
         *   `VPN_PROTOCOL=wireguard`
         *   `VPN_ENABLED=true`
-    *   **Agent Instructions:** Prompt user for NordVPN access token (from NordVPN dashboard). For WireGuard protocol, only the access token is needed, not username.
+    *   **Agent Instructions:** Prompt user for either NordVPN access token (WireGuard flow) or service credentials (`OPENVPN_USER` / `OPENVPN_PASSWORD` for OpenVPN/gluetun), depending on chosen protocol.
     *   Update the status of this sub-step to `[COMPLETE]` once real credentials are provided.
 
 6.  **Configure Domain** [COMPLETE]

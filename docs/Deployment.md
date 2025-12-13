@@ -15,10 +15,20 @@ cd ultimate-plex-stack
 ```
 
 ### 2. Configure Environment
+Create two files from the examples in `docs/Configuration.md`:
+
 ```bash
-cp .env.example .env
-# Edit .env with your values
+# Non-secret configuration
+cp .env.config .env.config.local  # optional backup pattern
+
+# Secrets (never commit this file)
+cp .env.secrets .env.secrets.local  # or create from scratch
 ```
+
+Then edit:
+
+- `.env.config` with paths, timezone, and domain.
+- `.env.secrets` with VPN credentials, Plex claim token, and API keys.
 
 ### 3. Create Directory Structure
 ```powershell
@@ -31,11 +41,11 @@ mkdir media\movies, media\tv -Force
 
 ### 4. Deploy Services
 ```powershell
-# Using Makefile (recommended)
+# Using Makefile (recommended) – loads .env.config automatically
 make up-d
 
 # Or directly with Docker Compose
-docker compose --profile core up -d
+docker compose --env-file .env.config --profile core up -d
 ```
 
 ### 5. Configure Services
@@ -54,7 +64,7 @@ docker compose --profile core up -d
 ## Service Integration
 
 ### 1. VPN Configuration (if using torrent/usenet)
-- Configure VPN credentials in `.env` file or VPN container config
+- Configure VPN credentials in `.env.secrets` (see `docs/Configuration.md`)
 - VPN is configured **once in the VPN container only**
 - qBittorrent and NZBGet require **NO VPN configuration** - they automatically route through VPN via Docker networking
 - Verify VPN connection before starting download clients
@@ -121,7 +131,7 @@ volumes:
 
 ### 4. Update Environment Variables
 ```bash
-# In .env file (or dotenv)
+# In .env.config
 MOVIES_PATH=G:\media\movies
 TV_PATH=G:\media\tv
 ```

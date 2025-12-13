@@ -34,7 +34,7 @@ This document details the deployment of the VPN container (gluetun or similar) w
     *   All other traffic blocked if VPN disconnects
 
 4.  **Start VPN Container** [COMPLETE]
-    *   Started with: `docker compose --env-file dotenv up -d vpn`
+    *   Started with: `docker compose --env-file .env.config up -d vpn`
     *   Logs confirmed: "Initialization Sequence Completed"
     *   TUN/TAP device tun0 successfully created
     *   Connected to NordVPN server: mx84.nordvpn.com

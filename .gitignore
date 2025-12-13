@@ -1,5 +1,10 @@
-**/*.env
-**/dotenv
+# Environment and secrets
+**/*.env*
+**/*.secrets*
+
+# Keep the reference .env and local config out of git as well
+!.env
+!.env.config
 
 # Python
 .python-version

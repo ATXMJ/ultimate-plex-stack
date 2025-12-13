@@ -4,7 +4,7 @@
 
 **Status:** `COMPLETE`
 
-**Agent Instructions:** Before deploying Plex, prompt user to obtain a fresh Plex claim token from https://www.plex.tv/claim (valid for 4 minutes only). Update the PLEX_CLAIM variable in dotenv immediately before starting the container.
+**Agent Instructions:** Before deploying Plex, prompt user to obtain a fresh Plex claim token from https://www.plex.tv/claim (valid for 4 minutes only). Update the PLEX_CLAIM variable in .env immediately before starting the container.
 
 This document details the deployment and initial configuration of Plex Media Server.
 
@@ -22,7 +22,7 @@ This document details the deployment and initial configuration of Plex Media Ser
     *   Sign in with your Plex account.
     *   Copy the claim token (format: `claim-xxxxxxxxxx`).
     *   **Agent Instructions:** Prompt user to get fresh token from plex.tv/claim and update immediately.
-    *   Update `PLEX_CLAIM` variable in `dotenv`:
+    *   Update `PLEX_CLAIM` variable in `.env`:
         ```bash
         PLEX_CLAIM=claim-xxxxxxxxxx
         ```
@@ -72,5 +72,5 @@ This document details the deployment and initial configuration of Plex Media Ser
 
 ## Important Notes
 - **Claim Token Expiration:** The Plex claim token is only valid for 4 minutes after generation. If deployment fails or takes too long, you'll need to generate a new token.
-- **After Claiming:** Once the server is claimed, you can remove or leave the `PLEX_CLAIM` variable in dotenv - it's only needed for the initial claim.
+- **After Claiming:** Once the server is claimed, you can remove or leave the `PLEX_CLAIM` variable in .env - it's only needed for the initial claim.
 - **Hardware Transcoding:** If you have Intel QuickSync or NVIDIA GPU, hardware transcoding can be enabled in Settings > Transcoder (requires Plex Pass for GPU transcoding).
