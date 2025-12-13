@@ -21,16 +21,16 @@ This document outlines the high-level step-by-step plan for implementing the Ult
 ## Phase 2: Environment & Storage Configuration
 
 3.  **Environment Configuration** [COMPLETE] ([Detail](steps/03-environment-configuration.md))
-    *   Create `.env` from `.env.example`.
-    *   **Note:** Due to globalignore, we are using `.env` temporarily instead of `.env`.
-    *   Populate critical variables:
+    *   Create `.env.config` and `.env.secrets` (see detailed guidance in Step 3).
+    *   Populate **non-secret configuration** in `.env.config`:
         *   User/Group IDs (`PUID`, `PGID`).
         *   Timezone (`TZ`).
-        *   VPN credentials (NordVPN access token).
         *   Media and download paths.
         *   Domain and ACME email.
-    *   **Note:** Plex Claim Token moved to Step 7 (4-minute expiration).
-    *   **Agent Instructions:** Prompt user for all configuration values before marking complete.
+        *   VPN provider settings and other feature flags.
+    *   Populate **secret values** (VPN credentials, access tokens, API keys, Plex claim token, etc.) in `.env.secrets`.
+    *   **Note:** Plex Claim Token is configured just-in-time in Step 7 due to its 4-minute expiration window.
+    *   **Agent Instructions:** For any **secret** values, instruct the user exactly which keys to add or update in `.env.secrets` and wait for confirmation. For **non-secret configuration**, you may directly modify `.env.config` as needed when applying this plan.
 
 4.  **Local Directory Structure Setup** [COMPLETE] ([Detail](steps/04-local-directory-structure.md))
     *   Create host directory hierarchy for persistence:

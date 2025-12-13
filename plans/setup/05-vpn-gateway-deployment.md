@@ -6,7 +6,7 @@
 
 This document details the deployment of the VPN container (gluetun or similar) which serves as the secure gateway for download clients.
 
-**Agent Instructions:** Before deploying VPN, verify that VPN credentials in Step 3 are configured with real values (not placeholders). Prompt user if needed.
+**Agent Instructions:** Before deploying VPN, verify that VPN credentials from Step 3 are configured with real values (not placeholders). Explicitly confirm with the user that all **secret** VPN credentials (e.g., `OPENVPN_USER`, `OPENVPN_PASSWORD`, access tokens) are stored in `.env.secrets`, and that only **non-secret** VPN settings (provider, protocol, ports, flags) live in `.env.config`. Prompt the user to update `.env.secrets` themselves if anything is missing or placeholder.
 
 ## Objectives
 - Deploy the VPN container.

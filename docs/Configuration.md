@@ -1,5 +1,18 @@
 # Configuration Management
 
+## Configuration Overview
+
+This stack separates **non‑secret configuration**, **secrets**, and **app‑level config/state**:
+
+- **`.env.config`**: non‑secret, environment‑specific settings (paths, timezone, domain, VPN provider flags, feature toggles).  
+  - Loaded with: `docker compose --env-file .env.config …`
+- **`.env.secrets`**: sensitive values (passwords, API keys, claim tokens, VPN credentials).  
+  - Never committed; referenced from `docker-compose.yml` via `env_file: .env.secrets`.
+- **`.env`**: informational stub only – Docker Compose is **not** expected to read real values from this file anymore.
+- **`docker-compose.yml`**: defines services, ports, volumes, and which environment variables each container consumes (via `${VAR}` and `env_file`).
+- **`buildarr.yml`**: configuration‑as‑code for Prowlarr/Radarr/Sonarr (root folders, quality profiles, indexers, qBittorrent linkage, etc.).
+- **`config/` directory** (e.g., `config/radarr`, `config/sonarr`, `config/prowlarr`, `config/qbittorrent`, `config/plex`, `config/tdarr`, `config/npm`, `config/vpn/servers.json`): per‑service runtime configuration and state created/managed by the applications themselves or by Buildarr.
+
 ## Environment Variables (.env.config and .env.secrets)
 
 ```bash
@@ -49,6 +62,14 @@ SONARR_API_KEY=your_sonarr_api_key_here
 QBITTORRENT_USERNAME=your_qbittorrent_username_here
 QBITTORRENT_PASSWORD=your_qbittorrent_password_here
 ```
+
+**Usage summary:**
+
+- **Non‑secret settings** (paths, timezone, IDs, domain, VPN provider and behavior) → `.env.config`.
+- **Secrets** (VPN credentials, Plex claim token, API keys, usernames/passwords, tokens) → `.env.secrets`.
+- Compose commands should always specify `.env.config`, and services that need secrets also load `.env.secrets`:
+  - `docker compose --env-file .env.config up -d`
+  - `docker compose --env-file .env.config run --rm buildarr apply`
 
 ## Buildarr Configuration (`buildarr.yml`)
 

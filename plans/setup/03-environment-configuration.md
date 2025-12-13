@@ -6,7 +6,7 @@
 
 This document details the configuration of the environment variables that control the stack.
 
-**Agent Instructions:** When implementing this step, prompt the user for actual configuration values. Do not mark sub-steps as complete until real values are provided and confirmed by the user.
+**Agent Instructions:** When implementing this step, prompt the user for actual configuration values. Do not mark sub-steps as complete until real values are provided and confirmed by the user. For any **secret values** (passwords, API keys, tokens, claim codes, VPN credentials, etc.), instruct the user to add or update those keys in `.env.secrets` themselves and wait for confirmation — do **not** write real secrets directly. For **non-secret configuration** (paths, timezone, domain, VPN provider flags, feature toggles, etc.), you may directly edit `.env.config` as needed when applying changes.
 
 **Note:** Plex claim token configuration has been moved to Step 7 (Plex Media Server deployment) due to its 4-minute expiration window.
 
