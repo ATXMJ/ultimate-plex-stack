@@ -78,7 +78,7 @@ This document outlines the high-level step-by-step plan for implementing the Ult
     *   Create and version-control a minimal `buildarr.yml` (global settings + basic Prowlarr connectivity).
     *   Establish the `docker compose run --rm buildarr apply` workflow.
 
-10.1 **Arr Configuration-as-Code (Buildarr)** [PLANNED] ([Detail](steps/10.1-arr-configuration-as-code.md))
+10.1 **Arr Configuration-as-Code (Buildarr)** [COMPLETE] ([Detail](steps/10.1-arr-configuration-as-code.md))
     *   Fully model Prowlarr/Radarr/Sonarr (and optionally Bazarr) configuration in `buildarr.yml` (indexers, apps, root folders, quality profiles, download clients).
     *   Apply Buildarr against running services and verify that Arr/Prowlarr UIs match the YAML (treating YAML as the source of truth).
     *   Update documentation to describe Buildarr-driven configuration as the primary path for Arr services.
