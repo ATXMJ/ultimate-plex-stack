@@ -7,9 +7,14 @@ buildarr:
 ##
 ## NOTE:
 ## - This section is intentionally conservative and uses placeholders.
-## - Fill in your real API keys, auth credentials, indexers, and Apps
-##   before running:
-##       docker compose run --rm buildarr apply
+## - Secrets (API keys, credentials) are provided to the container via
+##   environment variables defined in `.env.secrets` (see docs/Configuration.md).
+## - Do NOT hard-code real keys in this file; only reference env vars.
+## - Before running Buildarr, ensure `.env.secrets` contains values for:
+##     PROWLARR_API_KEY, PROWLARR_AUTH_USERNAME, PROWLARR_AUTH_PASSWORD,
+##     RADARR_API_KEY, SONARR_API_KEY, QBITTORRENT_USERNAME, QBITTORRENT_PASSWORD.
+##   Then run:
+##       docker compose --env-file .env.config run --rm buildarr apply
 ## - Field names are based on the Buildarr Prowlarr plugin; verify against
 ##   your installed version if you run into validation errors.
 ################################################################################
@@ -139,8 +144,8 @@ sonarr:
       host: qbittorrent
       port: 8080
       use_ssl: false
-      username: YOUR_QBITTORRENT_USERNAME_HERE
-      password: YOUR_QBITTORRENT_PASSWORD_HERE
+      username: ${QBITTORRENT_USERNAME}
+      password: ${QBITTORRENT_PASSWORD}
       category: tv
 
 ################################################################################

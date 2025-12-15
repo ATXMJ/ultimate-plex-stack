@@ -13,6 +13,13 @@ This stack separates **non‑secret configuration**, **secrets**, and **app‑le
 - **`buildarr.yml`**: configuration‑as‑code for Prowlarr/Radarr/Sonarr (root folders, quality profiles, indexers, qBittorrent linkage, etc.).
 - **`config/` directory** (e.g., `config/radarr`, `config/sonarr`, `config/prowlarr`, `config/qbittorrent`, `config/plex`, `config/tdarr`, `config/npm`, `config/vpn/servers.json`): per‑service runtime configuration and state created/managed by the applications themselves or by Buildarr.
 
+- **Example templates** (tracked in git, safe to share):
+  - `.env.config.example`: example non‑secret configuration.
+  - `.env.secrets.example`: example list of required secret keys (with placeholder values only).
+
+- **Setup plan reference**:
+  - For the high‑level implementation plan and where configuration fits into the overall rollout, see `plans/setup/00-SETUP.md`.
+
 ## Environment Variables (.env.config and .env.secrets)
 
 ```bash
@@ -71,6 +78,13 @@ QBITTORRENT_PASSWORD=your_qbittorrent_password_here
   - `docker compose --env-file .env.config up -d`
   - `docker compose --env-file .env.config run --rm buildarr apply`
 
+Additionally:
+
+- `.env.config.example` and `.env.secrets.example` are tracked templates you can copy from:
+  - `cp .env.config.example .env.config`
+  - `cp .env.secrets.example .env.secrets`
+- Run `make check` to validate that both env files exist and contain the expected keys (values are not printed).
+
 ## Buildarr Configuration (`buildarr.yml`)
 
 - **Purpose**: Configuration-as-code for the Arr ecosystem (Prowlarr, Radarr, Sonarr, optionally Bazarr).
@@ -80,6 +94,9 @@ QBITTORRENT_PASSWORD=your_qbittorrent_password_here
   - **Radarr**: connectivity, `/movies` root folder, quality profiles, and download client linkage (qBittorrent).
   - **Sonarr**: connectivity, `/tv` root folder, quality profiles, and download client linkage (qBittorrent).
   - **Bazarr**: optional stub (documented preferences only until a stable Buildarr plugin is available).
+- **Secrets handling**:
+  - API keys and credentials are **never** hard‑coded in `buildarr.yml`.
+  - Instead, `buildarr.yml` references environment variables (e.g. `${PROWLARR_API_KEY}`) that are defined only in `.env.secrets`.
 - **Execution**:
   - Buildarr is run as a **one-shot Docker tool** when configuration changes:
     - `docker compose run --rm buildarr apply`
@@ -98,14 +115,15 @@ prowlarr:
   hostname: prowlarr
   port: 9696
   protocol: http
-  api_key: YOUR_PROWLARR_API_KEY_HERE
-  # authentication, indexers, and apps (Radarr/Sonarr) defined here
+  api_key: ${PROWLARR_API_KEY}
+  # authentication, indexers, and apps (Radarr/Sonarr) defined here;
+  # secrets like PROWLARR_API_KEY come from .env.secrets
 
 radarr:
   hostname: radarr
   port: 7878
   protocol: http
-  api_key: YOUR_RADARR_API_KEY_HERE
+  api_key: ${RADARR_API_KEY}
   root_folders:
     - path: /movies
       default: true
@@ -120,7 +138,7 @@ sonarr:
   hostname: sonarr
   port: 8989
   protocol: http
-  api_key: YOUR_SONARR_API_KEY_HERE
+  api_key: ${SONARR_API_KEY}
   root_folders:
     - path: /tv
       default: true
@@ -131,6 +149,16 @@ sonarr:
       host: qbittorrent
       port: 8080
 ```
+
+## VPN Configuration Details
+
+- **Behavioral settings** (provider, protocol, DNS, kill switch) live in `.env.config`:
+  - `VPN_PROVIDER`, `VPN_ENABLED`, `VPN_DNS`, `VPN_PROTOCOL`, `VPN_PORT`, `VPN_KILL_SWITCH`.
+- **Credentials and secrets** for the VPN live only in `.env.secrets`:
+  - `OPENVPN_USER`, `OPENVPN_PASSWORD`, and any additional provider‑specific secret values.
+- **Static server configuration** (if used) lives in `config/vpn/servers.json`:
+  - This file can define preferred servers, countries, or other advanced routing preferences.
+- For step‑by‑step deployment and verification of the VPN gateway (Gluetun), see `plans/setup/05-vpn-gateway-deployment.md`.
 
 ## Docker Compose Profiles
 

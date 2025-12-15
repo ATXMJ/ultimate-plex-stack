@@ -2,7 +2,7 @@
 
 # Ultimate Plex Stack - High-Level Implementation Plan
 
-This document outlines the high-level step-by-step plan for implementing the Ultimate Plex Media Stack as specified in `docs/Specs.md`. 
+This document outlines the high-level step-by-step plan for implementing the Ultimate Plex Media Stack as specified in `docs/Specs.md` and `docs/Configuration.md`. 
 
 **Note:** We will create individual detailed comprehensive plans for each phase of this high-level setup plan in separate documents.
 
@@ -21,14 +21,18 @@ This document outlines the high-level step-by-step plan for implementing the Ult
 ## Phase 2: Environment & Storage Configuration
 
 3.  **Environment Configuration** [COMPLETE] ([Detail](steps/03-environment-configuration.md))
-    *   Create `.env.config` and `.env.secrets` (see detailed guidance in Step 3).
+    *   Create `.env.config` and `.env.secrets` (see detailed guidance in Step 3 and in `docs/Configuration.md`).
+    *   Use the tracked templates as a starting point:
+        *   Copy `.env.config.example` → `.env.config` and adjust non-secret values.
+        *   Copy `.env.secrets.example` → `.env.secrets` and fill in real secret values (never commit).
     *   Populate **non-secret configuration** in `.env.config`:
         *   User/Group IDs (`PUID`, `PGID`).
         *   Timezone (`TZ`).
         *   Media and download paths.
         *   Domain and ACME email.
         *   VPN provider settings and other feature flags.
-    *   Populate **secret values** (VPN credentials, access tokens, API keys, Plex claim token, etc.) in `.env.secrets`.
+    *   Populate **secret values** (VPN credentials, access tokens, API keys, Plex claim token, etc.) in `.env.secrets` (this file is `.gitignored`).
+    *   Run `make check` to validate that both env files exist and contain the expected keys before starting the stack.
     *   **Note:** Plex Claim Token is configured just-in-time in Step 7 due to its 4-minute expiration window.
     *   **Agent Instructions:** For any **secret** values, instruct the user exactly which keys to add or update in `.env.secrets` and wait for confirmation. For **non-secret configuration**, you may directly modify `.env.config` as needed when applying this plan.
 
