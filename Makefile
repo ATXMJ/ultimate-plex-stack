@@ -1,4 +1,8 @@
-.PHONY: up up-d down restart logs clean pull build check
+.PHONY: buildarr-apply up up-d down restart logs clean pull build check
+
+# Apply buildarr configuration
+buildarr-apply:
+	docker compose --env-file .env.config run --rm buildarr apply
 
 # Start services (attached) - load config from .env.config
 up:

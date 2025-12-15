@@ -35,19 +35,36 @@ prowlarr:
     username: ${PROWLARR_AUTH_USERNAME}
     password: ${PROWLARR_AUTH_PASSWORD}
 
-  # Optional: Model your indexers here. Start with a single public indexer and
-  # expand as needed. Replace the EXAMPLE_* placeholders with real values.
+  # Optional: Model your indexers here. Start with a couple of public
+  # torrent/usenet indexers and expand as needed.
   #
-  # For private trackers, add separate entries with their specific
-  # implementation / categories / API keys.
+  # IMPORTANT:
+  # - Public indexers change frequently and often require registration or
+  #   API keys, so this repo only ships **templates**, not live endpoints.
+  # - The recommended workflow is:
+  #     1) Add/verify indexers in the Prowlarr UI.
+  #     2) Mirror the final settings back into this block.
+  # - Secrets (API keys) should live in `.env.secrets` and be referenced
+  #   here via ${ENV_VAR} if needed.
+  #
+  # The examples below are **disabled** by default so Buildarr can apply
+  # cleanly even before you've chosen real indexers.
   indexers:
-    - name: EXAMPLE_PUBLIC_INDEXER
-      enabled: true
-      # implementation: torznab
-      # url: https://example-indexer.invalid
-      # api_key: YOUR_INDEXER_API_KEY_HERE
-      # categories: [2000, 5000]   # Example: Movies/TV categories
-      # tags: ["public"]
+    - name: PUBLIC_TORRENT_TORZNAB
+      enabled: false
+      implementation: torznab
+      # url: https://your-public-torrent-torznab.example
+      # api_key: ${PUBLIC_TORRENT_TORZNAB_API_KEY}
+      # categories: [2000, 5000]   # e.g., Movies/TV
+      # tags: ["public", "torrent"]
+
+    - name: PUBLIC_USENET_TORZNAB
+      enabled: false
+      implementation: torznab
+      # url: https://your-public-usenet-torznab.example
+      # api_key: ${PUBLIC_USENET_TORZNAB_API_KEY}
+      # categories: [2000, 5000]
+      # tags: ["public", "usenet"]
 
   # Optional: Prowlarr Apps for Radarr/Sonarr.
   # IMPORTANT:
