@@ -32,8 +32,8 @@ prowlarr:
   authentication:
     enabled: enabled
     method: forms
-    username: ${PROWLARR_AUTH_USERNAME}
-    password: ${PROWLARR_AUTH_PASSWORD}
+    username: "${PROWLARR_AUTH_USERNAME}"
+    password: "${PROWLARR_AUTH_PASSWORD}"
 
   # Optional: Model your indexers here. Start with a couple of public
   # torrent/usenet indexers and expand as needed.
@@ -50,21 +50,48 @@ prowlarr:
   # The examples below are **disabled** by default so Buildarr can apply
   # cleanly even before you've chosen real indexers.
   indexers:
-    - name: PUBLIC_TORRENT_TORZNAB
-      enabled: false
+    - name: The-Archive
+      enabled: true
       implementation: torznab
-      # url: https://your-public-torrent-torznab.example
+      url: https://archive.torznab.org/torznab/feed
       # api_key: ${PUBLIC_TORRENT_TORZNAB_API_KEY}
-      # categories: [2000, 5000]   # e.g., Movies/TV
-      # tags: ["public", "torrent"]
-
-    - name: PUBLIC_USENET_TORZNAB
-      enabled: false
+      categories: [2000, 5000]   # e.g., Movies/TV
+      tags: ["public", "torznab"]
+    - name: LimeTorrents.pro
+      enabled: true
       implementation: torznab
-      # url: https://your-public-usenet-torznab.example
+      url: https://limetorrents.pro/torznab/feed
       # api_key: ${PUBLIC_USENET_TORZNAB_API_KEY}
-      # categories: [2000, 5000]
-      # tags: ["public", "usenet"]
+      categories: [2000, 5000]
+      tags: ["public", "torznab"]
+    - name: TorrentGalaxy
+      enabled: true
+      implementation: torznab
+      url: https://torrentgalaxy.to/torznab/feed
+      # api_key: ${PUBLIC_USENET_TORZNAB_API_KEY}
+      categories: [2000, 5000]
+      tags: ["public", "torznab"]
+    - name: TorrentDownload.pro
+      enabled: true
+      implementation: torznab
+      url: https://torrentdownload.pro/torznab/feed
+      # api_key: ${PUBLIC_USENET_TORZNAB_API_KEY}
+      categories: [2000, 5000]
+      tags: ["public", "torznab"]
+    - name: TorLock
+      enabled: true
+      implementation: torznab
+      url: https://torlock.com/torznab/feed
+      # api_key: ${PUBLIC_USENET_TORZNAB_API_KEY}
+      categories: [2000, 5000]
+      tags: ["public", "torznab"]
+    - name: iDope.se
+      enabled: true
+      implementation: torznab
+      url: https://idope.se/torznab/feed
+      # api_key: ${PUBLIC_USENET_TORZNAB_API_KEY}
+      categories: [2000, 5000]
+      tags: ["public", "torznab"]
 
   # Optional: Prowlarr Apps for Radarr/Sonarr.
   # IMPORTANT:

@@ -2,7 +2,7 @@
 
 # Apply buildarr configuration
 buildarr-apply:
-	docker compose --env-file .env.config run --rm buildarr apply
+	docker compose --env-file .env.config run --rm buildarr
 
 # Start services (attached) - load config from .env.config
 up:

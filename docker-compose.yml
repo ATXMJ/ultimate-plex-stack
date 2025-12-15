@@ -259,7 +259,7 @@ services:
 
   # Buildarr - Configuration-as-code for Arr services
   buildarr:
-    image: ghcr.io/buildarr/buildarr:latest
+    image: python:3.11-slim
     container_name: buildarr
     profiles:
       - advanced            # run only when explicitly requested

@@ -17,6 +17,9 @@ else
   PYTHON_BIN=python
 fi
 
+echo "Ensuring Buildarr is installed..."
+"$PYTHON_BIN" -m pip install --no-cache-dir buildarr buildarr-prowlarr buildarr-radarr buildarr-sonarr
+
 "$PYTHON_BIN" - << 'EOF'
 import os
 from pathlib import Path
@@ -31,8 +34,9 @@ output_path.write_text(rendered)
 EOF
 
 echo "Rendered Buildarr config to $OUTPUT_PATH"
-echo "Running buildarr apply..."
+echo "Running buildarr run against rendered config..."
 
-exec buildarr apply
+cd /config
+exec buildarr run
 
 
