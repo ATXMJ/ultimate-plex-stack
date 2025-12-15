@@ -44,6 +44,7 @@ VPN_DNS=103.86.96.100,103.86.99.100
 VPN_PROTOCOL=wireguard
 VPN_PORT=443
 VPN_KILL_SWITCH=true
+OPENVPN_FLAGS=--ping-restart 60  # Extra OpenVPN CLI flags (space-separated)
 
 # Domain (for reverse proxy)
 DOMAIN=cooperstation.stream
@@ -153,7 +154,8 @@ sonarr:
 ## VPN Configuration Details
 
 - **Behavioral settings** (provider, protocol, DNS, kill switch) live in `.env.config`:
-  - `VPN_PROVIDER`, `VPN_ENABLED`, `VPN_DNS`, `VPN_PROTOCOL`, `VPN_PORT`, `VPN_KILL_SWITCH`.
+  - `VPN_PROVIDER`, `VPN_ENABLED`, `VPN_DNS`, `VPN_PROTOCOL`, `VPN_PORT`, `VPN_KILL_SWITCH`, `OPENVPN_FLAGS`.
+  - `OPENVPN_FLAGS` accepts raw OpenVPN CLI arguments (space-separated). Example: `--ping-restart 60` pairs with Gluetun's default `--ping` so the tunnel automatically re-establishes if the remote peer stops responding.
 - **Credentials and secrets** for the VPN live only in `.env.secrets`:
   - `OPENVPN_USER`, `OPENVPN_PASSWORD`, and any additional provider‑specific secret values.
 - **Static server configuration** (if used) lives in `config/vpn/servers.json`:

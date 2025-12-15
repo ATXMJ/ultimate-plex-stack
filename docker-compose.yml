@@ -45,6 +45,8 @@ services:
       - PGID=${PGID}
       # Log level for troubleshooting
       - LOG_LEVEL=info
+      # Extra OpenVPN CLI flags (ex: add ping-restart to auto-recover link)
+      - OPENVPN_FLAGS=${OPENVPN_FLAGS}
     volumes:
       - ${CONFIG_ROOT}/vpn:/gluetun
     networks:
